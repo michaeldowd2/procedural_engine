@@ -1,0 +1,93 @@
+{
+  "name": "composer_dataset",
+  "description": "Association rules and embeddings for music composition",
+
+  "data_sources": [
+    {
+      "name": "music_metadata",
+      "file": "data/music_metadata.csv",
+      "type": "tabular",
+      "columns": ["genre", "tempo", "key", "mode", "mood", "complexity"],
+      "description": "High-level music metadata for learning genre/tempo/key associations"
+    },
+    {
+      "name": "song_structures",
+      "file": "data/song_structures.csv",
+      "type": "tabular",
+      "columns": ["genre", "mood", "structure", "avg_duration"],
+      "description": "Common song structures by genre"
+    }
+  ],
+
+  "item_libraries": {
+    "instrument_presets": {
+      "file": "data/instrument_presets.json",
+      "embedding_file": "data/instrument_embeddings.npy",
+      "description": "Library of instrument presets with metadata tags"
+    },
+    "chord_progressions": {
+      "file": "data/chord_progressions.json",
+      "description": "Common chord progressions with key/mode associations"
+    },
+    "midi_patterns": {
+      "file": "data/midi_patterns.json",
+      "embedding_file": "data/pattern_embeddings.npy",
+      "description": "MIDI patterns for different instruments and styles"
+    }
+  },
+
+  "manual_rules": [
+    {
+      "antecedent": ["genre=jazz", "mood=complex"],
+      "consequent": ["mode=dorian"],
+      "confidence": 0.9,
+      "note": "Jazz with complex mood strongly prefers dorian mode"
+    },
+    {
+      "antecedent": ["genre=pop", "mood=upbeat"],
+      "consequent": ["tempo_range=120-140"],
+      "confidence": 0.95,
+      "note": "Upbeat pop typically in this tempo range"
+    },
+    {
+      "antecedent": ["genre=ambient", "mood=chill"],
+      "consequent": ["tempo_range=60-80", "structure=intro-verse-bridge-chorus-outro"],
+      "confidence": 0.85,
+      "note": "Ambient chill songs are slow with atmospheric structure"
+    },
+    {
+      "antecedent": ["part_type=chorus", "mood=energetic"],
+      "consequent": ["part_tags=upbeat", "part_tags=driving"],
+      "confidence": 1.0,
+      "note": "Energetic choruses should have driving energy"
+    }
+  ],
+
+  "preprocessing": {
+    "tempo_discretization": {
+      "type": "bins",
+      "bins": [60, 80, 100, 120, 140, 160, 180, 200],
+      "labels": ["60-80", "80-100", "100-120", "120-140", "140-160", "160-180", "180-200"]
+    },
+    "duration_discretization": {
+      "type": "bins",
+      "bins": [0, 120, 180, 240, 300, 600],
+      "labels": ["short", "medium-short", "medium", "medium-long", "long"]
+    }
+  },
+
+  "rule_mining_params": {
+    "min_support": 0.01,
+    "min_confidence": 0.3,
+    "algorithm": "fp-growth",
+    "max_antecedent_size": 5,
+    "note": "Extract association rules from data_sources using FP-Growth"
+  },
+
+  "embedding_params": {
+    "dimension": 100,
+    "algorithm": "item2vec",
+    "context_window": 5,
+    "note": "Learn item embeddings for large libraries (instruments, MIDI patterns)"
+  }
+}

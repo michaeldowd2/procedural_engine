@@ -1,0 +1,14 @@
+genre,mood,structure,avg_duration
+pop,upbeat,verse-chorus-verse-chorus-bridge-chorus,210
+pop,happy,verse-verse-chorus-verse-chorus,180
+jazz,complex,intro-verse-bridge-chorus-outro,300
+jazz,smooth,verse-chorus-verse-chorus-verse-chorus,240
+ambient,chill,intro-verse-bridge-chorus-outro,360
+ambient,atmospheric,intro-verse-chorus-verse-chorus-outro,420
+rock,energetic,verse-chorus-verse-chorus-bridge-chorus,195
+rock,aggressive,intro-verse-chorus-verse-chorus-outro,200
+electronic,danceable,intro-verse-chorus-verse-chorus-outro,240
+electronic,energetic,verse-chorus-verse-chorus-bridge-chorus,220
+blues,soulful,verse-verse-chorus-verse-chorus,210
+classical,elegant,intro-verse-bridge-chorus-outro,360
+folk,warm,verse-chorus-verse-chorus-verse-chorus,195
