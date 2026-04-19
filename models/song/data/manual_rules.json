@@ -1,0 +1,488 @@
+[
+  {
+    "antecedent": ["genre=jazz", "tags=complex"],
+    "consequent": ["mode=dorian"],
+    "confidence": 0.85,
+    "note": "Jazz with complexity strongly favours dorian (common in jazz harmony)"
+  },
+  {
+    "antecedent": ["genre=jazz"],
+    "consequent": ["mode=dorian"],
+    "confidence": 0.65,
+    "note": "Jazz broadly favours dorian mode"
+  },
+  {
+    "antecedent": ["genre=blues"],
+    "consequent": ["mode=mixolydian"],
+    "confidence": 0.80,
+    "note": "Blues scale is rooted in mixolydian / dominant seventh harmony"
+  },
+  {
+    "antecedent": ["genre=country"],
+    "consequent": ["mode=major"],
+    "confidence": 0.85,
+    "note": "Country music is overwhelmingly in major"
+  },
+  {
+    "antecedent": ["genre=folk"],
+    "consequent": ["mode=major"],
+    "confidence": 0.75,
+    "note": "Folk songs are predominantly major"
+  },
+  {
+    "antecedent": ["genre=folk", "tags=nostalgic"],
+    "consequent": ["mode=dorian"],
+    "confidence": 0.70,
+    "note": "Nostalgic folk often uses the bittersweet dorian mode"
+  },
+  {
+    "antecedent": ["genre=reggae"],
+    "consequent": ["mode=mixolydian"],
+    "confidence": 0.75,
+    "note": "Reggae is strongly associated with mixolydian and dominant chords"
+  },
+  {
+    "antecedent": ["genre=soul"],
+    "consequent": ["mode=major"],
+    "confidence": 0.70,
+    "note": "Soul has gospel roots — often major with blues inflections"
+  },
+  {
+    "antecedent": ["genre=metal"],
+    "consequent": ["mode=minor"],
+    "confidence": 0.80,
+    "note": "Metal is predominantly in natural minor"
+  },
+  {
+    "antecedent": ["genre=metal", "tags=aggressive"],
+    "consequent": ["mode=phrygian"],
+    "confidence": 0.80,
+    "note": "Aggressive metal heavily uses phrygian / phrygian dominant"
+  },
+  {
+    "antecedent": ["genre=rap"],
+    "consequent": ["mode=minor"],
+    "confidence": 0.80,
+    "note": "Hip-hop / rap samples and beats heavily favour minor tonalities"
+  },
+  {
+    "antecedent": ["genre=electronic", "tags=dark_mood"],
+    "consequent": ["mode=minor"],
+    "confidence": 0.85,
+    "note": "Dark electronic music almost exclusively uses minor"
+  },
+  {
+    "antecedent": ["genre=r&b", "tags=romantic"],
+    "consequent": ["mode=minor"],
+    "confidence": 0.75,
+    "note": "Romantic R&B tends toward minor (lush, emotional quality)"
+  },
+  {
+    "antecedent": ["genre=classical", "tags=elegant"],
+    "consequent": ["mode=major"],
+    "confidence": 0.70,
+    "note": "Elegant / bright classical pieces lean major"
+  },
+  {
+    "antecedent": ["genre=classical", "tags=dramatic"],
+    "consequent": ["mode=minor"],
+    "confidence": 0.75,
+    "note": "Dramatic classical writing frequently uses minor"
+  },
+  {
+    "antecedent": ["genre=latin"],
+    "consequent": ["mode=minor"],
+    "confidence": 0.70,
+    "note": "Latin music (flamenco, salsa, tango) has a strong minor flavour"
+  },
+  {
+    "antecedent": ["genre=rock"],
+    "consequent": ["key=E"],
+    "confidence": 0.70,
+    "note": "Rock guitarists favour E — natural open-string tuning"
+  },
+  {
+    "antecedent": ["genre=rock", "mode=minor"],
+    "consequent": ["key=A"],
+    "confidence": 0.65,
+    "note": "A minor is the other classic rock guitar key"
+  },
+  {
+    "antecedent": ["genre=metal"],
+    "consequent": ["key=E"],
+    "confidence": 0.80,
+    "note": "Metal uses drop-D/drop-E tunings; E is the most common key"
+  },
+  {
+    "antecedent": ["genre=blues"],
+    "consequent": ["key=A"],
+    "confidence": 0.75,
+    "note": "A is the canonical blues key on guitar"
+  },
+  {
+    "antecedent": ["genre=blues"],
+    "consequent": ["key=E"],
+    "confidence": 0.65,
+    "note": "E blues is the second most common blues key"
+  },
+  {
+    "antecedent": ["genre=jazz"],
+    "consequent": ["key=A#"],
+    "confidence": 0.75,
+    "note": "Bb (A#) is the most common jazz key — optimal for brass/reed instruments"
+  },
+  {
+    "antecedent": ["genre=jazz"],
+    "consequent": ["key=F"],
+    "confidence": 0.70,
+    "note": "F is another horn-friendly standard jazz key"
+  },
+  {
+    "antecedent": ["genre=country"],
+    "consequent": ["key=G"],
+    "confidence": 0.75,
+    "note": "G is the go-to country guitar key"
+  },
+  {
+    "antecedent": ["genre=country"],
+    "consequent": ["key=D"],
+    "confidence": 0.65,
+    "note": "D major is the second most common country key"
+  },
+  {
+    "antecedent": ["genre=folk"],
+    "consequent": ["key=G"],
+    "confidence": 0.75,
+    "note": "G is the classic folk/acoustic guitar key"
+  },
+  {
+    "antecedent": ["genre=classical"],
+    "consequent": ["key=C"],
+    "confidence": 0.70,
+    "note": "C major is the home key of classical music and piano instruction"
+  },
+  {
+    "antecedent": ["genre=latin"],
+    "consequent": ["key=A"],
+    "confidence": 0.65,
+    "note": "A minor is common across Latin subgenres"
+  },
+  {
+    "antecedent": ["genre=metal"],
+    "consequent": ["tags=high_energy"],
+    "confidence": 0.90,
+    "note": "Metal is characteristically high energy"
+  },
+  {
+    "antecedent": ["genre=metal"],
+    "consequent": ["tags=aggressive"],
+    "confidence": 0.85,
+    "note": "Aggression is a defining feature of metal"
+  },
+  {
+    "antecedent": ["genre=ambient"],
+    "consequent": ["tags=low_energy"],
+    "confidence": 0.85,
+    "note": "Ambient music is by definition low intensity"
+  },
+  {
+    "antecedent": ["genre=ambient"],
+    "consequent": ["tags=chill"],
+    "confidence": 0.80,
+    "note": "Ambient tracks are archetypal chill listening"
+  },
+  {
+    "antecedent": ["genre=jazz"],
+    "consequent": ["tags=complex"],
+    "confidence": 0.70,
+    "note": "Jazz is harmonically complex relative to other popular genres"
+  },
+  {
+    "antecedent": ["genre=jazz"],
+    "consequent": ["tags=smooth"],
+    "confidence": 0.65,
+    "note": "Smooth jazz is the dominant popular jazz subgenre"
+  },
+  {
+    "antecedent": ["genre=blues"],
+    "consequent": ["tags=soulful"],
+    "confidence": 0.80,
+    "note": "Blues and soul expression are tightly linked"
+  },
+  {
+    "antecedent": ["genre=blues"],
+    "consequent": ["tags=melancholic"],
+    "confidence": 0.70,
+    "note": "Blues originated as an expression of sorrow and hardship"
+  },
+  {
+    "antecedent": ["genre=classical"],
+    "consequent": ["tags=elegant"],
+    "confidence": 0.75,
+    "note": "Elegance and refinement are classical music hallmarks"
+  },
+  {
+    "antecedent": ["genre=reggae"],
+    "consequent": ["tags=relaxed"],
+    "confidence": 0.80,
+    "note": "Reggae's offbeat groove creates a relaxed, laid-back feel"
+  },
+  {
+    "antecedent": ["genre=reggae"],
+    "consequent": ["tags=uplifting"],
+    "confidence": 0.70,
+    "note": "Reggae carries themes of positivity and uplift"
+  },
+  {
+    "antecedent": ["genre=soul"],
+    "consequent": ["tags=emotional"],
+    "confidence": 0.80,
+    "note": "Emotional expressiveness is core to soul music"
+  },
+  {
+    "antecedent": ["genre=rap"],
+    "consequent": ["tags=energetic"],
+    "confidence": 0.75,
+    "note": "Rap delivery and production are typically high energy"
+  },
+  {
+    "antecedent": ["genre=country"],
+    "consequent": ["tags=warm"],
+    "confidence": 0.75,
+    "note": "Country music has a warm, homespun emotional quality"
+  },
+  {
+    "antecedent": ["genre=latin"],
+    "consequent": ["tags=passionate"],
+    "confidence": 0.80,
+    "note": "Passion and intensity are defining qualities of Latin music"
+  },
+  {
+    "antecedent": ["genre=r&b"],
+    "consequent": ["tags=smooth"],
+    "confidence": 0.75,
+    "note": "Contemporary R&B is characterised by smooth production"
+  },
+  {
+    "antecedent": ["genre=folk"],
+    "consequent": ["tags=nostalgic"],
+    "confidence": 0.65,
+    "note": "Folk music carries a nostalgic, timeless quality"
+  },
+  {
+    "antecedent": ["genre=electronic", "tags=danceable"],
+    "consequent": ["tags=high_energy"],
+    "confidence": 0.85,
+    "note": "Dancefloor electronic music is high energy by design"
+  },
+  {
+    "antecedent": ["genre=pop"],
+    "consequent": ["structure=intro-verse-chorus-verse-chorus-outro"],
+    "confidence": 0.85,
+    "note": "Intro-verse-chorus-outro is the canonical pop structure"
+  },
+  {
+    "antecedent": ["genre=rock"],
+    "consequent": ["structure=intro-verse-chorus-verse-chorus-outro"],
+    "confidence": 0.75,
+    "note": "Rock songs follow the same verse-chorus template as pop"
+  },
+  {
+    "antecedent": ["genre=blues"],
+    "consequent": ["structure=verse-verse-chorus-verse-chorus"],
+    "confidence": 0.75,
+    "note": "Blues is verse-heavy, reflecting its call-and-response roots"
+  },
+  {
+    "antecedent": ["genre=folk"],
+    "consequent": ["structure=verse-verse-chorus-verse-chorus"],
+    "confidence": 0.70,
+    "note": "Folk songs are traditionally verse-driven narrative forms"
+  },
+  {
+    "antecedent": ["genre=ambient"],
+    "consequent": ["structure=intro-verse-bridge-chorus-outro"],
+    "confidence": 0.75,
+    "note": "Ambient pieces use simpler, more gradual arc structures"
+  },
+  {
+    "antecedent": ["genre=pop", "tags=happy_mood"],
+    "consequent": ["structure=verse-chorus-verse-chorus-bridge-chorus"],
+    "confidence": 0.80,
+    "note": "Happy pop songs often use the bridge-to-final-chorus lift"
+  },
+  {
+    "antecedent": ["mode=minor"],
+    "consequent": ["tags=dark_mood"],
+    "confidence": 0.70,
+    "note": "Minor tonality consistently conveys darker emotions"
+  },
+  {
+    "antecedent": ["mode=major"],
+    "consequent": ["tags=happy_mood"],
+    "confidence": 0.65,
+    "note": "Major tonality is associated with brightness and happiness"
+  },
+  {
+    "antecedent": ["mode=phrygian"],
+    "consequent": ["tags=dark_mood"],
+    "confidence": 0.80,
+    "note": "Phrygian's flat-2 interval gives a particularly dark, tense quality"
+  },
+  {
+    "antecedent": ["mode=phrygian"],
+    "consequent": ["tags=intense"],
+    "confidence": 0.75,
+    "note": "Phrygian mode creates intense, dramatic tension"
+  },
+  {
+    "antecedent": ["mode=dorian"],
+    "consequent": ["tags=smooth"],
+    "confidence": 0.65,
+    "note": "Dorian's raised 6th gives it a smoother quality than natural minor"
+  },
+  {
+    "antecedent": ["mode=mixolydian"],
+    "consequent": ["tags=warm"],
+    "confidence": 0.65,
+    "note": "Mixolydian's flat-7 creates the warm, folksy dominant feel"
+  },
+  {
+    "antecedent": ["tags=aggressive"],
+    "consequent": ["tags=high_energy"],
+    "confidence": 0.85,
+    "note": "Aggression implies high energy almost universally"
+  },
+  {
+    "antecedent": ["tags=chill"],
+    "consequent": ["tags=low_energy"],
+    "confidence": 0.75,
+    "note": "Chill tracks are characteristically low energy"
+  },
+  {
+    "antecedent": ["tags=dark_mood"],
+    "consequent": ["mode=minor"],
+    "confidence": 0.80,
+    "note": "Dark mood almost always correlates with minor tonality"
+  },
+  {
+    "antecedent": ["tags=happy_mood"],
+    "consequent": ["mode=major"],
+    "confidence": 0.75,
+    "note": "Happy mood almost always correlates with major tonality"
+  },
+  {
+    "antecedent": ["tags=high_energy"],
+    "consequent": ["tags=tempo_fast"],
+    "confidence": 0.70,
+    "note": "High-energy tracks tend to have fast tempos"
+  },
+  {
+    "antecedent": ["tags=low_energy"],
+    "consequent": ["tags=tempo_slow"],
+    "confidence": 0.70,
+    "note": "Low-energy tracks tend toward slow tempos"
+  },
+  {
+    "antecedent": ["tags=danceable"],
+    "consequent": ["tags=tempo_moderate"],
+    "confidence": 0.65,
+    "note": "The most dancefloor-friendly tempos are in the moderate range"
+  },
+  {
+    "antecedent": ["tags=intense"],
+    "consequent": ["tags=high_energy"],
+    "confidence": 0.80,
+    "note": "Intensity implies high energy output"
+  },
+  {
+    "antecedent": ["genre=jazz"],
+    "consequent": ["tags=high_complexity"],
+    "confidence": 0.75,
+    "note": "Jazz harmony and improvisation demand high complexity"
+  },
+  {
+    "antecedent": ["genre=classical"],
+    "consequent": ["tags=high_complexity"],
+    "confidence": 0.70,
+    "note": "Classical composition is structurally and harmonically complex"
+  },
+  {
+    "antecedent": ["genre=pop"],
+    "consequent": ["tags=simple_complexity"],
+    "confidence": 0.75,
+    "note": "Pop music is designed for accessibility — intentionally simple"
+  },
+  {
+    "antecedent": ["genre=country"],
+    "consequent": ["tags=simple_complexity"],
+    "confidence": 0.70,
+    "note": "Country songs favour straightforward I-IV-V harmony"
+  },
+  {
+    "antecedent": ["genre=folk"],
+    "consequent": ["tags=simple_complexity"],
+    "confidence": 0.65,
+    "note": "Folk is rooted in simple, singable forms"
+  },
+  {
+    "antecedent": ["genre=metal", "tags=intense"],
+    "consequent": ["tags=high_complexity"],
+    "confidence": 0.70,
+    "note": "Intense metal subgenres (prog, tech) are highly complex"
+  },
+  {
+    "antecedent": ["part_type=chorus", "tags=energetic"],
+    "consequent": ["part_tags=upbeat"],
+    "confidence": 0.85,
+    "note": "Energetic choruses call for upbeat energy"
+  },
+  {
+    "antecedent": ["part_type=chorus", "tags=energetic"],
+    "consequent": ["part_tags=driving"],
+    "confidence": 0.85,
+    "note": "Energetic choruses should have driving momentum"
+  },
+  {
+    "antecedent": ["part_type=chorus", "tags=happy_mood"],
+    "consequent": ["part_tags=upbeat"],
+    "confidence": 0.85,
+    "note": "Happy choruses are reliably upbeat"
+  },
+  {
+    "antecedent": ["part_type=chorus", "genre=pop"],
+    "consequent": ["part_tags=upbeat"],
+    "confidence": 0.80,
+    "note": "Pop choruses are typically the most energetic section"
+  },
+  {
+    "antecedent": ["part_type=verse"],
+    "consequent": ["part_tags=mellow"],
+    "confidence": 0.65,
+    "note": "Verses are typically lower energy than the chorus"
+  },
+  {
+    "antecedent": ["part_type=bridge"],
+    "consequent": ["part_tags=dark"],
+    "confidence": 0.60,
+    "note": "Bridges often introduce harmonic tension or emotional contrast"
+  },
+  {
+    "antecedent": ["part_type=intro"],
+    "consequent": ["part_tags=chill"],
+    "confidence": 0.60,
+    "note": "Intros typically start low-key before the song builds"
+  },
+  {
+    "antecedent": ["part_type=outro"],
+    "consequent": ["part_tags=mellow"],
+    "confidence": 0.65,
+    "note": "Outros wind the energy down"
+  },
+  {
+    "antecedent": ["part_type=chorus", "tags=dark_mood"],
+    "consequent": ["part_tags=dark"],
+    "confidence": 0.75,
+    "note": "Dark-mood songs carry that darkness into the chorus"
+  }
+]

@@ -10,7 +10,7 @@
       "min_support": 0.01,
       "min_confidence": 0.1,
       "max_antecedent_size": 5,
-      "samples_per_source": 20000,
+      "samples": 20000,
       "min_item_freq": 0.001,
       "mappings": [
         { "column": "playlist_genre", "target": "genre"},
@@ -56,7 +56,7 @@
       "min_support": 0.005,
       "min_confidence": 0.1,
       "max_antecedent_size": 5,
-      "samples_per_source": 40000,
+      "samples": 20000,
       "min_item_freq": 0.001,
       "extract": {
         "prefixes": {
@@ -149,54 +149,9 @@
       "description": "Common chord progressions with key/mode associations"
     }
   },
-  "manual_rules": [
-    {
-      "antecedent": [
-        "genre=jazz",
-        "mood=complex"
-      ],
-      "consequent": [
-        "mode=dorian"
-      ],
-      "confidence": 0.9,
-      "note": "Jazz with complex mood strongly prefers dorian mode"
-    },
-    {
-      "antecedent": [
-        "genre=pop",
-        "mood=upbeat"
-      ],
-      "consequent": [
-        "tempo_range=120-140"
-      ],
-      "confidence": 0.95,
-      "note": "Upbeat pop typically in this tempo range"
-    },
-    {
-      "antecedent": [
-        "genre=ambient",
-        "mood=chill"
-      ],
-      "consequent": [
-        "tempo_range=60-80",
-        "structure=intro-verse-bridge-chorus-outro"
-      ],
-      "confidence": 0.85,
-      "note": "Ambient chill songs are slow with atmospheric structure"
-    },
-    {
-      "antecedent": [
-        "part_type=chorus",
-        "mood=energetic"
-      ],
-      "consequent": [
-        "part_tags=upbeat",
-        "part_tags=driving"
-      ],
-      "confidence": 1.0,
-      "note": "Energetic choruses should have driving energy"
-    }
-  ],
+  "manual_rules": {
+    "file": "data/manual_rules.json"
+  },
   "generation_params": {
     "tag_confidence_threshold": 0.2
   },

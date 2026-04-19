@@ -18,9 +18,19 @@ class RuleEngine:
                 })
         else:
             self._load_learned_rules()
+        print(f"[rule_engine] Total rules loaded: {len(self.rules)}")
 
     def _load_manual_rules(self):
-        manual = self.config.get("manual_rules", [])
+        manual_config = self.config.get("manual_rules", [])
+        if isinstance(manual_config, dict):
+            file_path = os.path.join(self.base_dir, manual_config["file"])
+            with open(file_path, 'r') as f:
+                manual = json.load(f)
+            print(f"[manual_rules] Loaded {len(manual)} rules from {manual_config['file']}")
+        else:
+            manual = manual_config
+            if manual:
+                print(f"[manual_rules] Loaded {len(manual)} inline rules")
         for r in manual:
             self.rules.append({
                 'antecedents': set(r['antecedent']),

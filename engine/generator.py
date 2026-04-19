@@ -101,7 +101,7 @@ class Generator:
                     and d_conf.get("target", "tags") == prop_name
                     and d_conf.get("inject_on_sample", True) is not False):
                 vocab.update(d_conf["labels"])
-        return list(vocab)
+        return sorted(vocab)
 
     def _sample_with_adherence(self, options_probs, adherence):
         """Sample a value from options_probs dict using temperature-scaled softmax."""

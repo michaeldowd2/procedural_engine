@@ -1,6 +1,7 @@
 import os
 import random
 import glob
+import numpy as np
 import pandas as pd
 from mlxtend.preprocessing import TransactionEncoder
 from mlxtend.frequent_patterns import fpgrowth, association_rules
@@ -225,6 +226,11 @@ def mine_rules(config, model_dir):
     samples_per_source  = mining_params.get("samples_per_source", 5000)
     min_item_freq       = mining_params.get("min_item_freq", 0.01)
     max_antecedent_size = mining_params.get("max_antecedent_size", 3)
+    seed                = mining_params.get("seed", 0)
+
+    random.seed(seed)
+    np.random.seed(seed)
+    print(f"[mine_rules] seed={seed}")
 
     all_rules = []
 
@@ -236,9 +242,10 @@ def mine_rules(config, model_dir):
         s_conf      = source.get("min_confidence", min_confidence)
         s_item_freq = source.get("min_item_freq", min_item_freq)
         s_max_ant   = source.get("max_antecedent_size", max_antecedent_size)
+        s_samples   = source.get("samples", source.get("samples_per_source", samples_per_source))
 
         print(f"\n[{name}] ({stype})")
-        print(f"  Params: min_support={s_support}, min_conf={s_conf}, min_item_freq={s_item_freq}, max_ant={s_max_ant}")
+        print(f"  Params: min_support={s_support}, min_conf={s_conf}, min_item_freq={s_item_freq}, max_ant={s_max_ant}, samples={s_samples or 'all'}")
 
         if stype == "csv":
             txns = _extract_csv(source, config, model_dir)
@@ -252,9 +259,9 @@ def mine_rules(config, model_dir):
 
         print(f"  Extracted {len(txns)} transactions")
 
-        if samples_per_source and len(txns) > samples_per_source:
-            txns = random.sample(txns, samples_per_source)
-            print(f"  Sampled down to {samples_per_source} transactions")
+        if s_samples and len(txns) > s_samples:
+            txns = random.sample(txns, s_samples)
+            print(f"  Sampled down to {s_samples} transactions")
 
         txns, removed_vocab = _prune_vocabulary(txns, s_item_freq)
         if removed_vocab:
