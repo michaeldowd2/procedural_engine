@@ -5,8 +5,8 @@ from engine.generator import Generator
 g = Generator('models/song/schema.json', 'models/song/dataset.json')
 
 DIMS = {
-    'energy': ['energy_low', 'energy_medium', 'energy_high'],
-    'mood':   ['mood_dark', 'mood_neutral', 'mood_happy'],
+    'energy': ['low_energy', 'medium_energy', 'high_energy'],
+    'mood':   ['dark_mood', 'neutral_mood', 'happy_mood'],
     'tempo':  ['tempo_slow', 'tempo_moderate', 'tempo_fast', 'tempo_very_fast'],
 }
 

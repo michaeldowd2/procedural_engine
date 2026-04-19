@@ -55,7 +55,6 @@
       -webkit-text-fill-color: transparent;
     }
 
-    /* Model picker */
     #model-picker-row {
       margin-top: 8px;
       display: flex;
@@ -89,10 +88,10 @@
       font-size: 0.72rem;
       color: var(--muted);
       margin-top: 3px;
+      min-height: 1em;
     }
     #graph-stats span { color: var(--accent); font-weight: 600; }
 
-    /* Controls */
     .control-row {
       padding: 10px 20px;
       border-bottom: 1px solid var(--border);
@@ -110,28 +109,6 @@
       width: 100%;
       accent-color: var(--accent);
     }
-
-    /* Source toggles */
-    #source-row {
-      padding: 10px 20px;
-      border-bottom: 1px solid var(--border);
-    }
-    #source-row .control-label { margin-bottom: 7px; }
-    #source-buttons {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 5px;
-    }
-    .src-btn {
-      font-size: 0.68rem;
-      padding: 3px 8px;
-      border-radius: 999px;
-      border: 1px solid;
-      cursor: pointer;
-      transition: opacity 0.2s, background 0.2s;
-      user-select: none;
-    }
-    .src-btn.off { opacity: 0.3; }
 
     /* Generation list */
     #gen-list {
@@ -161,6 +138,20 @@
     /* ── Centre graph ─────────────────────────────────────────── */
     #graph-wrap { flex: 1; position: relative; overflow: hidden; }
     svg { width: 100%; height: 100%; }
+
+    #empty-state {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      text-align: center;
+      pointer-events: none;
+    }
+    #empty-state.hidden { display: none; }
+    #empty-state p { font-size: 0.9rem; margin-bottom: 4px; }
+    #empty-state small { font-size: 0.75rem; opacity: 0.65; }
 
     /* ── JSON panel ───────────────────────────────────────────── */
     #json-panel {
@@ -221,8 +212,8 @@
       line-height: 1.5;
     }
     #tooltip strong { color: var(--accent); display: block; margin-bottom: 3px; font-size: 0.82rem; }
-    #tooltip .tip-rule { color: #94a3b8; margin-top: 4px; font-style: italic; font-size: 0.72rem; }
     #tooltip .tip-meta { color: var(--muted); }
+    #tooltip .tip-pinned { color: #f59e0b; font-size: 0.7rem; margin-top: 3px; }
 
     /* ── Legend ───────────────────────────────────────────────── */
     #legend {
@@ -238,19 +229,22 @@
       z-index: 10;
       pointer-events: none;
     }
+    #legend.hidden { display: none; }
     #legend .leg-title { font-weight: 600; color: var(--text); margin-bottom: 6px; }
     .leg-row { display: flex; align-items: center; gap: 6px; margin-bottom: 3px; }
     .leg-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
     .leg-line { width: 24px; height: 2px; border-radius: 1px; flex-shrink: 0; }
+    .leg-ring {
+      width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0;
+      border: 2px solid #f59e0b; background: transparent;
+    }
 
     /* ── Node / link base styles ─────────────────────────────── */
-    .node-circle { stroke: rgba(255,255,255,0.22); stroke-width: 1.5; cursor: pointer; }
-    .link { stroke-opacity: 0.45; }
-    .link-synonym { stroke-dasharray: 4 3; stroke-opacity: 0.3; }
+    .node-circle { cursor: pointer; }
+    .link { stroke-opacity: 0.5; }
     .node-label { pointer-events: none; font-size: 10.5px; fill: #cbd5e1;
                   text-shadow: 0 0 6px #000, 0 0 4px #000; }
 
-    /* Loading overlay */
     #loading {
       position: absolute;
       inset: 0;
@@ -275,23 +269,13 @@
       <label for="model-select">Model</label>
       <select id="model-select"><option value="">Loading…</option></select>
     </div>
-    <p id="header-sub">Association rules · procedural engine</p>
-    <div id="graph-stats">Loading…</div>
+    <p id="header-sub">Generated samples · procedural engine</p>
+    <div id="graph-stats"></div>
   </div>
 
   <div class="control-row">
-    <div class="control-label">Min confidence <span id="conf-val">0.30</span></div>
-    <input type="range" id="conf-slider" min="0.30" max="1.00" step="0.05" value="0.30">
-  </div>
-
-  <div class="control-row">
-    <div class="control-label">Min lift <span id="lift-val">1.2</span></div>
-    <input type="range" id="lift-slider" min="1.0" max="6.0" step="0.1" value="1.2">
-  </div>
-
-  <div id="source-row">
-    <div class="control-label">Sources</div>
-    <div id="source-buttons"></div>
+    <div class="control-label">Min rule confidence <span id="conf-val">0.30</span></div>
+    <input type="range" id="conf-slider" min="0.10" max="1.00" step="0.05" value="0.30">
   </div>
 
   <div id="gen-list">
@@ -299,16 +283,31 @@
   </div>
 </aside>
 
-<!-- ── Centre force graph ────────────────────────────────────── -->
+<!-- ── Centre sample graph ────────────────────────────────────── -->
 <div id="graph-wrap">
-  <div id="loading">Loading graph…</div>
+  <div id="loading">Loading samples…</div>
+  <div id="empty-state">
+    <div>
+      <div style="font-size:2.8rem;margin-bottom:10px;opacity:0.12">◉</div>
+      <p>Select a generation from the sidebar</p>
+      <small>to visualize its items and rule connections</small>
+    </div>
+  </div>
   <svg id="graph-svg"></svg>
-  <div id="legend">
-    <div class="leg-title">Edge lift</div>
-    <div class="leg-row"><div class="leg-line" style="background:#f59e0b"></div> high (≥ 3×)</div>
-    <div class="leg-row"><div class="leg-line" style="background:#38bdf8"></div> notable (1.5 – 3×)</div>
-    <div class="leg-row"><div class="leg-line" style="background:#334155"></div> moderate (1.2 – 1.5×)</div>
-    <div class="leg-row"><div class="leg-line" style="background:#475569;border-top:1px dashed #475569;height:0"></div> synonym</div>
+  <div id="legend" class="hidden">
+    <div class="leg-title">Rule confidence</div>
+    <div class="leg-row"><div class="leg-line" style="background:#f59e0b"></div> high (≥ 0.7)</div>
+    <div class="leg-row"><div class="leg-line" style="background:#38bdf8"></div> medium (0.4 – 0.7)</div>
+    <div class="leg-row"><div class="leg-line" style="background:#334155"></div> low (&lt; 0.4)</div>
+    <div style="border-top:1px solid var(--border);margin:6px 0 5px"></div>
+    <div class="leg-row"><div class="leg-dot" style="background:#f43f5e"></div> tags</div>
+    <div class="leg-row"><div class="leg-dot" style="background:#38bdf8"></div> key</div>
+    <div class="leg-row"><div class="leg-dot" style="background:#10b981"></div> instruments</div>
+    <div class="leg-row"><div class="leg-dot" style="background:#f59e0b"></div> tempo</div>
+    <div class="leg-row"><div class="leg-dot" style="background:#a78bfa"></div> genre / mode</div>
+    <div class="leg-row"><div class="leg-dot" style="background:#fb923c"></div> structure</div>
+    <div style="border-top:1px solid var(--border);margin:6px 0 5px"></div>
+    <div class="leg-row"><div class="leg-ring"></div> pinned input</div>
   </div>
 </div>
 
@@ -324,29 +323,29 @@
 <div id="tooltip"></div>
 
 <script>
-// ─── Config ───────────────────────────────────────────────────
+// ─── Colour config ────────────────────────────────────────────
 const GROUP_COLORS = {
   tags:        '#f43f5e',
   key:         '#38bdf8',
   instruments: '#10b981',
   tempo:       '#f59e0b',
+  genre:       '#a78bfa',
+  mode:        '#a78bfa',
   vocals:      '#a78bfa',
   structure:   '#fb923c',
-  mode:        '#34d399',
   default:     '#94a3b8',
 };
 function nodeColor(group) { return GROUP_COLORS[group] || GROUP_COLORS.default; }
 
-function liftColor(link) {
-  if (link.type === 'synonym') return '#475569';
-  const lift = link.lift || 1;
-  if (lift >= 3.0) return '#f59e0b';
-  if (lift >= 1.5) return '#38bdf8';
+function edgeColor(link) {
+  const c = link.confidence || 0;
+  if (c >= 0.7) return '#f59e0b';
+  if (c >= 0.4) return '#38bdf8';
   return '#334155';
 }
-function liftWidth(lift) { return Math.max(0.5, Math.min(4.5, lift * 0.9)); }
+function edgeWidth(link) { return Math.max(0.8, Math.min(3.5, (link.confidence || 0) * 4)); }
 
-// ─── SVG / zoom ──────────────────────────────────────────────
+// ─── SVG setup ───────────────────────────────────────────────
 const svg  = d3.select('#graph-svg');
 const root = svg.append('g');
 svg.call(d3.zoom().scaleExtent([0.1, 6]).on('zoom', e => root.attr('transform', e.transform)));
@@ -364,27 +363,32 @@ const linkGroup = root.append('g').attr('class', 'links');
 const nodeGroup = root.append('g').attr('class', 'nodes');
 
 // ─── State ───────────────────────────────────────────────────
-let allLinks = [], allNodes = [];
-let activeSources    = new Set();
-let highlightedNodes = new Set();
-let selectedNodeId   = null;
+let selectedNodeId     = null;
 let simulation;
-let confThr = 0.30, liftThr = 1.2;
+let confThr            = 0.30;
+let currentGenerations = [];
+let activeGenIdx       = -1;
 
 let linkSel = linkGroup.selectAll('line');
 let nodeSel = nodeGroup.selectAll('g');
 
-// ─── Graph update ─────────────────────────────────────────────
+// ─── Graph rendering ─────────────────────────────────────────
+function nodeRadius(d) { return Math.min(22, 7 + (d.degree || 0) * 1.8); }
+function labelText(id) {
+  const p = id.split('=');
+  return p.length > 1 ? p.slice(1).join('=') : id;
+}
+
 function updateGraph(links, nodes) {
   linkSel = linkGroup.selectAll('line').data(links, d => `${d.source.id||d.source}→${d.target.id||d.target}`);
   linkSel.exit().remove();
   linkSel = linkSel.enter().append('line')
-    .attr('class', d => 'link' + (d.type === 'synonym' ? ' link-synonym' : ''))
-    .attr('stroke',       d => liftColor(d))
-    .attr('stroke-width', d => d.type === 'synonym' ? 1 : liftWidth(d.lift || 1))
+    .attr('class', 'link')
+    .attr('stroke',       d => edgeColor(d))
+    .attr('stroke-width', d => edgeWidth(d))
     .merge(linkSel)
-    .attr('stroke',       d => liftColor(d))
-    .attr('stroke-width', d => d.type === 'synonym' ? 1 : liftWidth(d.lift || 1));
+    .attr('stroke',       d => edgeColor(d))
+    .attr('stroke-width', d => edgeWidth(d));
 
   nodeSel = nodeGroup.selectAll('g').data(nodes, d => d.id);
   nodeSel.exit().remove();
@@ -397,8 +401,10 @@ function updateGraph(links, nodes) {
 
   enter.append('circle')
     .attr('class', 'node-circle')
-    .attr('r',    d => nodeRadius(d))
-    .attr('fill', d => nodeColor(d.group))
+    .attr('r',            d => nodeRadius(d))
+    .attr('fill',         d => nodeColor(d.group))
+    .attr('stroke',       d => d.pinned ? '#f59e0b' : 'rgba(255,255,255,0.20)')
+    .attr('stroke-width', d => d.pinned ? 2.5 : 1.5)
     .style('filter', 'url(#glow)')
     .on('mouseover', onNodeHover)
     .on('mouseout',  onNodeOut)
@@ -421,16 +427,9 @@ function updateGraph(links, nodes) {
   updateStats(nodes.length, links.length);
 }
 
-function nodeRadius(d) { return Math.min(26, 6 + (d.degree || 1) * 1.6); }
-function labelText(id) {
-  const p = id.split('=');
-  return p.length > 1 ? p.slice(1).join('=') : id;
-}
-
-// ─── Stats display ────────────────────────────────────────────
 function updateStats(n, e) {
   document.getElementById('graph-stats').innerHTML =
-    `<span>${n}</span> nodes · <span>${e}</span> edges visible`;
+    `<span>${n}</span> items · <span>${e}</span> connections`;
 }
 
 // ─── Tooltip ─────────────────────────────────────────────────
@@ -438,30 +437,20 @@ const tooltip = d3.select('#tooltip');
 
 function onNodeHover(event, d) {
   d3.select(this).transition().duration(120).attr('r', nodeRadius(d) + 4);
-  const edges = allLinks.filter(l =>
-    (l.source.id || l.source) === d.id || (l.target.id || l.target) === d.id
-  ).sort((a, b) => (b.score || 0) - (a.score || 0));
-  const best = edges.find(e => e.type !== 'synonym') || edges[0];
-
   tooltip
     .style('opacity', 1)
     .style('left', (event.clientX + 16) + 'px')
     .style('top',  (event.clientY - 12) + 'px')
     .html(`
       <strong>${d.id}</strong>
-      <div class="tip-meta">
-        Group: <b>${d.group}</b> · Connections: <b>${d.degree}</b><br>
-        Avg lift: <b>${d.lift_avg || '—'}</b>
-      </div>
-      ${best ? `<div class="tip-rule">${best.rule}</div>` : ''}
+      <div class="tip-meta">Group: <b>${d.group}</b> · Connections: <b>${d.degree || 0}</b></div>
+      ${d.pinned ? '<div class="tip-pinned">★ pinned input</div>' : ''}
     `);
 }
-
 function onNodeOut(event, d) {
   d3.select(this).transition().duration(250).attr('r', nodeRadius(d));
   tooltip.style('opacity', 0);
 }
-
 function onNodeClick(e, d) {
   e.stopPropagation();
   selectedNodeId = selectedNodeId === d.id ? null : d.id;
@@ -472,7 +461,7 @@ svg.on('click', () => { selectedNodeId = null; applyHighlight(); });
 // ─── Highlight ────────────────────────────────────────────────
 function applyHighlight() {
   if (!nodeSel || nodeSel.empty()) return;
-  let glowSet = new Set(highlightedNodes);
+  const glowSet = new Set();
   if (selectedNodeId) {
     glowSet.add(selectedNodeId);
     linkSel.each(d => {
@@ -486,81 +475,81 @@ function applyHighlight() {
   nodeSel.select('circle').transition().duration(220)
     .attr('r', d => glowSet.has(d.id) ? nodeRadius(d) + 5 : nodeRadius(d))
     .style('filter', d => glowSet.has(d.id) ? 'url(#glow-hl)' : 'url(#glow)')
-    .style('opacity', d => !any || glowSet.has(d.id) ? 1 : 0.18)
-    .attr('stroke', d => glowSet.has(d.id) ? '#fff' : 'rgba(255,255,255,0.22)')
-    .attr('stroke-width', d => glowSet.has(d.id) ? 2.5 : 1.5);
+    .style('opacity', d => !any || glowSet.has(d.id) ? 1 : 0.2)
+    .attr('stroke', d => {
+      if (glowSet.has(d.id)) return '#fff';
+      return d.pinned ? '#f59e0b' : 'rgba(255,255,255,0.20)';
+    })
+    .attr('stroke-width', d => glowSet.has(d.id) ? 2.5 : (d.pinned ? 2.5 : 1.5));
 
   nodeSel.select('text').style('opacity', d => !any || glowSet.has(d.id) ? 1 : 0.12);
 
   linkSel.transition().duration(220)
     .style('opacity', d => {
-      if (!any) return d.type === 'synonym' ? 0.2 : 0.45;
+      if (!any) return 0.5;
       const s = d.source.id || d.source, t = d.target.id || d.target;
       return (glowSet.has(s) && glowSet.has(t)) ? 0.9 : 0.04;
     })
     .attr('stroke', d => {
       const s = d.source.id || d.source, t = d.target.id || d.target;
-      return (glowSet.has(s) && glowSet.has(t)) ? '#fff' : liftColor(d);
+      return (glowSet.has(s) && glowSet.has(t)) ? '#fff' : edgeColor(d);
     });
 }
 
-// ─── Filter logic ─────────────────────────────────────────────
-function filterGraph() {
-  const filtered = allLinks.filter(l =>
-    (l.type === 'synonym' || (l.confidence >= confThr && (l.lift || 1) >= liftThr)) &&
-    activeSources.has(l.dataset || 'unknown')
-  );
-  const active = new Set();
-  filtered.forEach(l => {
-    active.add(l.source.id || l.source);
-    active.add(l.target.id || l.target);
-  });
-  updateGraph(filtered, allNodes.filter(n => active.has(n.id)));
-}
-
-// ─── Sliders ──────────────────────────────────────────────────
+// ─── Confidence slider ────────────────────────────────────────
 document.getElementById('conf-slider').addEventListener('input', function () {
   confThr = parseFloat(this.value);
   document.getElementById('conf-val').textContent = confThr.toFixed(2);
-  filterGraph();
+  if (activeGenIdx >= 0 && currentGenerations[activeGenIdx]) {
+    renderSampleGraph(currentGenerations[activeGenIdx]);
+  }
 });
 
-document.getElementById('lift-slider').addEventListener('input', function () {
-  liftThr = parseFloat(this.value);
-  document.getElementById('lift-val').textContent = liftThr.toFixed(1);
-  filterGraph();
-});
+// ─── Build nodes from a song output ──────────────────────────
+const SKIP_PROPS = new Set(['parts', 'target_duration']);
 
-// ─── Source toggles ───────────────────────────────────────────
-const SRC_PALETTE = ['#f43f5e','#38bdf8','#10b981','#f59e0b','#a78bfa','#fb923c'];
-
-function buildSourceToggles(sources) {
-  activeSources = new Set();
-  const container = document.getElementById('source-buttons');
-  container.innerHTML = '';
-
-  // Always add synonyms toggle
-  const allSources = { ...sources, synonyms: 0 };
-  Object.keys(allSources).forEach((src, i) => {
-    activeSources.add(src);
-    const col = src === 'synonyms' ? '#475569' : SRC_PALETTE[i % SRC_PALETTE.length];
-    const btn = document.createElement('div');
-    btn.className = 'src-btn';
-    btn.textContent = src.replace(/_/g, ' ');
-    btn.style.borderColor = col;
-    btn.style.color = col;
-    btn.style.background = col + '22';
-    btn.dataset.src = src;
-    btn.addEventListener('click', () => {
-      if (activeSources.has(src)) { activeSources.delete(src); btn.classList.add('off'); }
-      else { activeSources.add(src); btn.classList.remove('off'); }
-      filterGraph();
-    });
-    container.appendChild(btn);
-  });
+function songToNodes(song, pinnedIds) {
+  const nodes = [];
+  for (const [key, val] of Object.entries(song)) {
+    if (SKIP_PROPS.has(key)) continue;
+    if (Array.isArray(val)) {
+      val.forEach(v => {
+        if (typeof v === 'string' || typeof v === 'number') {
+          const id = `${key}=${v}`;
+          nodes.push({ id, group: key, degree: 0, pinned: pinnedIds.has(id) });
+        }
+      });
+    } else if (typeof val === 'string' || typeof val === 'number') {
+      const id = `${key}=${val}`;
+      nodes.push({ id, group: key, degree: 0, pinned: pinnedIds.has(id) });
+    }
+  }
+  return nodes;
 }
 
-// ─── Sidebar: generation list ────────────────────────────────
+// ─── Render per-sample graph ──────────────────────────────────
+function renderSampleGraph(gen) {
+  // Build pinned set from fixed_values
+  const pinnedIds = new Set();
+  for (const [k, v] of Object.entries(gen.fixed_values || {})) {
+    if (Array.isArray(v)) v.forEach(vi => pinnedIds.add(`${k}=${vi}`));
+    else pinnedIds.add(`${k}=${v}`);
+  }
+
+  const nodeMap = {};
+  songToNodes(gen.song, pinnedIds).forEach(n => { nodeMap[n.id] = n; });
+
+  const edges = (gen.edges || [])
+    .filter(e => e.confidence >= confThr && nodeMap[e.source] && nodeMap[e.target]);
+  edges.forEach(e => { nodeMap[e.source].degree++; nodeMap[e.target].degree++; });
+
+  const nodes = Object.values(nodeMap);
+  initSimulation(nodes, edges);
+  updateGraph(edges, nodes);
+  document.getElementById('legend').classList.remove('hidden');
+}
+
+// ─── Sidebar ─────────────────────────────────────────────────
 function buildSidebar(generations) {
   const list = document.getElementById('gen-list');
   list.innerHTML = '';
@@ -583,31 +572,38 @@ function buildSidebar(generations) {
   });
 }
 
-let activeGenIdx = -1;
+function clearGraph() {
+  if (simulation) simulation.stop();
+  linkGroup.selectAll('*').remove();
+  nodeGroup.selectAll('*').remove();
+  linkSel = linkGroup.selectAll('line');
+  nodeSel = nodeGroup.selectAll('g');
+}
 
 function selectGeneration(idx, generations) {
+  // Toggle off if already selected
   if (activeGenIdx === idx) {
     activeGenIdx = -1;
-    highlightedNodes = new Set();
+    selectedNodeId = null;
     document.querySelectorAll('.gen-item').forEach(el => el.classList.remove('active'));
     document.getElementById('json-panel').classList.remove('open');
-    applyHighlight();
+    document.getElementById('empty-state').classList.remove('hidden');
+    document.getElementById('legend').classList.add('hidden');
+    document.getElementById('graph-stats').innerHTML = '';
+    clearGraph();
     return;
   }
-  activeGenIdx = idx;
-  document.querySelectorAll('.gen-item').forEach((el, i) => el.classList.toggle('active', i === idx));
 
-  const { song } = generations[idx];
-  highlightedNodes = new Set();
-  (song.tags || []).forEach(t => highlightedNodes.add(`tags=${t}`));
-  if (song.key)       highlightedNodes.add(`key=${song.key}`);
-  if (song.mode)      highlightedNodes.add(`mode=${song.mode}`);
-  if (song.structure) highlightedNodes.add(`structure=${song.structure}`);
+  activeGenIdx = idx;
+  selectedNodeId = null;
+  document.querySelectorAll('.gen-item').forEach((el, i) => el.classList.toggle('active', i === idx));
+  document.getElementById('empty-state').classList.add('hidden');
+
+  renderSampleGraph(generations[idx]);
 
   document.getElementById('json-panel').classList.add('open');
   document.getElementById('json-title').textContent = generations[idx].label;
-  document.getElementById('json-pre').innerHTML = syntaxHighlight(JSON.stringify(song, null, 2));
-  applyHighlight();
+  document.getElementById('json-pre').innerHTML = syntaxHighlight(JSON.stringify(generations[idx].song, null, 2));
 }
 
 // ─── JSON syntax highlighting ─────────────────────────────────
@@ -626,23 +622,24 @@ function syntaxHighlight(json) {
 document.getElementById('close-json').addEventListener('click', () => {
   document.getElementById('json-panel').classList.remove('open');
   activeGenIdx = -1;
-  highlightedNodes = new Set();
+  selectedNodeId = null;
   document.querySelectorAll('.gen-item').forEach(el => el.classList.remove('active'));
-  applyHighlight();
+  document.getElementById('empty-state').classList.remove('hidden');
+  document.getElementById('legend').classList.add('hidden');
+  document.getElementById('graph-stats').innerHTML = '';
+  clearGraph();
 });
 
-// ─── Load model data ──────────────────────────────────────────
+// ─── Force simulation ─────────────────────────────────────────
 function initSimulation(nodes, links) {
   const W = document.getElementById('graph-wrap').clientWidth;
   const H = document.getElementById('graph-wrap').clientHeight;
-
   if (simulation) simulation.stop();
-
   simulation = d3.forceSimulation(nodes)
-    .force('link',    d3.forceLink(links).id(d => d.id).distance(120))
-    .force('charge',  d3.forceManyBody().strength(-260))
+    .force('link',    d3.forceLink(links).id(d => d.id).distance(110))
+    .force('charge',  d3.forceManyBody().strength(-200))
     .force('center',  d3.forceCenter(W / 2, H / 2))
-    .force('collide', d3.forceCollide(d => nodeRadius(d) + 9))
+    .force('collide', d3.forceCollide(d => nodeRadius(d) + 10))
     .on('tick', () => {
       linkSel.attr('x1', d=>d.source.x).attr('y1', d=>d.source.y)
              .attr('x2', d=>d.target.x).attr('y2', d=>d.target.y);
@@ -650,61 +647,46 @@ function initSimulation(nodes, links) {
     });
 }
 
+// ─── Load model ───────────────────────────────────────────────
 function loadModel(modelName) {
   document.getElementById('loading').classList.remove('hidden');
-  // Reset state
-  allNodes = []; allLinks = [];
-  activeSources = new Set();
-  highlightedNodes = new Set();
-  selectedNodeId = null;
+  document.getElementById('empty-state').classList.add('hidden');
+  document.getElementById('legend').classList.add('hidden');
+  document.getElementById('graph-stats').innerHTML = '';
+  currentGenerations = [];
   activeGenIdx = -1;
-  linkGroup.selectAll('*').remove();
-  nodeGroup.selectAll('*').remove();
+  selectedNodeId = null;
+  clearGraph();
   document.getElementById('json-panel').classList.remove('open');
   document.getElementById('gen-list').innerHTML =
     '<div style="padding:13px 20px;font-size:0.76rem;color:var(--muted)">Loading…</div>';
 
-  const base = `../models/${modelName}/model_data`;
+  const base = `../output/${modelName}`;
 
-  Promise.all([
-    d3.json(`${base}/graph_data.json`).catch(() => null),
-    d3.json(`${base}/generations.json`).catch(() => null),
-  ]).then(([graphData, generations]) => {
+  d3.json(`${base}/generations.json`).catch(() => null).then(generations => {
     document.getElementById('loading').classList.add('hidden');
 
-    if (!graphData) {
-      document.getElementById('graph-wrap').insertAdjacentHTML('beforeend',
-        '<div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#ef4444;text-align:center;padding:40px">' +
-        `<div><h2>graph_data.json not found</h2><p>Run <code>python scripts/generate_model_data.py --model ${modelName}</code> first.</p></div></div>`);
+    if (!generations || !generations.length) {
+      document.getElementById('empty-state').classList.remove('hidden');
+      document.getElementById('gen-list').innerHTML =
+        `<div style="padding:13px 20px;font-size:0.75rem;color:var(--muted)">No generations found.<br>Run: <code>python scripts/generate_samples.py --model ${modelName}</code></div>`;
       return;
     }
 
-    allNodes = graphData.nodes || [];
-    allLinks = graphData.links || [];
+    currentGenerations = generations;
+    const hasEdges = generations.some(g => g.edges && g.edges.length > 0);
+    document.getElementById('header-sub').textContent =
+      hasEdges
+        ? `${generations.length} samples · rule connections included`
+        : `${generations.length} samples · re-run generate_samples.py for edges`;
 
-    const meta = graphData.meta || {};
-    if (meta.total_rules_in_file) {
-      document.getElementById('header-sub').textContent =
-        `${meta.total_rules_in_file.toLocaleString()} rules mined · ${meta.rules_shown} shown`;
-    }
-    if (meta.lift_range) {
-      const ls = document.getElementById('lift-slider');
-      ls.min   = Math.max(1.0, meta.lift_range[0]).toFixed(1);
-      ls.max   = Math.min(10,  meta.lift_range[1]).toFixed(1);
-      ls.value = Math.max(parseFloat(ls.min), 1.2).toFixed(1);
-      liftThr  = parseFloat(ls.value);
-      document.getElementById('lift-val').textContent = liftThr.toFixed(1);
-    }
-    if (meta.sources) buildSourceToggles(meta.sources);
-
-    initSimulation(allNodes, allLinks);
-    filterGraph();
+    document.getElementById('empty-state').classList.remove('hidden');
     buildSidebar(generations);
   });
 }
 
-// ─── Bootstrap: load manifest then first model ────────────────
-d3.json('../models/manifest.json').catch(() => ({ models: ['song'] })).then(manifest => {
+// ─── Bootstrap ───────────────────────────────────────────────
+d3.json('output/manifest.json').catch(() => ({ models: ['song'] })).then(manifest => {
   const models = manifest.models || [];
   const sel = document.getElementById('model-select');
   sel.innerHTML = '';

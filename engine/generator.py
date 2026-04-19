@@ -8,19 +8,30 @@ from .embeddings import EmbeddingsManager
 
 
 class Generator:
-    def __init__(self, schema_path, dataset_path):
+    def __init__(self, schema_path, dataset_path, generate_rules_inline=True):
         self.schema_parser = SchemaParser(schema_path)
-        self.rule_engine = RuleEngine(dataset_path)
         self.embeddings_manager = EmbeddingsManager(dataset_path)
         self.preprocessing = self._load_preprocessing(dataset_path)
 
+        inline_rules = None
+        if generate_rules_inline:
+            from .rule_miner import mine_rules
+            with open(dataset_path, 'r') as f:
+                config = json.load(f)
+            model_dir = os.path.dirname(dataset_path)
+            inline_rules = mine_rules(config, model_dir)
+
+        self.rule_engine = RuleEngine(dataset_path, inline_rules=inline_rules)
+
     def _load_preprocessing(self, dataset_path):
-        """Load global preprocessing/discretization definitions from dataset.json."""
         with open(dataset_path, 'r') as f:
             config = json.load(f)
         gen_params = config.get("generation_params", {})
         self.tag_confidence_threshold = gen_params.get("tag_confidence_threshold", 0.2)
-        return config.get("preprocessing", {})
+        merged = {}
+        for source in config.get("data_sources", []):
+            merged.update(source.get("preprocessing", {}))
+        return merged
 
     def _discretize_value(self, prop_name, value):
         """
@@ -86,7 +97,9 @@ class Generator:
         
         # Add discretization labels for this specific target property
         for d_conf in self.preprocessing.values():
-            if d_conf.get("target", "tags") == prop_name and d_conf.get("inject_on_sample", True) is not False:
+            if (d_conf.get("type") == "bins"
+                    and d_conf.get("target", "tags") == prop_name
+                    and d_conf.get("inject_on_sample", True) is not False):
                 vocab.update(d_conf["labels"])
         return list(vocab)
 
@@ -105,7 +118,21 @@ class Generator:
             probs = exp_scores / np.sum(exp_scores)
         return np.random.choice(items, p=probs)
 
-    def generate(self, seed=None, adherence=1.0, fixed_values=None):
+    def _compute_sample_edges(self, context_tags):
+        best = {}
+        for rule in self.rule_engine.rules:
+            if (rule['antecedents'].issubset(context_tags)
+                    and rule['consequents'].issubset(context_tags)):
+                for ant in rule['antecedents']:
+                    for cons in rule['consequents']:
+                        if ant == cons:
+                            continue
+                        key = (ant, cons)
+                        if key not in best or rule['confidence'] > best[key]:
+                            best[key] = rule['confidence']
+        return [{"source": s, "target": t, "confidence": c} for (s, t), c in best.items()]
+
+    def generate(self, seed=None, adherence=1.0, fixed_values=None, return_edges=False):
         if seed is not None:
             random.seed(seed)
             np.random.seed(seed)
@@ -300,4 +327,6 @@ class Generator:
 
                     output[name].append(part_dict)
 
+        if return_edges:
+            return output, self._compute_sample_edges(context_tags)
         return output

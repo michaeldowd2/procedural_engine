@@ -2,14 +2,22 @@ import json
 import os
 
 class RuleEngine:
-    def __init__(self, dataset_path):
+    def __init__(self, dataset_path, inline_rules=None):
         self.rules = []
         self.base_dir = os.path.dirname(dataset_path)
         with open(dataset_path, 'r') as f:
             self.config = json.load(f)
-            
+
         self._load_manual_rules()
-        self._load_learned_rules()
+        if inline_rules is not None:
+            for r in inline_rules:
+                self.rules.append({
+                    'antecedents': set(r['antecedents']),
+                    'consequents': set(r['consequents']),
+                    'confidence': r['confidence']
+                })
+        else:
+            self._load_learned_rules()
 
     def _load_manual_rules(self):
         manual = self.config.get("manual_rules", [])
@@ -21,11 +29,7 @@ class RuleEngine:
             })
 
     def _load_learned_rules(self):
-        # Prefer model_data/ over data/
         learned_rules_path = os.path.join(self.base_dir, "model_data", "learned_rules.json")
-        if not os.path.exists(learned_rules_path):
-            learned_rules_path = os.path.join(self.base_dir, "data", "learned_rules.json")
-            
         if os.path.exists(learned_rules_path):
             with open(learned_rules_path, 'r') as f:
                 learned = json.load(f)

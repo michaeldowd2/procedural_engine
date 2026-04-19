@@ -1,89 +1,60 @@
-# Music Composer Example
+# Song Model
 
-This example demonstrates using the Procedural Engine for procedural music composition.
-
-## Overview
-
-The composer generates complete song structures including:
-- High-level properties: tempo, key, mode, genre/mood tags
-- Song structure: verse/chorus/bridge arrangement
-- Instruments: selection from preset library
-- Musical parts: chord progressions and MIDI patterns for each section
+Procedural music composition model. Generates complete song metadata including tempo, key, mode, genre, tags, instrument selection, song structure, and per-part chord progressions.
 
 ## Files
 
-### Schema
-- `schema.json` - Defines the output structure and property types
+| File | Purpose |
+|---|---|
+| `schema.json` | Output structure — property names, types, ranges, and item libraries |
+| `dataset.json` | Data sources, preprocessing bins, manual rules, item libraries |
+| `data/` | Source datasets used for rule mining |
+| `model_data/` | Generated outputs (created by scripts) |
 
-### Dataset
-- `dataset.json` - Configuration for association rules and embeddings
-- `data/music_metadata.csv` - Genre/tempo/key relationships
-- `data/song_structures.csv` - Common song structures by genre
-- `data/instrument_presets.json` - Library of instrument presets with tags
-- `data/chord_progressions.json` - Chord progressions with mode/tag associations
+## Data Sources
 
-## Example Usage
+| Source | Type | What it contributes |
+|---|---|---|
+| `spotify_songs.csv` | CSV | genre, key, mode, tempo, energy, valence associations |
+| `jamendo/...tsv` | wide_tsv | genre, mood/tag, instrument co-occurrences |
+| `SegLabelHard/` | time_series_dir | emotion, instrument, vocal tag associations |
+| `song_structures.csv` | CSV | genre→structure relationships |
 
-```python
-from procedural_engine import Generator
+## Preprocessing
 
-# Load schema and dataset
-generator = Generator(
-    schema="examples/composer/schema.json",
-    dataset="examples/composer/dataset.json"
-)
+Numeric binning is defined inside the `spotify_songs` source in `dataset.json`. Four columns are discretized into tags:
 
-# Generate with no constraints
-song = generator.generate(seed=42, adherence=1.0)
+| Column | Tags produced |
+|---|---|
+| `tempo` | `tempo_slow`, `tempo_moderate`, `tempo_fast`, `tempo_very_fast` |
+| `energy` | `energy_low`, `energy_medium`, `energy_high` |
+| `valence` | `mood_dark`, `mood_neutral`, `mood_happy` |
+| `target_duration` | `short`, `medium-short`, `medium`, `medium-long`, `long` |
 
-# Generate with fixed tempo
-song = generator.generate(
-    seed=42,
-    adherence=0.8,
-    fixed_values={"tempo": 128, "tags": ["pop", "energetic"]}
-)
+`target_duration` has `"inject_on_sample": false` — it maps tags to numeric ranges during generation but does not auto-inject the label back into the output.
+
+## Generating Samples
+
+From the project root:
+
+```bash
+python scripts/generate_samples.py --model song
 ```
 
-## Sample Output
+This mines rules inline and writes `model_data/generations.json` for the Explorer UI.
 
-```json
+## Schema Overview
+
+```
 {
-  "tempo": 128,
-  "key": "C",
-  "mode": "major",
-  "tags": ["pop", "upbeat", "energetic"],
-  "target_duration": 210,
-  "instruments": ["preset_001", "preset_003", "preset_006"],
-  "structure": "verse-chorus-verse-chorus-bridge-chorus",
-  "parts": [
-    {
-      "part_type": "verse",
-      "part_tags": ["mellow"],
-      "chords": ["C", "G", "Am", "F"],
-      "instrument_patterns": {
-        "preset_001": "pattern_042",
-        "preset_003": "pattern_071",
-        "preset_006": "pattern_105"
-      }
-    },
-    {
-      "part_type": "chorus",
-      "part_tags": ["energetic", "driving"],
-      "chords": ["C", "G", "Am", "F"],
-      "instrument_patterns": {
-        "preset_001": "pattern_043",
-        "preset_003": "pattern_072",
-        "preset_006": "pattern_106"
-      }
-    }
-  ]
+  tempo          numeric  60–200 BPM
+  key            categorical  C, C#, D, ... B
+  mode           categorical  major, minor, dorian, ...
+  genre          tag_list
+  tags           tag_list     mood, energy, tempo, style tags
+  target_duration numeric     seconds
+  instruments    item_list    from instrument_presets library
+  structure      categorical  verse-chorus-... patterns
+  parts          part_list    per-section chords and tags
 }
 ```
-
-## Dataset Notes
-
-The sample datasets are intentionally small for illustration. In production:
-- `music_metadata.csv` would contain 1000s of songs
-- Instrument and pattern libraries would contain 100s-1000s of items
-- Embeddings would be pre-trained on large corpora
-- Manual rules would encode specific musical knowledge
