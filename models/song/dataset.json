@@ -1,7 +1,6 @@
 {
   "name": "composer_dataset",
   "description": "Association rules and embeddings for music composition",
-
   "data_sources": [
     {
       "name": "spotify_songs",
@@ -9,8 +8,14 @@
       "type": "csv",
       "delimiter": ",",
       "mappings": [
-        {"column": "playlist_genre", "target": "tags"},
-        {"column": "key", "target": "key"}
+        {
+          "column": "playlist_genre",
+          "target": "tags"
+        },
+        {
+          "column": "key",
+          "target": "key"
+        }
       ]
     },
     {
@@ -32,13 +37,16 @@
       "folder": "data/SegLabelHard",
       "type": "time_series_dir",
       "aggregate": "max",
-      "max_antecedent_size": 2,
+      "max_antecedent_size": 3,
       "extract": {
         "prefixes": {
           "Emotion-": "tags",
           "Instrument_-_": "instruments",
           "Vocals-": "vocals"
-        }
+        },
+        "exclude_suffixes": [
+          "-Solo"
+        ]
       }
     },
     {
@@ -47,13 +55,21 @@
       "type": "csv",
       "delimiter": ",",
       "mappings": [
-        {"column": "genre", "target": "tags"},
-        {"column": "mood", "target": "tags"},
-        {"column": "structure", "target": "structure"}
+        {
+          "column": "genre",
+          "target": "tags"
+        },
+        {
+          "column": "mood",
+          "target": "tags"
+        },
+        {
+          "column": "structure",
+          "target": "structure"
+        }
       ]
     }
   ],
-
   "item_libraries": {
     "instrument_presets": {
       "file": "data/instrument_presets.json",
@@ -65,62 +81,123 @@
       "description": "Common chord progressions with key/mode associations"
     }
   },
-
   "manual_rules": [
     {
-      "antecedent": ["genre=jazz", "mood=complex"],
-      "consequent": ["mode=dorian"],
+      "antecedent": [
+        "genre=jazz",
+        "mood=complex"
+      ],
+      "consequent": [
+        "mode=dorian"
+      ],
       "confidence": 0.9,
       "note": "Jazz with complex mood strongly prefers dorian mode"
     },
     {
-      "antecedent": ["genre=pop", "mood=upbeat"],
-      "consequent": ["tempo_range=120-140"],
+      "antecedent": [
+        "genre=pop",
+        "mood=upbeat"
+      ],
+      "consequent": [
+        "tempo_range=120-140"
+      ],
       "confidence": 0.95,
       "note": "Upbeat pop typically in this tempo range"
     },
     {
-      "antecedent": ["genre=ambient", "mood=chill"],
-      "consequent": ["tempo_range=60-80", "structure=intro-verse-bridge-chorus-outro"],
+      "antecedent": [
+        "genre=ambient",
+        "mood=chill"
+      ],
+      "consequent": [
+        "tempo_range=60-80",
+        "structure=intro-verse-bridge-chorus-outro"
+      ],
       "confidence": 0.85,
       "note": "Ambient chill songs are slow with atmospheric structure"
     },
     {
-      "antecedent": ["part_type=chorus", "mood=energetic"],
-      "consequent": ["part_tags=upbeat", "part_tags=driving"],
+      "antecedent": [
+        "part_type=chorus",
+        "mood=energetic"
+      ],
+      "consequent": [
+        "part_tags=upbeat",
+        "part_tags=driving"
+      ],
       "confidence": 1.0,
       "note": "Energetic choruses should have driving energy"
     }
   ],
-
   "preprocessing": {
     "tempo": {
       "type": "bins",
-      "bins": [0, 90, 120, 150, 300],
-      "labels": ["tempo_slow", "tempo_moderate", "tempo_fast", "tempo_very_fast"],
+      "bins": [
+        0,
+        90,
+        120,
+        150,
+        300
+      ],
+      "labels": [
+        "tempo_slow",
+        "tempo_moderate",
+        "tempo_fast",
+        "tempo_very_fast"
+      ],
       "target": "tags"
     },
     "energy": {
       "type": "bins",
-      "bins": [0, 0.33, 0.66, 1.0],
-      "labels": ["energy_low", "energy_medium", "energy_high"],
+      "bins": [
+        0,
+        0.33,
+        0.66,
+        1.0
+      ],
+      "labels": [
+        "energy_low",
+        "energy_medium",
+        "energy_high"
+      ],
       "target": "tags"
     },
     "valence": {
       "type": "bins",
-      "bins": [0, 0.33, 0.66, 1.0],
-      "labels": ["mood_dark", "mood_neutral", "mood_happy"],
+      "bins": [
+        0,
+        0.33,
+        0.66,
+        1.0
+      ],
+      "labels": [
+        "mood_dark",
+        "mood_neutral",
+        "mood_happy"
+      ],
       "target": "tags"
     },
     "target_duration": {
       "type": "bins",
-      "bins": [0, 120, 180, 240, 300, 600],
-      "labels": ["short", "medium-short", "medium", "medium-long", "long"],
+      "bins": [
+        0,
+        120,
+        180,
+        240,
+        300,
+        600
+      ],
+      "labels": [
+        "short",
+        "medium-short",
+        "medium",
+        "medium-long",
+        "long"
+      ],
       "target": "tags",
       "inject_on_sample": false
     }
   },
-
   "rule_mining_params": {
     "min_support": 0.05,
     "min_confidence": 0.3,
@@ -129,34 +206,102 @@
     "samples_per_source": 10000,
     "min_item_freq": 0.005
   },
-
   "generation_params": {
     "tag_confidence_threshold": 0.2
   },
-
   "embedding_params": {
     "dimension": 100,
     "algorithm": "item2vec",
     "context_window": 5,
     "note": "Learn item embeddings for large libraries (instruments, MIDI patterns)"
   },
-
   "tag_synonyms": [
-    ["tags=Happy", "tags=happy", "tags=mood_happy"],
-    ["tags=Sad", "tags=sad", "tags=melancholic", "tags=mood_dark"],
-    ["tags=dark", "tags=mood_dark"],
-    ["tags=Calming / Soothing", "tags=calm", "tags=relaxing", "tags=meditative", "tags=mellow"],
-    ["tags=Laid-back / Mellow", "tags=mellow", "tags=easylistening", "tags=chillout"],
-    ["tags=Arousing / Awakening", "tags=Exciting / Thrilling", "tags=energetic", "tags=energy_high"],
-    ["tags=Powerful / Strong", "tags=powerful", "tags=epic", "tags=energy_high"],
-    ["tags=Loving / Romantic", "tags=Touching / Loving", "tags=romantic", "tags=love"],
-    ["tags=Positive / Optimistic", "tags=positive", "tags=uplifting", "tags=upbeat", "tags=hopeful"],
-    ["tags=Carefree / Lighthearted", "tags=fun", "tags=Light / Playful"],
-    ["tags=Cheerful / Festive", "tags=happy", "tags=party", "tags=summer"],
-    ["tags=Emotional / Passionate", "tags=emotional", "tags=dramatic"],
-    ["tags=Tender / Soft", "tags=soft", "tags=slow"],
-    ["tags=fast", "tags=tempo_fast", "tags=tempo_very_fast"],
-    ["tags=slow", "tags=tempo_slow"],
-    ["tags=deep", "tags=energy_low"]
+    [
+      "tags=Happy",
+      "tags=happy",
+      "tags=mood_happy"
+    ],
+    [
+      "tags=Sad",
+      "tags=sad",
+      "tags=melancholic",
+      "tags=mood_dark"
+    ],
+    [
+      "tags=dark",
+      "tags=mood_dark"
+    ],
+    [
+      "tags=Calming / Soothing",
+      "tags=calm",
+      "tags=relaxing",
+      "tags=meditative",
+      "tags=mellow"
+    ],
+    [
+      "tags=Laid-back / Mellow",
+      "tags=mellow",
+      "tags=easylistening",
+      "tags=chillout"
+    ],
+    [
+      "tags=Arousing / Awakening",
+      "tags=Exciting / Thrilling",
+      "tags=energetic",
+      "tags=energy_high"
+    ],
+    [
+      "tags=Powerful / Strong",
+      "tags=powerful",
+      "tags=epic",
+      "tags=energy_high"
+    ],
+    [
+      "tags=Loving / Romantic",
+      "tags=Touching / Loving",
+      "tags=romantic",
+      "tags=love"
+    ],
+    [
+      "tags=Positive / Optimistic",
+      "tags=positive",
+      "tags=uplifting",
+      "tags=upbeat",
+      "tags=hopeful"
+    ],
+    [
+      "tags=Carefree / Lighthearted",
+      "tags=fun",
+      "tags=Light / Playful"
+    ],
+    [
+      "tags=Cheerful / Festive",
+      "tags=happy",
+      "tags=party",
+      "tags=summer"
+    ],
+    [
+      "tags=Emotional / Passionate",
+      "tags=emotional",
+      "tags=dramatic"
+    ],
+    [
+      "tags=Tender / Soft",
+      "tags=soft",
+      "tags=slow"
+    ],
+    [
+      "tags=fast",
+      "tags=tempo_fast",
+      "tags=tempo_very_fast"
+    ],
+    [
+      "tags=slow",
+      "tags=tempo_slow"
+    ],
+    [
+      "tags=deep",
+      "tags=energy_low"
+    ]
   ]
 }

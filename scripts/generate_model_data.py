@@ -53,7 +53,8 @@ def _extract_csv(source, config, model_dir):
             df[col] = pd.cut(df[col], bins=d_conf["bins"], labels=d_conf["labels"])
 
     mappings = source.get("mappings", [])
-    extract  = source.get("extract", {})
+    extract = source.get("extract", {})
+    exclude_suffixes = extract.get("exclude_suffixes", [])
     group_by = source.get("group_by")
 
     def row_to_items(row):
@@ -62,17 +63,21 @@ def _extract_csv(source, config, model_dir):
             col, target = mapping["column"], mapping["target"]
             if col in df.columns and pd.notna(row[col]):
                 val = str(row[col]).strip()
-                if val:
+                if val and not any(val.endswith(s) for s in exclude_suffixes):
                     items.add(f"{target}={val}")
         for col, d_conf in preprocessing.items():
             if col in df.columns and pd.notna(row[col]):
                 target = d_conf.get("target", col)
-                items.add(f"{target}={row[col]}")
+                val = str(row[col])
+                if not any(val.endswith(s) for s in exclude_suffixes):
+                    items.add(f"{target}={row[col]}")
         if "column" in extract:
             col = extract["column"]
             if col in df.columns and pd.notna(row[col]):
                 parts = [p.strip() for p in str(row[col]).split(extract.get("delimiter", ",")) if p.strip()]
                 for part in parts:
+                    if any(part.endswith(s) for s in exclude_suffixes):
+                        continue
                     for pre, target in extract.get("prefixes", {}).items():
                         if part.startswith(pre):
                             items.add(f"{target}={part[len(pre):]}")
@@ -103,7 +108,9 @@ def _extract_wide_tsv(source, model_dir):
         print(f"  [SKIP] file not found: {filepath}")
         return []
 
-    prefixes   = source.get("extract", {}).get("prefixes", {})
+    extract    = source.get("extract", {})
+    prefixes   = extract.get("prefixes", {})
+    ex_suffixes = extract.get("exclude_suffixes", [])
     group_col  = source.get("group_by", "TRACK_ID")
     delimiter  = source.get("delimiter", "\t")
     transactions = {}
@@ -127,6 +134,8 @@ def _extract_wide_tsv(source, model_dir):
             if group_key not in transactions:
                 transactions[group_key] = set()
             for tag in raw_tags:
+                if any(tag.endswith(s) for s in ex_suffixes):
+                    continue
                 for pre, target in prefixes.items():
                     if tag.startswith(pre):
                         transactions[group_key].add(f"{target}={tag[len(pre):]}")
@@ -143,7 +152,9 @@ def _extract_time_series_dir(source, model_dir):
 
     csv_files = glob.glob(os.path.join(folder_path, "*.csv"))
     print(f"  Found {len(csv_files)} files")
-    prefixes = source.get("extract", {}).get("prefixes", {})
+    extract = source.get("extract", {})
+    prefixes = extract.get("prefixes", {})
+    ex_suffixes = extract.get("exclude_suffixes", [])
 
     transactions = []
     for file in csv_files:
@@ -156,6 +167,8 @@ def _extract_time_series_dir(source, model_dir):
             itemset = set()
             for col, val in max_vals.items():
                 if pd.notna(val) and val > 0.5:
+                    if any(col.endswith(s) for s in ex_suffixes):
+                        continue
                     for pre, target in prefixes.items():
                         if col.startswith(pre):
                             clean = col[len(pre):].replace("_", " ").strip()
