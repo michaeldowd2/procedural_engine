@@ -2,6 +2,8 @@
 **/learned_rules.json
 **/graph_data.json
 **/generations.json
+!output/**/generations.json
+!output/manifest.json
 *.npy
 
 # Python

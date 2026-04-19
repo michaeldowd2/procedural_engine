@@ -1,0 +1,2004 @@
+[
+  {
+    "label": "Unconstrained (seed 1)",
+    "seed": 1,
+    "fixed_values": {},
+    "song": {
+      "tempo": 94,
+      "key": "F",
+      "mode": "mixolydian",
+      "genre": [
+        "ambient"
+      ],
+      "tags": [
+        "relaxing",
+        "Powerful / Strong",
+        "emotional"
+      ],
+      "target_duration": 124,
+      "instruments": [
+        "strings",
+        "acousticguitar",
+        "guitar",
+        "Electric Guitar (distorted)",
+        "violin",
+        "classicalguitar",
+        "orchestra",
+        "Male Lead Vocals"
+      ],
+      "structure": "verse-chorus-verse-chorus-bridge-chorus",
+      "parts": [
+        {
+          "part_type": "verse",
+          "part_tags": [
+            "dark",
+            "mellow"
+          ],
+          "chords": [
+            "prog_008",
+            "prog_008"
+          ]
+        },
+        {
+          "part_type": "chorus",
+          "part_tags": [
+            "upbeat",
+            "energetic",
+            "driving"
+          ],
+          "chords": [
+            "prog_007",
+            "prog_004",
+            "prog_002",
+            "prog_008",
+            "prog_001",
+            "prog_007",
+            "prog_007"
+          ]
+        },
+        {
+          "part_type": "verse",
+          "part_tags": [],
+          "chords": [
+            "prog_008",
+            "prog_005",
+            "prog_004",
+            "prog_002",
+            "prog_006",
+            "prog_001",
+            "prog_001"
+          ]
+        },
+        {
+          "part_type": "chorus",
+          "part_tags": [],
+          "chords": [
+            "prog_001",
+            "prog_007",
+            "prog_004",
+            "prog_007",
+            "prog_001",
+            "prog_004",
+            "prog_008"
+          ]
+        },
+        {
+          "part_type": "bridge",
+          "part_tags": [
+            "dark",
+            "chill",
+            "driving"
+          ],
+          "chords": [
+            "prog_004",
+            "prog_006",
+            "prog_004",
+            "prog_004",
+            "prog_008",
+            "prog_005"
+          ]
+        },
+        {
+          "part_type": "chorus",
+          "part_tags": [],
+          "chords": [
+            "prog_002",
+            "prog_003",
+            "prog_005",
+            "prog_002",
+            "prog_006"
+          ]
+        }
+      ]
+    },
+    "edges": [
+      {
+        "source": "instruments=violin",
+        "target": "genre=ambient",
+        "confidence": 0.18023255813953487
+      },
+      {
+        "source": "instruments=violin",
+        "target": "instruments=guitar",
+        "confidence": 0.1569767441860465
+      },
+      {
+        "source": "tags=relaxing",
+        "target": "genre=ambient",
+        "confidence": 0.4357142857142857
+      },
+      {
+        "source": "tags=emotional",
+        "target": "genre=ambient",
+        "confidence": 0.2818181818181818
+      },
+      {
+        "source": "instruments=acousticguitar",
+        "target": "genre=ambient",
+        "confidence": 0.15420560747663553
+      },
+      {
+        "source": "tags=Powerful / Strong",
+        "target": "instruments=Male Lead Vocals",
+        "confidence": 0.8742857142857143
+      },
+      {
+        "source": "instruments=Male Lead Vocals",
+        "target": "tags=Powerful / Strong",
+        "confidence": 0.9683544303797468
+      },
+      {
+        "source": "instruments=Electric Guitar (distorted)",
+        "target": "tags=Powerful / Strong",
+        "confidence": 0.9683544303797468
+      },
+      {
+        "source": "tags=Powerful / Strong",
+        "target": "instruments=Electric Guitar (distorted)",
+        "confidence": 0.5066225165562914
+      },
+      {
+        "source": "instruments=Electric Guitar (distorted)",
+        "target": "instruments=Male Lead Vocals",
+        "confidence": 0.8742857142857143
+      },
+      {
+        "source": "instruments=Male Lead Vocals",
+        "target": "instruments=Electric Guitar (distorted)",
+        "confidence": 0.5066225165562914
+      }
+    ]
+  },
+  {
+    "label": "High-energy rock",
+    "seed": 2,
+    "fixed_values": {
+      "genre": [
+        "rock"
+      ],
+      "tags": [
+        "high_energy",
+        "tempo_slow"
+      ]
+    },
+    "song": {
+      "genre": [
+        "rock"
+      ],
+      "tags": [
+        "high_energy",
+        "tempo_slow"
+      ],
+      "tempo": 74,
+      "key": "F",
+      "mode": "major",
+      "target_duration": 153,
+      "instruments": [
+        "beat",
+        "Electric Guitar (clean)",
+        "guitar",
+        "cello",
+        "strings",
+        "Drum Set",
+        "Female Lead Vocals",
+        "computer"
+      ],
+      "structure": "intro-verse-chorus-verse-chorus-outro",
+      "parts": [
+        {
+          "part_type": "intro",
+          "part_tags": [],
+          "chords": [
+            "prog_003",
+            "prog_005",
+            "prog_005",
+            "prog_004"
+          ]
+        },
+        {
+          "part_type": "verse",
+          "part_tags": [],
+          "chords": [
+            "prog_003",
+            "prog_007",
+            "prog_007",
+            "prog_006",
+            "prog_008",
+            "prog_005"
+          ]
+        },
+        {
+          "part_type": "chorus",
+          "part_tags": [],
+          "chords": [
+            "prog_001",
+            "prog_006",
+            "prog_008",
+            "prog_006",
+            "prog_007",
+            "prog_007",
+            "prog_003",
+            "prog_003"
+          ]
+        },
+        {
+          "part_type": "verse",
+          "part_tags": [
+            "upbeat"
+          ],
+          "chords": [
+            "prog_001",
+            "prog_003",
+            "prog_006"
+          ]
+        },
+        {
+          "part_type": "chorus",
+          "part_tags": [
+            "energetic"
+          ],
+          "chords": [
+            "prog_006",
+            "prog_003",
+            "prog_008"
+          ]
+        },
+        {
+          "part_type": "outro",
+          "part_tags": [
+            "upbeat",
+            "driving",
+            "dark"
+          ],
+          "chords": [
+            "prog_006",
+            "prog_006",
+            "prog_006",
+            "prog_008",
+            "prog_003",
+            "prog_007",
+            "prog_008"
+          ]
+        }
+      ]
+    },
+    "edges": [
+      {
+        "source": "tags=high_energy",
+        "target": "genre=rock",
+        "confidence": 0.17129928894634777
+      },
+      {
+        "source": "genre=rock",
+        "target": "tags=high_energy",
+        "confidence": 0.6883116883116883
+      },
+      {
+        "source": "tags=tempo_slow",
+        "target": "genre=rock",
+        "confidence": 0.13103448275862067
+      },
+      {
+        "source": "tags=tempo_slow",
+        "target": "tags=high_energy",
+        "confidence": 0.37413793103448273
+      },
+      {
+        "source": "instruments=guitar",
+        "target": "genre=rock",
+        "confidence": 0.23672566371681417
+      },
+      {
+        "source": "genre=rock",
+        "target": "instruments=guitar",
+        "confidence": 0.17627677100494235
+      },
+      {
+        "source": "instruments=computer",
+        "target": "instruments=cello",
+        "confidence": 0.1269035532994924
+      },
+      {
+        "source": "instruments=cello",
+        "target": "instruments=computer",
+        "confidence": 0.26595744680851063
+      },
+      {
+        "source": "instruments=Electric Guitar (clean)",
+        "target": "instruments=Drum Set",
+        "confidence": 0.9650793650793651
+      },
+      {
+        "source": "instruments=Drum Set",
+        "target": "instruments=Electric Guitar (clean)",
+        "confidence": 0.7220902612826603
+      },
+      {
+        "source": "instruments=Female Lead Vocals",
+        "target": "instruments=Drum Set",
+        "confidence": 0.9500000000000001
+      },
+      {
+        "source": "instruments=Female Lead Vocals",
+        "target": "instruments=Electric Guitar (clean)",
+        "confidence": 0.6404494382022472
+      },
+      {
+        "source": "structure=intro-verse-chorus-verse-chorus-outro",
+        "target": "genre=rock",
+        "confidence": 0.3333333333333333
+      },
+      {
+        "source": "genre=rock",
+        "target": "structure=intro-verse-chorus-verse-chorus-outro",
+        "confidence": 0.5
+      }
+    ]
+  },
+  {
+    "label": "Slow ambient chill",
+    "seed": 3,
+    "fixed_values": {
+      "genre": [
+        "ambient"
+      ],
+      "tags": [
+        "chill",
+        "tempo_slow"
+      ]
+    },
+    "song": {
+      "genre": [
+        "ambient"
+      ],
+      "tags": [
+        "chill",
+        "tempo_slow"
+      ],
+      "tempo": 67,
+      "key": "F#",
+      "mode": "mixolydian",
+      "target_duration": 193,
+      "instruments": [
+        "Female Lead Vocals",
+        "beat",
+        "Male Lead Vocals",
+        "drummachine",
+        "percussion",
+        "strings",
+        "Piano",
+        "violin"
+      ],
+      "structure": "verse-chorus-verse-chorus-bridge-chorus",
+      "parts": [
+        {
+          "part_type": "verse",
+          "part_tags": [
+            "mellow",
+            "upbeat"
+          ],
+          "chords": [
+            "prog_008",
+            "prog_002",
+            "prog_001",
+            "prog_008",
+            "prog_005",
+            "prog_004"
+          ]
+        },
+        {
+          "part_type": "chorus",
+          "part_tags": [
+            "driving"
+          ],
+          "chords": [
+            "prog_008",
+            "prog_008",
+            "prog_007",
+            "prog_003",
+            "prog_004",
+            "prog_003",
+            "prog_007"
+          ]
+        },
+        {
+          "part_type": "verse",
+          "part_tags": [],
+          "chords": [
+            "prog_002",
+            "prog_003",
+            "prog_001",
+            "prog_005",
+            "prog_001",
+            "prog_005",
+            "prog_008"
+          ]
+        },
+        {
+          "part_type": "chorus",
+          "part_tags": [
+            "dark",
+            "upbeat",
+            "energetic"
+          ],
+          "chords": [
+            "prog_007",
+            "prog_007",
+            "prog_008",
+            "prog_003",
+            "prog_006",
+            "prog_002",
+            "prog_001"
+          ]
+        },
+        {
+          "part_type": "bridge",
+          "part_tags": [
+            "upbeat"
+          ],
+          "chords": [
+            "prog_004",
+            "prog_005",
+            "prog_007",
+            "prog_005",
+            "prog_007"
+          ]
+        },
+        {
+          "part_type": "chorus",
+          "part_tags": [
+            "driving",
+            "mellow",
+            "dark"
+          ],
+          "chords": [
+            "prog_006",
+            "prog_007",
+            "prog_004",
+            "prog_006",
+            "prog_001",
+            "prog_005"
+          ]
+        }
+      ]
+    },
+    "edges": [
+      {
+        "source": "instruments=violin",
+        "target": "instruments=drummachine",
+        "confidence": 0.19767441860465115
+      },
+      {
+        "source": "instruments=drummachine",
+        "target": "instruments=violin",
+        "confidence": 0.17801047120418848
+      },
+      {
+        "source": "instruments=violin",
+        "target": "genre=ambient",
+        "confidence": 0.18023255813953487
+      },
+      {
+        "source": "instruments=drummachine",
+        "target": "genre=ambient",
+        "confidence": 0.17801047120418848
+      },
+      {
+        "source": "instruments=Piano",
+        "target": "instruments=Male Lead Vocals",
+        "confidence": 0.681159420289855
+      },
+      {
+        "source": "tags=chill",
+        "target": "genre=ambient",
+        "confidence": 1.0
+      },
+      {
+        "source": "genre=ambient",
+        "target": "tags=chill",
+        "confidence": 0.5
+      }
+    ]
+  },
+  {
+    "label": "Happy pop",
+    "seed": 4,
+    "fixed_values": {
+      "genre": [
+        "pop"
+      ],
+      "tags": [
+        "happy_mood",
+        "tempo_fast"
+      ]
+    },
+    "song": {
+      "genre": [
+        "pop"
+      ],
+      "tags": [
+        "happy_mood",
+        "tempo_fast"
+      ],
+      "tempo": 120,
+      "key": "B",
+      "mode": "dorian",
+      "target_duration": 370,
+      "instruments": [
+        "trombone",
+        "rhodes",
+        "Drum Set",
+        "strings",
+        "Backing vocals",
+        "Synthesizer",
+        "Female Lead Vocals",
+        "guitar"
+      ],
+      "structure": "verse-chorus-verse-chorus-verse-chorus",
+      "parts": [
+        {
+          "part_type": "verse",
+          "part_tags": [],
+          "chords": [
+            "prog_007",
+            "prog_008",
+            "prog_003",
+            "prog_002",
+            "prog_002",
+            "prog_001",
+            "prog_007"
+          ]
+        },
+        {
+          "part_type": "chorus",
+          "part_tags": [
+            "driving",
+            "chill"
+          ],
+          "chords": [
+            "prog_001",
+            "prog_004",
+            "prog_006",
+            "prog_005",
+            "prog_003",
+            "prog_002",
+            "prog_005",
+            "prog_004"
+          ]
+        },
+        {
+          "part_type": "verse",
+          "part_tags": [],
+          "chords": [
+            "prog_005",
+            "prog_005",
+            "prog_004",
+            "prog_003",
+            "prog_005",
+            "prog_005",
+            "prog_006",
+            "prog_002"
+          ]
+        },
+        {
+          "part_type": "chorus",
+          "part_tags": [
+            "chill",
+            "energetic"
+          ],
+          "chords": [
+            "prog_007",
+            "prog_004",
+            "prog_003",
+            "prog_004",
+            "prog_008",
+            "prog_005",
+            "prog_002"
+          ]
+        },
+        {
+          "part_type": "verse",
+          "part_tags": [
+            "upbeat",
+            "energetic"
+          ],
+          "chords": [
+            "prog_005",
+            "prog_005"
+          ]
+        },
+        {
+          "part_type": "chorus",
+          "part_tags": [
+            "mellow"
+          ],
+          "chords": [
+            "prog_007",
+            "prog_005",
+            "prog_007",
+            "prog_008",
+            "prog_003"
+          ]
+        }
+      ]
+    },
+    "edges": [
+      {
+        "source": "tags=happy_mood",
+        "target": "tags=tempo_fast",
+        "confidence": 0.4263959390862944
+      },
+      {
+        "source": "tags=tempo_fast",
+        "target": "tags=happy_mood",
+        "confidence": 0.2772277227722772
+      },
+      {
+        "source": "genre=pop",
+        "target": "tags=tempo_fast",
+        "confidence": 0.4263959390862944
+      },
+      {
+        "source": "tags=tempo_fast",
+        "target": "genre=pop",
+        "confidence": 0.1826086956521739
+      },
+      {
+        "source": "genre=pop",
+        "target": "tags=happy_mood",
+        "confidence": 0.2772277227722772
+      },
+      {
+        "source": "tags=happy_mood",
+        "target": "genre=pop",
+        "confidence": 0.1826086956521739
+      },
+      {
+        "source": "genre=pop",
+        "target": "instruments=guitar",
+        "confidence": 0.13005780346820808
+      },
+      {
+        "source": "instruments=guitar",
+        "target": "genre=pop",
+        "confidence": 0.19911504424778761
+      },
+      {
+        "source": "instruments=Backing vocals",
+        "target": "instruments=Drum Set",
+        "confidence": 0.9141104294478527
+      },
+      {
+        "source": "instruments=Drum Set",
+        "target": "instruments=Backing vocals",
+        "confidence": 0.7865168539325844
+      },
+      {
+        "source": "instruments=Synthesizer",
+        "target": "instruments=Drum Set",
+        "confidence": 0.9141104294478527
+      },
+      {
+        "source": "instruments=Drum Set",
+        "target": "instruments=Synthesizer",
+        "confidence": 0.6179775280898877
+      },
+      {
+        "source": "instruments=Synthesizer",
+        "target": "instruments=Backing vocals",
+        "confidence": 0.7376237623762375
+      },
+      {
+        "source": "instruments=Backing vocals",
+        "target": "instruments=Synthesizer",
+        "confidence": 0.5437956204379562
+      },
+      {
+        "source": "instruments=Female Lead Vocals",
+        "target": "instruments=Drum Set",
+        "confidence": 0.8860759493670887
+      },
+      {
+        "source": "instruments=Female Lead Vocals",
+        "target": "instruments=Backing vocals",
+        "confidence": 0.7865168539325844
+      },
+      {
+        "source": "instruments=Female Lead Vocals",
+        "target": "instruments=Synthesizer",
+        "confidence": 0.6179775280898877
+      }
+    ]
+  },
+  {
+    "label": "Jazz minor (seed 5)",
+    "seed": 5,
+    "fixed_values": {
+      "genre": [
+        "jazz"
+      ],
+      "mode": "dorian"
+    },
+    "song": {
+      "genre": [
+        "jazz"
+      ],
+      "mode": "dorian",
+      "tempo": 125,
+      "key": "D",
+      "tags": [
+        "complex",
+        "summer",
+        "film"
+      ],
+      "target_duration": 427,
+      "instruments": [
+        "violin",
+        "trumpet",
+        "electricguitar",
+        "Drum Machine",
+        "electricpiano",
+        "keyboard",
+        "String Ensemble",
+        "Bass"
+      ],
+      "structure": "intro-verse-chorus-verse-chorus-outro",
+      "parts": [
+        {
+          "part_type": "intro",
+          "part_tags": [],
+          "chords": [
+            "prog_008",
+            "prog_004",
+            "prog_001",
+            "prog_003",
+            "prog_002",
+            "prog_006",
+            "prog_008",
+            "prog_004"
+          ]
+        },
+        {
+          "part_type": "verse",
+          "part_tags": [
+            "energetic",
+            "chill",
+            "driving"
+          ],
+          "chords": [
+            "prog_002",
+            "prog_004",
+            "prog_001",
+            "prog_004",
+            "prog_007",
+            "prog_005"
+          ]
+        },
+        {
+          "part_type": "chorus",
+          "part_tags": [
+            "mellow"
+          ],
+          "chords": [
+            "prog_007",
+            "prog_003",
+            "prog_002",
+            "prog_003",
+            "prog_008",
+            "prog_003",
+            "prog_003",
+            "prog_001"
+          ]
+        },
+        {
+          "part_type": "verse",
+          "part_tags": [],
+          "chords": [
+            "prog_004",
+            "prog_003",
+            "prog_003"
+          ]
+        },
+        {
+          "part_type": "chorus",
+          "part_tags": [
+            "driving",
+            "upbeat"
+          ],
+          "chords": [
+            "prog_004",
+            "prog_004",
+            "prog_003",
+            "prog_004"
+          ]
+        },
+        {
+          "part_type": "outro",
+          "part_tags": [
+            "upbeat",
+            "driving",
+            "mellow"
+          ],
+          "chords": [
+            "prog_001",
+            "prog_006",
+            "prog_007",
+            "prog_003"
+          ]
+        }
+      ]
+    },
+    "edges": [
+      {
+        "source": "instruments=violin",
+        "target": "instruments=electricguitar",
+        "confidence": 0.20930232558139533
+      },
+      {
+        "source": "instruments=violin",
+        "target": "instruments=keyboard",
+        "confidence": 0.16279069767441862
+      },
+      {
+        "source": "instruments=keyboard",
+        "target": "instruments=violin",
+        "confidence": 0.13270142180094785
+      },
+      {
+        "source": "genre=jazz",
+        "target": "instruments=electricguitar",
+        "confidence": 0.8064516129032259
+      },
+      {
+        "source": "instruments=electricpiano",
+        "target": "instruments=electricguitar",
+        "confidence": 0.8064516129032259
+      },
+      {
+        "source": "instruments=electricguitar",
+        "target": "instruments=electricpiano",
+        "confidence": 0.5952380952380952
+      },
+      {
+        "source": "instruments=keyboard",
+        "target": "instruments=electricpiano",
+        "confidence": 0.47692307692307695
+      },
+      {
+        "source": "instruments=electricpiano",
+        "target": "instruments=keyboard",
+        "confidence": 0.4492753623188406
+      },
+      {
+        "source": "instruments=violin",
+        "target": "instruments=electricpiano",
+        "confidence": 0.18604651162790697
+      },
+      {
+        "source": "instruments=electricpiano",
+        "target": "instruments=violin",
+        "confidence": 0.23703703703703705
+      },
+      {
+        "source": "instruments=electricpiano",
+        "target": "genre=jazz",
+        "confidence": 0.36231884057971014
+      },
+      {
+        "source": "genre=jazz",
+        "target": "instruments=electricpiano",
+        "confidence": 0.5952380952380952
+      },
+      {
+        "source": "instruments=keyboard",
+        "target": "instruments=electricguitar",
+        "confidence": 0.7749999999999999
+      },
+      {
+        "source": "instruments=electricguitar",
+        "target": "instruments=keyboard",
+        "confidence": 0.4492753623188406
+      },
+      {
+        "source": "instruments=electricguitar",
+        "target": "genre=jazz",
+        "confidence": 0.36231884057971014
+      },
+      {
+        "source": "instruments=keyboard",
+        "target": "tags=summer",
+        "confidence": 0.14691943127962084
+      },
+      {
+        "source": "tags=summer",
+        "target": "instruments=keyboard",
+        "confidence": 0.5636363636363636
+      },
+      {
+        "source": "instruments=trumpet",
+        "target": "genre=jazz",
+        "confidence": 0.38028169014084506
+      },
+      {
+        "source": "genre=jazz",
+        "target": "instruments=trumpet",
+        "confidence": 0.1139240506329114
+      },
+      {
+        "source": "instruments=trumpet",
+        "target": "instruments=electricguitar",
+        "confidence": 0.5492957746478873
+      },
+      {
+        "source": "instruments=trumpet",
+        "target": "instruments=violin",
+        "confidence": 0.40845070422535207
+      },
+      {
+        "source": "instruments=violin",
+        "target": "instruments=trumpet",
+        "confidence": 0.1686046511627907
+      },
+      {
+        "source": "instruments=Drum Machine",
+        "target": "instruments=Bass",
+        "confidence": 0.6990291262135923
+      },
+      {
+        "source": "tags=complex",
+        "target": "genre=jazz",
+        "confidence": 1.0
+      },
+      {
+        "source": "genre=jazz",
+        "target": "tags=complex",
+        "confidence": 0.5
+      }
+    ]
+  },
+  {
+    "label": "Dark electronic",
+    "seed": 6,
+    "fixed_values": {
+      "genre": [
+        "electronic"
+      ],
+      "tags": [
+        "dark_mood",
+        "high_energy",
+        "tempo_slow"
+      ]
+    },
+    "song": {
+      "genre": [
+        "electronic"
+      ],
+      "tags": [
+        "dark_mood",
+        "high_energy",
+        "tempo_slow"
+      ],
+      "tempo": 80,
+      "key": "A#",
+      "mode": "minor",
+      "target_duration": 556,
+      "instruments": [
+        "synthesizer",
+        "Piano",
+        "keyboard",
+        "Electric Guitar (distorted)",
+        "beat",
+        "Electric Guitar (clean)",
+        "harp",
+        "Drum Set"
+      ],
+      "structure": "intro-verse-chorus-verse-chorus-outro",
+      "parts": [
+        {
+          "part_type": "intro",
+          "part_tags": [
+            "dark",
+            "upbeat"
+          ],
+          "chords": [
+            "prog_001",
+            "prog_003"
+          ]
+        },
+        {
+          "part_type": "verse",
+          "part_tags": [
+            "upbeat",
+            "chill",
+            "dark"
+          ],
+          "chords": [
+            "prog_006",
+            "prog_006",
+            "prog_001",
+            "prog_005",
+            "prog_008",
+            "prog_004",
+            "prog_007",
+            "prog_002"
+          ]
+        },
+        {
+          "part_type": "chorus",
+          "part_tags": [
+            "mellow"
+          ],
+          "chords": [
+            "prog_005",
+            "prog_002",
+            "prog_007",
+            "prog_006",
+            "prog_002",
+            "prog_006"
+          ]
+        },
+        {
+          "part_type": "verse",
+          "part_tags": [
+            "chill",
+            "dark",
+            "energetic"
+          ],
+          "chords": [
+            "prog_005",
+            "prog_008",
+            "prog_002",
+            "prog_004",
+            "prog_005",
+            "prog_002",
+            "prog_001",
+            "prog_004"
+          ]
+        },
+        {
+          "part_type": "chorus",
+          "part_tags": [
+            "dark",
+            "upbeat"
+          ],
+          "chords": [
+            "prog_004",
+            "prog_001",
+            "prog_006",
+            "prog_004",
+            "prog_007"
+          ]
+        },
+        {
+          "part_type": "outro",
+          "part_tags": [
+            "dark",
+            "upbeat"
+          ],
+          "chords": [
+            "prog_002",
+            "prog_002",
+            "prog_004",
+            "prog_002"
+          ]
+        }
+      ]
+    },
+    "edges": [
+      {
+        "source": "tags=dark_mood",
+        "target": "tags=high_energy",
+        "confidence": 0.5191693290734825
+      },
+      {
+        "source": "tags=high_energy",
+        "target": "tags=dark_mood",
+        "confidence": 0.21008403361344538
+      },
+      {
+        "source": "tags=dark_mood",
+        "target": "tags=tempo_slow",
+        "confidence": 0.11182108626198083
+      },
+      {
+        "source": "tags=tempo_slow",
+        "target": "tags=dark_mood",
+        "confidence": 0.24137931034482757
+      },
+      {
+        "source": "tags=tempo_slow",
+        "target": "tags=high_energy",
+        "confidence": 0.37413793103448273
+      },
+      {
+        "source": "genre=electronic",
+        "target": "instruments=synthesizer",
+        "confidence": 0.8085106382978723
+      },
+      {
+        "source": "instruments=synthesizer",
+        "target": "genre=electronic",
+        "confidence": 0.4588688946015425
+      },
+      {
+        "source": "instruments=beat",
+        "target": "genre=electronic",
+        "confidence": 0.3968253968253968
+      },
+      {
+        "source": "instruments=synthesizer",
+        "target": "instruments=keyboard",
+        "confidence": 0.15295629820051415
+      },
+      {
+        "source": "instruments=keyboard",
+        "target": "instruments=synthesizer",
+        "confidence": 0.8085106382978723
+      },
+      {
+        "source": "instruments=keyboard",
+        "target": "genre=electronic",
+        "confidence": 0.31932773109243695
+      },
+      {
+        "source": "genre=electronic",
+        "target": "instruments=keyboard",
+        "confidence": 0.10644257703081232
+      },
+      {
+        "source": "instruments=Electric Guitar (clean)",
+        "target": "instruments=Drum Set",
+        "confidence": 0.99375
+      },
+      {
+        "source": "instruments=Drum Set",
+        "target": "instruments=Electric Guitar (clean)",
+        "confidence": 0.8736263736263736
+      },
+      {
+        "source": "instruments=Piano",
+        "target": "instruments=Drum Set",
+        "confidence": 0.9733333333333333
+      },
+      {
+        "source": "instruments=Piano",
+        "target": "instruments=Electric Guitar (clean)",
+        "confidence": 0.5793650793650793
+      },
+      {
+        "source": "instruments=Electric Guitar (distorted)",
+        "target": "instruments=Drum Set",
+        "confidence": 0.994535519125683
+      },
+      {
+        "source": "instruments=Drum Set",
+        "target": "instruments=Electric Guitar (distorted)",
+        "confidence": 0.5230263157894737
+      },
+      {
+        "source": "instruments=Electric Guitar (distorted)",
+        "target": "instruments=Electric Guitar (clean)",
+        "confidence": 0.8743169398907105
+      },
+      {
+        "source": "instruments=Electric Guitar (clean)",
+        "target": "instruments=Electric Guitar (distorted)",
+        "confidence": 0.5230263157894737
+      },
+      {
+        "source": "genre=electronic",
+        "target": "structure=intro-verse-chorus-verse-chorus-outro",
+        "confidence": 0.5
+      },
+      {
+        "source": "structure=intro-verse-chorus-verse-chorus-outro",
+        "target": "genre=electronic",
+        "confidence": 0.3333333333333333
+      }
+    ]
+  },
+  {
+    "label": "Fast upbeat rap",
+    "seed": 7,
+    "fixed_values": {
+      "genre": [
+        "rap"
+      ],
+      "tags": [
+        "tempo_fast",
+        "high_energy"
+      ]
+    },
+    "song": {
+      "genre": [
+        "rap"
+      ],
+      "tags": [
+        "tempo_fast",
+        "high_energy"
+      ],
+      "tempo": 130,
+      "key": "C",
+      "mode": "mixolydian",
+      "target_duration": 214,
+      "instruments": [
+        "Electric Guitar (clean)",
+        "Bass",
+        "Sequencer",
+        "beat",
+        "Drum Machine",
+        "Piano",
+        "computer",
+        "flute"
+      ],
+      "structure": "verse-chorus-verse-chorus-verse-chorus",
+      "parts": [
+        {
+          "part_type": "verse",
+          "part_tags": [
+            "dark",
+            "mellow",
+            "energetic"
+          ],
+          "chords": [
+            "prog_001",
+            "prog_002",
+            "prog_002",
+            "prog_006",
+            "prog_001",
+            "prog_004",
+            "prog_001"
+          ]
+        },
+        {
+          "part_type": "chorus",
+          "part_tags": [],
+          "chords": [
+            "prog_007",
+            "prog_002",
+            "prog_004",
+            "prog_002",
+            "prog_007"
+          ]
+        },
+        {
+          "part_type": "verse",
+          "part_tags": [],
+          "chords": [
+            "prog_002",
+            "prog_004",
+            "prog_001",
+            "prog_007",
+            "prog_001",
+            "prog_004",
+            "prog_001",
+            "prog_003"
+          ]
+        },
+        {
+          "part_type": "chorus",
+          "part_tags": [
+            "driving",
+            "chill"
+          ],
+          "chords": [
+            "prog_003",
+            "prog_002",
+            "prog_005",
+            "prog_003",
+            "prog_002"
+          ]
+        },
+        {
+          "part_type": "verse",
+          "part_tags": [
+            "driving"
+          ],
+          "chords": [
+            "prog_002",
+            "prog_002",
+            "prog_001",
+            "prog_004"
+          ]
+        },
+        {
+          "part_type": "chorus",
+          "part_tags": [
+            "mellow",
+            "chill",
+            "energetic"
+          ],
+          "chords": [
+            "prog_007",
+            "prog_006",
+            "prog_008",
+            "prog_008",
+            "prog_006",
+            "prog_005",
+            "prog_004"
+          ]
+        }
+      ]
+    },
+    "edges": [
+      {
+        "source": "tags=high_energy",
+        "target": "tags=tempo_fast",
+        "confidence": 0.43956043956043955
+      },
+      {
+        "source": "tags=tempo_fast",
+        "target": "tags=high_energy",
+        "confidence": 0.7003089598352215
+      },
+      {
+        "source": "tags=high_energy",
+        "target": "genre=rap",
+        "confidence": 0.14414996767937943
+      },
+      {
+        "source": "genre=rap",
+        "target": "tags=high_energy",
+        "confidence": 0.5079726651480637
+      },
+      {
+        "source": "tags=tempo_fast",
+        "target": "genre=rap",
+        "confidence": 0.13027806385169927
+      },
+      {
+        "source": "genre=rap",
+        "target": "tags=tempo_fast",
+        "confidence": 0.28815489749430523
+      },
+      {
+        "source": "instruments=Bass",
+        "target": "instruments=Electric Guitar (clean)",
+        "confidence": 0.7084282460136674
+      },
+      {
+        "source": "instruments=Electric Guitar (clean)",
+        "target": "instruments=Bass",
+        "confidence": 0.9873015873015872
+      },
+      {
+        "source": "instruments=Piano",
+        "target": "instruments=Bass",
+        "confidence": 0.9866666666666667
+      },
+      {
+        "source": "instruments=Piano",
+        "target": "instruments=Electric Guitar (clean)",
+        "confidence": 0.578125
+      },
+      {
+        "source": "instruments=Drum Machine",
+        "target": "instruments=Bass",
+        "confidence": 0.6990291262135923
+      },
+      {
+        "source": "instruments=Sequencer",
+        "target": "instruments=Drum Machine",
+        "confidence": 0.9482758620689655
+      },
+      {
+        "source": "instruments=Drum Machine",
+        "target": "instruments=Sequencer",
+        "confidence": 0.5339805825242718
+      }
+    ]
+  },
+  {
+    "label": "Mellow r&b",
+    "seed": 8,
+    "fixed_values": {
+      "genre": [
+        "r&b"
+      ],
+      "tags": [
+        "neutral_mood",
+        "low_energy",
+        "tempo_moderate"
+      ]
+    },
+    "song": {
+      "genre": [
+        "r&b"
+      ],
+      "tags": [
+        "neutral_mood",
+        "low_energy",
+        "tempo_moderate"
+      ],
+      "tempo": 118,
+      "key": "A#",
+      "mode": "phrygian",
+      "target_duration": 439,
+      "instruments": [
+        "Samples",
+        "Drum Machine",
+        "strings",
+        "Synthesizer",
+        "violin",
+        "Electric Guitar (clean)",
+        "Electric Guitar (distorted)",
+        "flute"
+      ],
+      "structure": "intro-verse-chorus-verse-chorus-outro",
+      "parts": [
+        {
+          "part_type": "intro",
+          "part_tags": [
+            "upbeat",
+            "dark",
+            "mellow"
+          ],
+          "chords": [
+            "prog_004",
+            "prog_001",
+            "prog_002"
+          ]
+        },
+        {
+          "part_type": "verse",
+          "part_tags": [
+            "mellow"
+          ],
+          "chords": [
+            "prog_004",
+            "prog_007",
+            "prog_001"
+          ]
+        },
+        {
+          "part_type": "chorus",
+          "part_tags": [
+            "driving",
+            "chill",
+            "mellow"
+          ],
+          "chords": [
+            "prog_008",
+            "prog_007",
+            "prog_008",
+            "prog_004",
+            "prog_007"
+          ]
+        },
+        {
+          "part_type": "verse",
+          "part_tags": [],
+          "chords": [
+            "prog_004",
+            "prog_001",
+            "prog_005",
+            "prog_007",
+            "prog_008"
+          ]
+        },
+        {
+          "part_type": "chorus",
+          "part_tags": [
+            "driving",
+            "energetic",
+            "chill"
+          ],
+          "chords": [
+            "prog_002",
+            "prog_005",
+            "prog_002",
+            "prog_002",
+            "prog_007",
+            "prog_007",
+            "prog_002"
+          ]
+        },
+        {
+          "part_type": "outro",
+          "part_tags": [],
+          "chords": [
+            "prog_004",
+            "prog_002",
+            "prog_008",
+            "prog_004"
+          ]
+        }
+      ]
+    },
+    "edges": [
+      {
+        "source": "tags=neutral_mood",
+        "target": "tags=tempo_moderate",
+        "confidence": 0.3640897755610973
+      },
+      {
+        "source": "tags=tempo_moderate",
+        "target": "tags=neutral_mood",
+        "confidence": 0.46737311767986617
+      },
+      {
+        "source": "genre=r&b",
+        "target": "tags=neutral_mood",
+        "confidence": 0.4739952718676123
+      },
+      {
+        "source": "tags=neutral_mood",
+        "target": "genre=r&b",
+        "confidence": 0.17422434367541767
+      },
+      {
+        "source": "genre=r&b",
+        "target": "tags=tempo_moderate",
+        "confidence": 0.42907801418439717
+      },
+      {
+        "source": "tags=tempo_moderate",
+        "target": "genre=r&b",
+        "confidence": 0.20245398773006135
+      },
+      {
+        "source": "tags=low_energy",
+        "target": "tags=neutral_mood",
+        "confidence": 0.39887640449438205
+      },
+      {
+        "source": "tags=low_energy",
+        "target": "genre=r&b",
+        "confidence": 0.3764044943820225
+      },
+      {
+        "source": "instruments=flute",
+        "target": "instruments=violin",
+        "confidence": 0.381578947368421
+      },
+      {
+        "source": "instruments=violin",
+        "target": "instruments=flute",
+        "confidence": 0.1686046511627907
+      },
+      {
+        "source": "instruments=Synthesizer",
+        "target": "instruments=Electric Guitar (clean)",
+        "confidence": 0.8625
+      },
+      {
+        "source": "instruments=Electric Guitar (clean)",
+        "target": "instruments=Synthesizer",
+        "confidence": 0.473015873015873
+      },
+      {
+        "source": "instruments=Drum Machine",
+        "target": "instruments=Synthesizer",
+        "confidence": 0.9636363636363636
+      },
+      {
+        "source": "instruments=Samples",
+        "target": "instruments=Synthesizer",
+        "confidence": 0.9636363636363636
+      },
+      {
+        "source": "instruments=Samples",
+        "target": "instruments=Drum Machine",
+        "confidence": 0.8548387096774194
+      },
+      {
+        "source": "instruments=Drum Machine",
+        "target": "instruments=Samples",
+        "confidence": 0.5408163265306122
+      },
+      {
+        "source": "instruments=Synthesizer",
+        "target": "instruments=Drum Machine",
+        "confidence": 0.8548387096774194
+      },
+      {
+        "source": "instruments=Synthesizer",
+        "target": "instruments=Samples",
+        "confidence": 0.5408163265306122
+      },
+      {
+        "source": "instruments=Electric Guitar (distorted)",
+        "target": "instruments=Electric Guitar (clean)",
+        "confidence": 0.8743169398907105
+      },
+      {
+        "source": "instruments=Electric Guitar (clean)",
+        "target": "instruments=Electric Guitar (distorted)",
+        "confidence": 0.5079365079365079
+      },
+      {
+        "source": "instruments=Electric Guitar (distorted)",
+        "target": "instruments=Synthesizer",
+        "confidence": 0.43715846994535523
+      },
+      {
+        "source": "instruments=Synthesizer",
+        "target": "instruments=Electric Guitar (distorted)",
+        "confidence": 0.4630872483221477
+      }
+    ]
+  },
+  {
+    "label": "Long epic (tempo=128)",
+    "seed": 9,
+    "fixed_values": {
+      "tempo": 128,
+      "tags": [
+        "long"
+      ]
+    },
+    "song": {
+      "tempo": 128,
+      "tags": [
+        "long"
+      ],
+      "key": "C",
+      "mode": "dorian",
+      "genre": [
+        "latin"
+      ],
+      "target_duration": 537,
+      "instruments": [
+        "keyboard",
+        "brass",
+        "computer",
+        "violin",
+        "Female Lead Vocals",
+        "bass",
+        "Electric Guitar (clean)",
+        "Acoustic Guitar"
+      ],
+      "structure": "intro-verse-bridge-chorus-outro",
+      "parts": [
+        {
+          "part_type": "intro",
+          "part_tags": [
+            "chill",
+            "energetic"
+          ],
+          "chords": [
+            "prog_003",
+            "prog_003",
+            "prog_001",
+            "prog_006"
+          ]
+        },
+        {
+          "part_type": "verse",
+          "part_tags": [
+            "dark",
+            "upbeat",
+            "chill"
+          ],
+          "chords": [
+            "prog_002",
+            "prog_006",
+            "prog_001",
+            "prog_007",
+            "prog_003",
+            "prog_008"
+          ]
+        },
+        {
+          "part_type": "bridge",
+          "part_tags": [
+            "dark",
+            "upbeat",
+            "driving"
+          ],
+          "chords": [
+            "prog_003",
+            "prog_004",
+            "prog_001"
+          ]
+        },
+        {
+          "part_type": "chorus",
+          "part_tags": [],
+          "chords": [
+            "prog_002",
+            "prog_007",
+            "prog_002"
+          ]
+        },
+        {
+          "part_type": "outro",
+          "part_tags": [
+            "dark",
+            "mellow"
+          ],
+          "chords": [
+            "prog_004",
+            "prog_007",
+            "prog_002"
+          ]
+        }
+      ]
+    },
+    "edges": [
+      {
+        "source": "genre=latin",
+        "target": "tags=tempo_fast",
+        "confidence": 0.23963730569948183
+      },
+      {
+        "source": "instruments=violin",
+        "target": "instruments=bass",
+        "confidence": 0.19767441860465115
+      },
+      {
+        "source": "instruments=violin",
+        "target": "instruments=keyboard",
+        "confidence": 0.16279069767441862
+      },
+      {
+        "source": "instruments=keyboard",
+        "target": "instruments=violin",
+        "confidence": 0.13270142180094785
+      },
+      {
+        "source": "instruments=computer",
+        "target": "instruments=violin",
+        "confidence": 0.1319796954314721
+      },
+      {
+        "source": "instruments=violin",
+        "target": "instruments=computer",
+        "confidence": 0.1511627906976744
+      },
+      {
+        "source": "instruments=computer",
+        "target": "instruments=bass",
+        "confidence": 0.2385786802030457
+      },
+      {
+        "source": "instruments=computer",
+        "target": "instruments=keyboard",
+        "confidence": 0.2131979695431472
+      },
+      {
+        "source": "instruments=keyboard",
+        "target": "instruments=computer",
+        "confidence": 0.19905213270142177
+      },
+      {
+        "source": "instruments=keyboard",
+        "target": "instruments=bass",
+        "confidence": 0.5165876777251185
+      },
+      {
+        "source": "instruments=bass",
+        "target": "instruments=keyboard",
+        "confidence": 0.1872852233676976
+      },
+      {
+        "source": "instruments=Acoustic Guitar",
+        "target": "instruments=Electric Guitar (clean)",
+        "confidence": 0.6097560975609756
+      },
+      {
+        "source": "instruments=Female Lead Vocals",
+        "target": "instruments=Electric Guitar (clean)",
+        "confidence": 0.5660377358490566
+      }
+    ]
+  },
+  {
+    "label": "Short energetic (seed 10)",
+    "seed": 10,
+    "fixed_values": {
+      "tags": [
+        "tempo_very_fast",
+        "high_energy",
+        "short"
+      ]
+    },
+    "song": {
+      "tags": [
+        "tempo_very_fast",
+        "high_energy",
+        "short"
+      ],
+      "tempo": 186,
+      "key": "A",
+      "mode": "major",
+      "genre": [
+        "drumnbass"
+      ],
+      "target_duration": 62,
+      "instruments": [
+        "classicalguitar",
+        "violin",
+        "strings",
+        "orchestra",
+        "electricguitar",
+        "keyboard",
+        "bass",
+        "rhodes"
+      ],
+      "structure": "intro-verse-bridge-chorus-outro",
+      "parts": [
+        {
+          "part_type": "intro",
+          "part_tags": [
+            "energetic",
+            "upbeat",
+            "dark"
+          ],
+          "chords": [
+            "prog_001",
+            "prog_004",
+            "prog_008",
+            "prog_008",
+            "prog_005"
+          ]
+        },
+        {
+          "part_type": "verse",
+          "part_tags": [
+            "upbeat"
+          ],
+          "chords": [
+            "prog_008",
+            "prog_006"
+          ]
+        },
+        {
+          "part_type": "bridge",
+          "part_tags": [],
+          "chords": [
+            "prog_006",
+            "prog_001",
+            "prog_007"
+          ]
+        },
+        {
+          "part_type": "chorus",
+          "part_tags": [
+            "dark"
+          ],
+          "chords": [
+            "prog_006",
+            "prog_007",
+            "prog_007",
+            "prog_005",
+            "prog_005",
+            "prog_008"
+          ]
+        },
+        {
+          "part_type": "outro",
+          "part_tags": [
+            "driving"
+          ],
+          "chords": [
+            "prog_005",
+            "prog_006",
+            "prog_003",
+            "prog_008",
+            "prog_004",
+            "prog_008",
+            "prog_007"
+          ]
+        }
+      ]
+    },
+    "edges": [
+      {
+        "source": "tags=tempo_very_fast",
+        "target": "tags=high_energy",
+        "confidence": 0.6452554744525547
+      },
+      {
+        "source": "tags=high_energy",
+        "target": "tags=tempo_very_fast",
+        "confidence": 0.14285714285714288
+      },
+      {
+        "source": "instruments=bass",
+        "target": "instruments=electricguitar",
+        "confidence": 0.7352941176470589
+      },
+      {
+        "source": "instruments=electricguitar",
+        "target": "instruments=bass",
+        "confidence": 0.6944444444444445
+      },
+      {
+        "source": "instruments=violin",
+        "target": "instruments=electricguitar",
+        "confidence": 0.7352941176470589
+      },
+      {
+        "source": "instruments=violin",
+        "target": "instruments=bass",
+        "confidence": 0.6944444444444445
+      },
+      {
+        "source": "instruments=violin",
+        "target": "instruments=keyboard",
+        "confidence": 0.16279069767441862
+      },
+      {
+        "source": "instruments=keyboard",
+        "target": "instruments=violin",
+        "confidence": 0.13270142180094785
+      },
+      {
+        "source": "instruments=keyboard",
+        "target": "instruments=bass",
+        "confidence": 0.6923076923076923
+      },
+      {
+        "source": "instruments=bass",
+        "target": "instruments=keyboard",
+        "confidence": 0.1872852233676976
+      },
+      {
+        "source": "instruments=keyboard",
+        "target": "instruments=electricguitar",
+        "confidence": 0.9655172413793104
+      },
+      {
+        "source": "instruments=electricguitar",
+        "target": "instruments=keyboard",
+        "confidence": 0.9333333333333333
+      },
+      {
+        "source": "instruments=classicalguitar",
+        "target": "instruments=electricguitar",
+        "confidence": 0.9655172413793104
+      },
+      {
+        "source": "instruments=keyboard",
+        "target": "instruments=classicalguitar",
+        "confidence": 0.4307692307692308
+      },
+      {
+        "source": "instruments=classicalguitar",
+        "target": "instruments=keyboard",
+        "confidence": 0.9333333333333333
+      },
+      {
+        "source": "instruments=classicalguitar",
+        "target": "instruments=bass",
+        "confidence": 0.4444444444444444
+      },
+      {
+        "source": "instruments=electricguitar",
+        "target": "instruments=classicalguitar",
+        "confidence": 0.4307692307692308
+      },
+      {
+        "source": "instruments=rhodes",
+        "target": "instruments=electricguitar",
+        "confidence": 0.5471698113207547
+      },
+      {
+        "source": "instruments=rhodes",
+        "target": "instruments=bass",
+        "confidence": 0.6037735849056604
+      }
+    ]
+  }
+]
