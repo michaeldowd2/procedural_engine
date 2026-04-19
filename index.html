@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Procedural Engine Explorer</title>
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #080e1a;
+      --surface:   rgba(16, 26, 46, 0.85);
+      --border:    rgba(148, 163, 184, 0.12);
+      --text:      #e2e8f0;
+      --muted:     #64748b;
+      --accent:    #38bdf8;
+      --accent2:   #818cf8;
+      --sidebar-w: 300px;
+      --json-w:    360px;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      overflow: hidden;
+      display: flex;
+      height: 100vh;
+    }
+
+    /* ── Sidebar ─────────────────────────────────────────────── */
+    #sidebar {
+      width: var(--sidebar-w);
+      flex-shrink: 0;
+      background: var(--surface);
+      border-right: 1px solid var(--border);
+      backdrop-filter: blur(16px);
+      display: flex;
+      flex-direction: column;
+      z-index: 20;
+    }
+
+    #sidebar-header {
+      padding: 16px 20px 12px;
+      border-bottom: 1px solid var(--border);
+    }
+    #sidebar-header h1 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* Model picker */
+    #model-picker-row {
+      margin-top: 8px;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+    #model-picker-row label {
+      font-size: 0.72rem;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+    #model-select {
+      flex: 1;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--border);
+      border-radius: 5px;
+      color: var(--text);
+      font-size: 0.78rem;
+      padding: 4px 8px;
+      cursor: pointer;
+      outline: none;
+    }
+    #model-select:focus { border-color: var(--accent); }
+
+    #header-sub {
+      font-size: 0.73rem;
+      color: var(--muted);
+      margin-top: 5px;
+    }
+    #graph-stats {
+      font-size: 0.72rem;
+      color: var(--muted);
+      margin-top: 3px;
+    }
+    #graph-stats span { color: var(--accent); font-weight: 600; }
+
+    /* Controls */
+    .control-row {
+      padding: 10px 20px;
+      border-bottom: 1px solid var(--border);
+    }
+    .control-label {
+      font-size: 0.75rem;
+      color: var(--muted);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 5px;
+    }
+    .control-label span { color: var(--accent); font-weight: 600; }
+    input[type=range] {
+      width: 100%;
+      accent-color: var(--accent);
+    }
+
+    /* Source toggles */
+    #source-row {
+      padding: 10px 20px;
+      border-bottom: 1px solid var(--border);
+    }
+    #source-row .control-label { margin-bottom: 7px; }
+    #source-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+    }
+    .src-btn {
+      font-size: 0.68rem;
+      padding: 3px 8px;
+      border-radius: 999px;
+      border: 1px solid;
+      cursor: pointer;
+      transition: opacity 0.2s, background 0.2s;
+      user-select: none;
+    }
+    .src-btn.off { opacity: 0.3; }
+
+    /* Generation list */
+    #gen-list {
+      overflow-y: auto;
+      flex: 1;
+    }
+    .gen-item {
+      padding: 11px 20px;
+      cursor: pointer;
+      border-bottom: 1px solid var(--border);
+      transition: background 0.15s;
+    }
+    .gen-item:hover  { background: rgba(56,189,248,0.06); }
+    .gen-item.active { background: rgba(56,189,248,0.12); border-left: 3px solid var(--accent); }
+    .gen-item .gen-label { font-size: 0.85rem; font-weight: 600; }
+    .gen-item .gen-meta  { font-size: 0.72rem; color: var(--muted); margin-top: 2px; }
+    .gen-item .gen-tags  { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 5px; }
+    .tag-pill {
+      font-size: 0.65rem;
+      padding: 2px 6px;
+      border-radius: 999px;
+      background: rgba(56,189,248,0.12);
+      color: var(--accent);
+      border: 1px solid rgba(56,189,248,0.22);
+    }
+
+    /* ── Centre graph ─────────────────────────────────────────── */
+    #graph-wrap { flex: 1; position: relative; overflow: hidden; }
+    svg { width: 100%; height: 100%; }
+
+    /* ── JSON panel ───────────────────────────────────────────── */
+    #json-panel {
+      width: 0;
+      flex-shrink: 0;
+      background: var(--surface);
+      border-left: 1px solid var(--border);
+      backdrop-filter: blur(16px);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: width 0.3s ease;
+      z-index: 20;
+    }
+    #json-panel.open { width: var(--json-w); }
+    #json-panel-header {
+      padding: 13px 18px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-shrink: 0;
+    }
+    #json-panel-header h3 { font-size: 0.88rem; font-weight: 600; }
+    #close-json {
+      background: none; border: none; color: var(--muted);
+      font-size: 1.1rem; cursor: pointer;
+    }
+    #close-json:hover { color: var(--text); }
+    #json-content { overflow-y: auto; flex: 1; padding: 13px 15px; }
+    pre {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.68rem;
+      line-height: 1.55;
+      white-space: pre-wrap;
+      word-break: break-all;
+      color: #94a3b8;
+    }
+    .j-key  { color: #93c5fd; }
+    .j-str  { color: #6ee7b7; }
+    .j-num  { color: #fcd34d; }
+    .j-bool { color: #f9a8d4; }
+    .j-null { color: #94a3b8; }
+
+    /* ── Tooltip ──────────────────────────────────────────────── */
+    #tooltip {
+      position: fixed;
+      background: rgba(8,14,26,0.97);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 8px;
+      padding: 9px 13px;
+      font-size: 0.76rem;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.18s;
+      z-index: 100;
+      max-width: 280px;
+      line-height: 1.5;
+    }
+    #tooltip strong { color: var(--accent); display: block; margin-bottom: 3px; font-size: 0.82rem; }
+    #tooltip .tip-rule { color: #94a3b8; margin-top: 4px; font-style: italic; font-size: 0.72rem; }
+    #tooltip .tip-meta { color: var(--muted); }
+
+    /* ── Legend ───────────────────────────────────────────────── */
+    #legend {
+      position: absolute;
+      bottom: 16px;
+      right: 16px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 10px 14px;
+      font-size: 0.7rem;
+      color: var(--muted);
+      z-index: 10;
+      pointer-events: none;
+    }
+    #legend .leg-title { font-weight: 600; color: var(--text); margin-bottom: 6px; }
+    .leg-row { display: flex; align-items: center; gap: 6px; margin-bottom: 3px; }
+    .leg-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+    .leg-line { width: 24px; height: 2px; border-radius: 1px; flex-shrink: 0; }
+
+    /* ── Node / link base styles ─────────────────────────────── */
+    .node-circle { stroke: rgba(255,255,255,0.22); stroke-width: 1.5; cursor: pointer; }
+    .link { stroke-opacity: 0.45; }
+    .link-synonym { stroke-dasharray: 4 3; stroke-opacity: 0.3; }
+    .node-label { pointer-events: none; font-size: 10.5px; fill: #cbd5e1;
+                  text-shadow: 0 0 6px #000, 0 0 4px #000; }
+
+    /* Loading overlay */
+    #loading {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--bg);
+      color: var(--muted);
+      font-size: 0.9rem;
+      z-index: 50;
+    }
+    #loading.hidden { display: none; }
+  </style>
+</head>
+<body>
+
+<!-- ── Left sidebar ─────────────────────────────────────────── -->
+<aside id="sidebar">
+  <div id="sidebar-header">
+    <h1>Procedural Engine Explorer</h1>
+    <div id="model-picker-row">
+      <label for="model-select">Model</label>
+      <select id="model-select"><option value="">Loading…</option></select>
+    </div>
+    <p id="header-sub">Association rules · procedural engine</p>
+    <div id="graph-stats">Loading…</div>
+  </div>
+
+  <div class="control-row">
+    <div class="control-label">Min confidence <span id="conf-val">0.30</span></div>
+    <input type="range" id="conf-slider" min="0.30" max="1.00" step="0.05" value="0.30">
+  </div>
+
+  <div class="control-row">
+    <div class="control-label">Min lift <span id="lift-val">1.2</span></div>
+    <input type="range" id="lift-slider" min="1.0" max="6.0" step="0.1" value="1.2">
+  </div>
+
+  <div id="source-row">
+    <div class="control-label">Sources</div>
+    <div id="source-buttons"></div>
+  </div>
+
+  <div id="gen-list">
+    <div style="padding:13px 20px;font-size:0.76rem;color:var(--muted)">Loading…</div>
+  </div>
+</aside>
+
+<!-- ── Centre force graph ────────────────────────────────────── -->
+<div id="graph-wrap">
+  <div id="loading">Loading graph…</div>
+  <svg id="graph-svg"></svg>
+  <div id="legend">
+    <div class="leg-title">Edge lift</div>
+    <div class="leg-row"><div class="leg-line" style="background:#f59e0b"></div> high (≥ 3×)</div>
+    <div class="leg-row"><div class="leg-line" style="background:#38bdf8"></div> notable (1.5 – 3×)</div>
+    <div class="leg-row"><div class="leg-line" style="background:#334155"></div> moderate (1.2 – 1.5×)</div>
+    <div class="leg-row"><div class="leg-line" style="background:#475569;border-top:1px dashed #475569;height:0"></div> synonym</div>
+  </div>
+</div>
+
+<!-- ── Right JSON panel ──────────────────────────────────────── -->
+<aside id="json-panel">
+  <div id="json-panel-header">
+    <h3 id="json-title">Output</h3>
+    <button id="close-json">&#10005;</button>
+  </div>
+  <div id="json-content"><pre id="json-pre"></pre></div>
+</aside>
+
+<div id="tooltip"></div>
+
+<script>
+// ─── Config ───────────────────────────────────────────────────
+const GROUP_COLORS = {
+  tags:        '#f43f5e',
+  key:         '#38bdf8',
+  instruments: '#10b981',
+  tempo:       '#f59e0b',
+  vocals:      '#a78bfa',
+  structure:   '#fb923c',
+  mode:        '#34d399',
+  default:     '#94a3b8',
+};
+function nodeColor(group) { return GROUP_COLORS[group] || GROUP_COLORS.default; }
+
+function liftColor(link) {
+  if (link.type === 'synonym') return '#475569';
+  const lift = link.lift || 1;
+  if (lift >= 3.0) return '#f59e0b';
+  if (lift >= 1.5) return '#38bdf8';
+  return '#334155';
+}
+function liftWidth(lift) { return Math.max(0.5, Math.min(4.5, lift * 0.9)); }
+
+// ─── SVG / zoom ──────────────────────────────────────────────
+const svg  = d3.select('#graph-svg');
+const root = svg.append('g');
+svg.call(d3.zoom().scaleExtent([0.1, 6]).on('zoom', e => root.attr('transform', e.transform)));
+
+const defs = svg.append('defs');
+['glow', 'glow-hl'].forEach((id, i) => {
+  const f = defs.append('filter').attr('id', id);
+  f.append('feGaussianBlur').attr('stdDeviation', i ? '8' : '4').attr('result', 'blur');
+  const m = f.append('feMerge');
+  m.append('feMergeNode').attr('in', 'blur');
+  m.append('feMergeNode').attr('in', 'SourceGraphic');
+});
+
+const linkGroup = root.append('g').attr('class', 'links');
+const nodeGroup = root.append('g').attr('class', 'nodes');
+
+// ─── State ───────────────────────────────────────────────────
+let allLinks = [], allNodes = [];
+let activeSources    = new Set();
+let highlightedNodes = new Set();
+let selectedNodeId   = null;
+let simulation;
+let confThr = 0.30, liftThr = 1.2;
+
+let linkSel = linkGroup.selectAll('line');
+let nodeSel = nodeGroup.selectAll('g');
+
+// ─── Graph update ─────────────────────────────────────────────
+function updateGraph(links, nodes) {
+  linkSel = linkGroup.selectAll('line').data(links, d => `${d.source.id||d.source}→${d.target.id||d.target}`);
+  linkSel.exit().remove();
+  linkSel = linkSel.enter().append('line')
+    .attr('class', d => 'link' + (d.type === 'synonym' ? ' link-synonym' : ''))
+    .attr('stroke',       d => liftColor(d))
+    .attr('stroke-width', d => d.type === 'synonym' ? 1 : liftWidth(d.lift || 1))
+    .merge(linkSel)
+    .attr('stroke',       d => liftColor(d))
+    .attr('stroke-width', d => d.type === 'synonym' ? 1 : liftWidth(d.lift || 1));
+
+  nodeSel = nodeGroup.selectAll('g').data(nodes, d => d.id);
+  nodeSel.exit().remove();
+
+  const enter = nodeSel.enter().append('g').attr('class', 'node-g')
+    .call(d3.drag()
+      .on('start', (e, d) => { if (!e.active) simulation.alphaTarget(0.3).restart(); d.fx=d.x; d.fy=d.y; })
+      .on('drag',  (e, d) => { d.fx=e.x; d.fy=e.y; })
+      .on('end',   (e, d) => { if (!e.active) simulation.alphaTarget(0); d.fx=null; d.fy=null; }));
+
+  enter.append('circle')
+    .attr('class', 'node-circle')
+    .attr('r',    d => nodeRadius(d))
+    .attr('fill', d => nodeColor(d.group))
+    .style('filter', 'url(#glow)')
+    .on('mouseover', onNodeHover)
+    .on('mouseout',  onNodeOut)
+    .on('click',     onNodeClick);
+
+  enter.append('text')
+    .attr('class', 'node-label')
+    .attr('dx', d => nodeRadius(d) + 4)
+    .attr('dy', '0.35em')
+    .text(d => labelText(d.id));
+
+  nodeSel = enter.merge(nodeSel);
+
+  if (simulation) {
+    simulation.nodes(nodes);
+    simulation.force('link').links(links);
+    simulation.alpha(0.6).restart();
+  }
+  applyHighlight();
+  updateStats(nodes.length, links.length);
+}
+
+function nodeRadius(d) { return Math.min(26, 6 + (d.degree || 1) * 1.6); }
+function labelText(id) {
+  const p = id.split('=');
+  return p.length > 1 ? p.slice(1).join('=') : id;
+}
+
+// ─── Stats display ────────────────────────────────────────────
+function updateStats(n, e) {
+  document.getElementById('graph-stats').innerHTML =
+    `<span>${n}</span> nodes · <span>${e}</span> edges visible`;
+}
+
+// ─── Tooltip ─────────────────────────────────────────────────
+const tooltip = d3.select('#tooltip');
+
+function onNodeHover(event, d) {
+  d3.select(this).transition().duration(120).attr('r', nodeRadius(d) + 4);
+  const edges = allLinks.filter(l =>
+    (l.source.id || l.source) === d.id || (l.target.id || l.target) === d.id
+  ).sort((a, b) => (b.score || 0) - (a.score || 0));
+  const best = edges.find(e => e.type !== 'synonym') || edges[0];
+
+  tooltip
+    .style('opacity', 1)
+    .style('left', (event.clientX + 16) + 'px')
+    .style('top',  (event.clientY - 12) + 'px')
+    .html(`
+      <strong>${d.id}</strong>
+      <div class="tip-meta">
+        Group: <b>${d.group}</b> · Connections: <b>${d.degree}</b><br>
+        Avg lift: <b>${d.lift_avg || '—'}</b>
+      </div>
+      ${best ? `<div class="tip-rule">${best.rule}</div>` : ''}
+    `);
+}
+
+function onNodeOut(event, d) {
+  d3.select(this).transition().duration(250).attr('r', nodeRadius(d));
+  tooltip.style('opacity', 0);
+}
+
+function onNodeClick(e, d) {
+  e.stopPropagation();
+  selectedNodeId = selectedNodeId === d.id ? null : d.id;
+  applyHighlight();
+}
+svg.on('click', () => { selectedNodeId = null; applyHighlight(); });
+
+// ─── Highlight ────────────────────────────────────────────────
+function applyHighlight() {
+  if (!nodeSel || nodeSel.empty()) return;
+  let glowSet = new Set(highlightedNodes);
+  if (selectedNodeId) {
+    glowSet.add(selectedNodeId);
+    linkSel.each(d => {
+      const s = d.source.id || d.source, t = d.target.id || d.target;
+      if (s === selectedNodeId) glowSet.add(t);
+      if (t === selectedNodeId) glowSet.add(s);
+    });
+  }
+  const any = glowSet.size > 0;
+
+  nodeSel.select('circle').transition().duration(220)
+    .attr('r', d => glowSet.has(d.id) ? nodeRadius(d) + 5 : nodeRadius(d))
+    .style('filter', d => glowSet.has(d.id) ? 'url(#glow-hl)' : 'url(#glow)')
+    .style('opacity', d => !any || glowSet.has(d.id) ? 1 : 0.18)
+    .attr('stroke', d => glowSet.has(d.id) ? '#fff' : 'rgba(255,255,255,0.22)')
+    .attr('stroke-width', d => glowSet.has(d.id) ? 2.5 : 1.5);
+
+  nodeSel.select('text').style('opacity', d => !any || glowSet.has(d.id) ? 1 : 0.12);
+
+  linkSel.transition().duration(220)
+    .style('opacity', d => {
+      if (!any) return d.type === 'synonym' ? 0.2 : 0.45;
+      const s = d.source.id || d.source, t = d.target.id || d.target;
+      return (glowSet.has(s) && glowSet.has(t)) ? 0.9 : 0.04;
+    })
+    .attr('stroke', d => {
+      const s = d.source.id || d.source, t = d.target.id || d.target;
+      return (glowSet.has(s) && glowSet.has(t)) ? '#fff' : liftColor(d);
+    });
+}
+
+// ─── Filter logic ─────────────────────────────────────────────
+function filterGraph() {
+  const filtered = allLinks.filter(l =>
+    (l.type === 'synonym' || (l.confidence >= confThr && (l.lift || 1) >= liftThr)) &&
+    activeSources.has(l.dataset || 'unknown')
+  );
+  const active = new Set();
+  filtered.forEach(l => {
+    active.add(l.source.id || l.source);
+    active.add(l.target.id || l.target);
+  });
+  updateGraph(filtered, allNodes.filter(n => active.has(n.id)));
+}
+
+// ─── Sliders ──────────────────────────────────────────────────
+document.getElementById('conf-slider').addEventListener('input', function () {
+  confThr = parseFloat(this.value);
+  document.getElementById('conf-val').textContent = confThr.toFixed(2);
+  filterGraph();
+});
+
+document.getElementById('lift-slider').addEventListener('input', function () {
+  liftThr = parseFloat(this.value);
+  document.getElementById('lift-val').textContent = liftThr.toFixed(1);
+  filterGraph();
+});
+
+// ─── Source toggles ───────────────────────────────────────────
+const SRC_PALETTE = ['#f43f5e','#38bdf8','#10b981','#f59e0b','#a78bfa','#fb923c'];
+
+function buildSourceToggles(sources) {
+  activeSources = new Set();
+  const container = document.getElementById('source-buttons');
+  container.innerHTML = '';
+
+  // Always add synonyms toggle
+  const allSources = { ...sources, synonyms: 0 };
+  Object.keys(allSources).forEach((src, i) => {
+    activeSources.add(src);
+    const col = src === 'synonyms' ? '#475569' : SRC_PALETTE[i % SRC_PALETTE.length];
+    const btn = document.createElement('div');
+    btn.className = 'src-btn';
+    btn.textContent = src.replace(/_/g, ' ');
+    btn.style.borderColor = col;
+    btn.style.color = col;
+    btn.style.background = col + '22';
+    btn.dataset.src = src;
+    btn.addEventListener('click', () => {
+      if (activeSources.has(src)) { activeSources.delete(src); btn.classList.add('off'); }
+      else { activeSources.add(src); btn.classList.remove('off'); }
+      filterGraph();
+    });
+    container.appendChild(btn);
+  });
+}
+
+// ─── Sidebar: generation list ────────────────────────────────
+function buildSidebar(generations) {
+  const list = document.getElementById('gen-list');
+  list.innerHTML = '';
+  if (!generations || !generations.length) {
+    list.innerHTML = '<div style="padding:13px 20px;font-size:0.75rem;color:var(--muted)">No generations found.<br>Run <code>python scripts/generate_samples.py</code></div>';
+    return;
+  }
+  generations.forEach((gen, idx) => {
+    const tags = gen.song.tags || [];
+    const item = document.createElement('div');
+    item.className = 'gen-item';
+    const meta = [gen.song.tempo && `${gen.song.tempo} bpm`, gen.song.key, gen.song.mode].filter(Boolean).join(' · ');
+    item.innerHTML = `
+      <div class="gen-label">${gen.label}</div>
+      <div class="gen-meta">seed ${gen.seed}${meta ? ' · ' + meta : ''}</div>
+      <div class="gen-tags">${tags.map(t => `<span class="tag-pill">${t}</span>`).join('')}</div>
+    `;
+    item.addEventListener('click', () => selectGeneration(idx, generations));
+    list.appendChild(item);
+  });
+}
+
+let activeGenIdx = -1;
+
+function selectGeneration(idx, generations) {
+  if (activeGenIdx === idx) {
+    activeGenIdx = -1;
+    highlightedNodes = new Set();
+    document.querySelectorAll('.gen-item').forEach(el => el.classList.remove('active'));
+    document.getElementById('json-panel').classList.remove('open');
+    applyHighlight();
+    return;
+  }
+  activeGenIdx = idx;
+  document.querySelectorAll('.gen-item').forEach((el, i) => el.classList.toggle('active', i === idx));
+
+  const { song } = generations[idx];
+  highlightedNodes = new Set();
+  (song.tags || []).forEach(t => highlightedNodes.add(`tags=${t}`));
+  if (song.key)       highlightedNodes.add(`key=${song.key}`);
+  if (song.mode)      highlightedNodes.add(`mode=${song.mode}`);
+  if (song.structure) highlightedNodes.add(`structure=${song.structure}`);
+
+  document.getElementById('json-panel').classList.add('open');
+  document.getElementById('json-title').textContent = generations[idx].label;
+  document.getElementById('json-pre').innerHTML = syntaxHighlight(JSON.stringify(song, null, 2));
+  applyHighlight();
+}
+
+// ─── JSON syntax highlighting ─────────────────────────────────
+function syntaxHighlight(json) {
+  return json
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+    .replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, m => {
+      let c = 'j-num';
+      if (/^"/.test(m)) c = /:$/.test(m) ? 'j-key' : 'j-str';
+      else if (/true|false/.test(m)) c = 'j-bool';
+      else if (/null/.test(m)) c = 'j-null';
+      return `<span class="${c}">${m}</span>`;
+    });
+}
+
+document.getElementById('close-json').addEventListener('click', () => {
+  document.getElementById('json-panel').classList.remove('open');
+  activeGenIdx = -1;
+  highlightedNodes = new Set();
+  document.querySelectorAll('.gen-item').forEach(el => el.classList.remove('active'));
+  applyHighlight();
+});
+
+// ─── Load model data ──────────────────────────────────────────
+function initSimulation(nodes, links) {
+  const W = document.getElementById('graph-wrap').clientWidth;
+  const H = document.getElementById('graph-wrap').clientHeight;
+
+  if (simulation) simulation.stop();
+
+  simulation = d3.forceSimulation(nodes)
+    .force('link',    d3.forceLink(links).id(d => d.id).distance(120))
+    .force('charge',  d3.forceManyBody().strength(-260))
+    .force('center',  d3.forceCenter(W / 2, H / 2))
+    .force('collide', d3.forceCollide(d => nodeRadius(d) + 9))
+    .on('tick', () => {
+      linkSel.attr('x1', d=>d.source.x).attr('y1', d=>d.source.y)
+             .attr('x2', d=>d.target.x).attr('y2', d=>d.target.y);
+      nodeSel.attr('transform', d=>`translate(${d.x},${d.y})`);
+    });
+}
+
+function loadModel(modelName) {
+  document.getElementById('loading').classList.remove('hidden');
+  // Reset state
+  allNodes = []; allLinks = [];
+  activeSources = new Set();
+  highlightedNodes = new Set();
+  selectedNodeId = null;
+  activeGenIdx = -1;
+  linkGroup.selectAll('*').remove();
+  nodeGroup.selectAll('*').remove();
+  document.getElementById('json-panel').classList.remove('open');
+  document.getElementById('gen-list').innerHTML =
+    '<div style="padding:13px 20px;font-size:0.76rem;color:var(--muted)">Loading…</div>';
+
+  const base = `../models/${modelName}/model_data`;
+
+  Promise.all([
+    d3.json(`${base}/graph_data.json`).catch(() => null),
+    d3.json(`${base}/generations.json`).catch(() => null),
+  ]).then(([graphData, generations]) => {
+    document.getElementById('loading').classList.add('hidden');
+
+    if (!graphData) {
+      document.getElementById('graph-wrap').insertAdjacentHTML('beforeend',
+        '<div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#ef4444;text-align:center;padding:40px">' +
+        `<div><h2>graph_data.json not found</h2><p>Run <code>python scripts/generate_model_data.py --model ${modelName}</code> first.</p></div></div>`);
+      return;
+    }
+
+    allNodes = graphData.nodes || [];
+    allLinks = graphData.links || [];
+
+    const meta = graphData.meta || {};
+    if (meta.total_rules_in_file) {
+      document.getElementById('header-sub').textContent =
+        `${meta.total_rules_in_file.toLocaleString()} rules mined · ${meta.rules_shown} shown`;
+    }
+    if (meta.lift_range) {
+      const ls = document.getElementById('lift-slider');
+      ls.min   = Math.max(1.0, meta.lift_range[0]).toFixed(1);
+      ls.max   = Math.min(10,  meta.lift_range[1]).toFixed(1);
+      ls.value = Math.max(parseFloat(ls.min), 1.2).toFixed(1);
+      liftThr  = parseFloat(ls.value);
+      document.getElementById('lift-val').textContent = liftThr.toFixed(1);
+    }
+    if (meta.sources) buildSourceToggles(meta.sources);
+
+    initSimulation(allNodes, allLinks);
+    filterGraph();
+    buildSidebar(generations);
+  });
+}
+
+// ─── Bootstrap: load manifest then first model ────────────────
+d3.json('../models/manifest.json').catch(() => ({ models: ['song'] })).then(manifest => {
+  const models = manifest.models || [];
+  const sel = document.getElementById('model-select');
+  sel.innerHTML = '';
+  models.forEach(m => {
+    const opt = document.createElement('option');
+    opt.value = m;
+    opt.textContent = m.replace(/_/g, ' ');
+    sel.appendChild(opt);
+  });
+  sel.addEventListener('change', () => loadModel(sel.value));
+  if (models.length > 0) loadModel(models[0]);
+});
+
+// ─── Resize ──────────────────────────────────────────────────
+window.addEventListener('resize', () => {
+  if (simulation) {
+    simulation.force('center', d3.forceCenter(
+      document.getElementById('graph-wrap').clientWidth / 2,
+      document.getElementById('graph-wrap').clientHeight / 2,
+    )).alpha(0.2).restart();
+  }
+});
+</script>
+</body>
+</html>

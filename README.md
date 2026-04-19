@@ -1,98 +1,90 @@
 # Procedural Engine
 
-A generic procedural generation system that produces coherent, constraint-aware outputs from schema definitions and learned associations.
+A Python-based procedural generation system that produces coherent, constraint-aware outputs from schema definitions and learned association rules.
 
 ## Core Concept
 
-The Procedural Engine generates structured JSON outputs where property values maintain meaningful relationships learned from datasets. It works across any domain by separating *structure* (schema) from *semantics* (data).
+The Procedural Engine generates structured JSON outputs where property values maintain meaningful relationships learned from datasets. It works by separating *structure* (schema) from *semantics* (association rules).
 
 **Key Features:**
-- Schema-driven generation of arbitrary JSON structures
-- Multi-dimensional association learning from datasets
-- Manual rule integration for domain expertise
-- Deterministic generation via seed
-- Controllable adherence to learned patterns (0=independent, 1=faithful to data)
-- Support for fixed values with bidirectional inference
+- **Schema-Driven**: Generate arbitrary JSON structures defined by a schema.
+- **Association Learning**: Learns multi-dimensional relationships from datasets using rule-mining (FP-Growth).
+- **Deterministic**: Supports seed-based generation for repeatable results.
+- **Controllable Adherence**: Adjust the `adherence` parameter (0 to 1+) to control how closely the generator follows learned patterns.
+- **Bidirectional Inference**: Supports fixed values with type-aware inference (e.g., setting a numeric value automatically injects its discretized tag into the context).
+- **Explorer UI**: A web-based visualization tool to inspect learned rules and generated samples.
 
 ## Architecture
 
-### Three-Component System
+### 1. Association Rules
+The core "intelligence" of the engine. Rules are mined from datasets and capture relationships like `{tag_A, tag_B} → {tag_C}` with specific confidence and lift scores.
 
-**1. Association Rules (Core)**
-- Learned from datasets using FP-Growth algorithm
-- Captures multi-dimensional relationships: `{item_A, item_B} → {item_C}` with confidence
-- Handles categorical properties, tags, and high-level structure
+### 2. Item Embeddings
+Dense vector representations are used for large item libraries. This allows the engine to transfer learned associations from one item to similar items based on vector distance, handling data sparsity effectively.
 
-**2. Item Embeddings (Sparsity Handling)**
-- Dense vector representations for large item libraries (100s-1000s of items)
-- Used when specific items don't appear in dataset
-- Transfers learned associations to similar items via similarity metrics
+### 3. Discretization & Bins
+Continuous numeric properties (like tempo or energy) are mapped to discrete tags during generation. This allows the rule engine to treat numeric ranges as categorical concepts, enabling complex cross-dimension associations.
 
-**3. Manual Rules (Domain Expertise)**
-- Same format as learned rules, integrated seamlessly
-- Allows explicit specification of critical relationships
-- Contributes proportionally rather than overriding
+## Explorer UI
 
-### Generation Process
+The project includes a built-in **Procedural Engine Explorer** (`index.html`). This tool allows you to:
+- Visualize the network of association rules as a force-directed graph.
+- Filter rules by confidence, lift, and data source.
+- Browse and inspect generated samples in real-time.
 
-```
-For each property in schema order:
-  1. Find all rules where antecedent ⊆ current_context
-  2. Aggregate confidence scores weighted by rule coverage
-  3. For unseen items, smooth scores using embedding similarity
-  4. Apply adherence via temperature: probs = softmax(scores, T=1/adherence)
-  5. Sample value and add to context
-```
-
-**Adherence Parameter:**
-- `adherence = 0`: Uniform sampling (independent properties)
-- `adherence = 1`: Respects learned associations
-- `adherence > 1`: Stronger emphasis on data patterns
-
-### Input/Output
-
-**Inputs:**
-- **Schema**: JSON defining output structure, property types, and generation order
-- **Dataset**: Learned association rules + optional item embeddings
-- **Parameters**: seed, adherence, fixed_values
-
-**Output:**
-- JSON object conforming to schema with coherent property values
-
-## Use Cases
-
-The engine is domain-agnostic. Initial focus: procedural music composition.
-
-### Example: Music Composer
-
-Generate complete song structures with:
-- High-level properties: tempo, key, mode, tags (genre, mood)
-- Structural elements: parts (verse, chorus, bridge)
-- Low-level details: chord progressions, MIDI patterns, instrument presets
-
-The engine learns which combinations are musically coherent from datasets and can generate novel but stylistically consistent compositions.
+To use the explorer, simply open `index.html` in a modern web browser.
 
 ## Project Structure
 
-```
+```text
 procedural_engine/
-├── engine/              # Core generation engine (TBD: Python or JavaScript)
-│   ├── schema_parser.py
-│   ├── rule_engine.py
-│   ├── embeddings.py
-│   └── generator.py
-├── examples/
-│   └── composer/        # Music composition example
-│       ├── schema.json
-│       ├── dataset.json
-│       └── data/        # CSV files, embedding models
-├── docs/
-│   ├── schema_spec.md
-│   ├── dataset_spec.md
-│   └── architecture.md
-└── README.md
+├── engine/              # Core generation engine (Python)
+│   ├── generator.py     # Main generation logic
+│   ├── rule_engine.py   # Association rule querying
+│   ├── schema_parser.py # Schema validation and parsing
+│   └── embeddings.py    # Vector similarity management
+├── models/              # Domain-specific models
+│   └── song/            # Music composition model
+│       ├── schema.json  # Structure definition
+│       ├── dataset.json # Rule configuration & discretization
+│       └── data/        # Source CSV/JSON datasets
+├── scripts/             # Data processing and generation tools
+│   ├── generate_model_data.py # Mines rules and builds graph data
+│   ├── generate_samples.py    # Batch generation for the explorer
+│   └── generate_embeddings.py # Builds vector models
+├── test_generation.py   # Simple CLI test script
+└── index.html           # Explorer UI
 ```
+
+## Quick Start
+
+### 1. Installation
+Ensure you have Python 3.8+ installed.
+```bash
+pip install -r requirements.txt
+```
+
+### 2. Prepare Data (Optional)
+If you want to rebuild the association rules for the song model:
+```bash
+python scripts/generate_model_data.py --model song
+```
+
+### 3. Generate Samples
+Generate a batch of samples for the Explorer UI:
+```bash
+python scripts/generate_samples.py --model song --count 10
+```
+
+### 4. Run CLI Test
+Run the simple test script to see the generator in action:
+```bash
+python test_generation.py
+```
+
+### 5. Open Explorer
+Open `index.html` in your browser to visualize the rules and browse the samples you just generated.
 
 ## Status
 
-Currently in design phase. Folder structure and specifications being developed.
+**Alpha Implementation**. The core engine is functional and optimized for procedural music composition, but the APIs are still subject to change.

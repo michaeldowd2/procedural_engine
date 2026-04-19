@@ -1,0 +1,1034 @@
+[
+  {
+    "label": "Unconstrained (seed 1)",
+    "seed": 1,
+    "fixed_values": {},
+    "song": {
+      "tempo": 94,
+      "key": "F",
+      "mode": "mixolydian",
+      "tags": [
+        "energy_high",
+        "rock",
+        "electronic",
+        "upbeat",
+        "mood_neutral",
+        "rap",
+        "chill",
+        "r&b",
+        "latin",
+        "jazz"
+      ],
+      "target_duration": 124,
+      "instruments": [
+        "preset_009",
+        "preset_004",
+        "preset_006",
+        "preset_010",
+        "preset_001"
+      ],
+      "structure": "intro-verse-bridge-chorus-outro",
+      "parts": [
+        {
+          "part_type": "intro",
+          "part_tags": [],
+          "chords": [
+            "prog_008",
+            "prog_008",
+            "prog_007",
+            "prog_004",
+            "prog_002"
+          ]
+        },
+        {
+          "part_type": "verse",
+          "part_tags": [
+            "driving",
+            "dark",
+            "chill"
+          ],
+          "chords": [
+            "prog_007",
+            "prog_007"
+          ]
+        },
+        {
+          "part_type": "bridge",
+          "part_tags": [],
+          "chords": [
+            "prog_008",
+            "prog_005",
+            "prog_004",
+            "prog_002",
+            "prog_006",
+            "prog_001",
+            "prog_001"
+          ]
+        },
+        {
+          "part_type": "chorus",
+          "part_tags": [],
+          "chords": [
+            "prog_001",
+            "prog_007",
+            "prog_004",
+            "prog_007",
+            "prog_001",
+            "prog_004",
+            "prog_008"
+          ]
+        },
+        {
+          "part_type": "outro",
+          "part_tags": [
+            "chill",
+            "energetic",
+            "driving"
+          ],
+          "chords": [
+            "prog_004",
+            "prog_006",
+            "prog_004",
+            "prog_004",
+            "prog_008",
+            "prog_005"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "label": "High-energy rock",
+    "seed": 2,
+    "fixed_values": {
+      "tags": [
+        "rock",
+        "energy_high"
+      ]
+    },
+    "song": {
+      "tags": [
+        "rock",
+        "energy_high"
+      ],
+      "tempo": 74,
+      "key": "F",
+      "mode": "major",
+      "target_duration": 153,
+      "instruments": [
+        "preset_012",
+        "preset_005"
+      ],
+      "structure": "intro-verse-chorus-verse-chorus-outro",
+      "parts": [
+        {
+          "part_type": "intro",
+          "part_tags": [
+            "energetic",
+            "upbeat"
+          ],
+          "chords": [
+            "prog_003",
+            "prog_005",
+            "prog_005",
+            "prog_004",
+            "prog_001",
+            "prog_003",
+            "prog_007",
+            "prog_007"
+          ]
+        },
+        {
+          "part_type": "verse",
+          "part_tags": [
+            "driving",
+            "dark"
+          ],
+          "chords": [
+            "prog_008",
+            "prog_005",
+            "prog_001",
+            "prog_001",
+            "prog_006",
+            "prog_008"
+          ]
+        },
+        {
+          "part_type": "chorus",
+          "part_tags": [
+            "chill",
+            "mellow"
+          ],
+          "chords": [
+            "prog_007",
+            "prog_003",
+            "prog_003",
+            "prog_004",
+            "prog_004"
+          ]
+        },
+        {
+          "part_type": "verse",
+          "part_tags": [],
+          "chords": [
+            "prog_006",
+            "prog_003",
+            "prog_003"
+          ]
+        },
+        {
+          "part_type": "chorus",
+          "part_tags": [
+            "chill",
+            "energetic"
+          ],
+          "chords": [
+            "prog_003",
+            "prog_008",
+            "prog_007",
+            "prog_006",
+            "prog_006",
+            "prog_006"
+          ]
+        },
+        {
+          "part_type": "outro",
+          "part_tags": [
+            "upbeat",
+            "energetic",
+            "mellow"
+          ],
+          "chords": [
+            "prog_007",
+            "prog_008",
+            "prog_004"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "label": "Slow ambient chill",
+    "seed": 3,
+    "fixed_values": {
+      "tags": [
+        "ambient",
+        "chill",
+        "tempo_slow"
+      ]
+    },
+    "song": {
+      "tags": [
+        "ambient",
+        "chill",
+        "tempo_slow"
+      ],
+      "tempo": 67,
+      "key": "F#",
+      "mode": "mixolydian",
+      "target_duration": 193,
+      "instruments": [
+        "preset_008",
+        "preset_010",
+        "preset_005",
+        "preset_002",
+        "preset_007",
+        "preset_003"
+      ],
+      "structure": "verse-verse-chorus-verse-chorus",
+      "parts": [
+        {
+          "part_type": "verse",
+          "part_tags": [
+            "energetic",
+            "dark",
+            "mellow"
+          ],
+          "chords": [
+            "prog_002",
+            "prog_001",
+            "prog_008",
+            "prog_005",
+            "prog_004",
+            "prog_004",
+            "prog_008"
+          ]
+        },
+        {
+          "part_type": "verse",
+          "part_tags": [
+            "driving",
+            "mellow",
+            "chill"
+          ],
+          "chords": [
+            "prog_003",
+            "prog_004",
+            "prog_003",
+            "prog_007",
+            "prog_001"
+          ]
+        },
+        {
+          "part_type": "chorus",
+          "part_tags": [],
+          "chords": [
+            "prog_001",
+            "prog_005",
+            "prog_001"
+          ]
+        },
+        {
+          "part_type": "verse",
+          "part_tags": [
+            "dark",
+            "chill"
+          ],
+          "chords": [
+            "prog_007",
+            "prog_007",
+            "prog_007",
+            "prog_008",
+            "prog_003"
+          ]
+        },
+        {
+          "part_type": "chorus",
+          "part_tags": [
+            "mellow",
+            "upbeat"
+          ],
+          "chords": [
+            "prog_001",
+            "prog_003"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "label": "Happy pop",
+    "seed": 4,
+    "fixed_values": {
+      "tags": [
+        "pop",
+        "mood_happy"
+      ]
+    },
+    "song": {
+      "tags": [
+        "pop",
+        "mood_happy"
+      ],
+      "tempo": 120,
+      "key": "B",
+      "mode": "dorian",
+      "target_duration": 370,
+      "instruments": [
+        "preset_006",
+        "preset_001"
+      ],
+      "structure": "verse-chorus-verse-chorus-verse-chorus",
+      "parts": [
+        {
+          "part_type": "verse",
+          "part_tags": [
+            "chill",
+            "upbeat",
+            "energetic"
+          ],
+          "chords": [
+            "prog_003",
+            "prog_002",
+            "prog_002",
+            "prog_001",
+            "prog_007"
+          ]
+        },
+        {
+          "part_type": "chorus",
+          "part_tags": [
+            "upbeat",
+            "mellow"
+          ],
+          "chords": [
+            "prog_001",
+            "prog_004",
+            "prog_006",
+            "prog_005",
+            "prog_003",
+            "prog_002",
+            "prog_005",
+            "prog_004"
+          ]
+        },
+        {
+          "part_type": "verse",
+          "part_tags": [],
+          "chords": [
+            "prog_005",
+            "prog_005",
+            "prog_004",
+            "prog_003",
+            "prog_005",
+            "prog_005",
+            "prog_006",
+            "prog_002"
+          ]
+        },
+        {
+          "part_type": "chorus",
+          "part_tags": [
+            "upbeat",
+            "mellow"
+          ],
+          "chords": [
+            "prog_007",
+            "prog_004",
+            "prog_003",
+            "prog_004",
+            "prog_008",
+            "prog_005",
+            "prog_002"
+          ]
+        },
+        {
+          "part_type": "verse",
+          "part_tags": [
+            "dark",
+            "upbeat"
+          ],
+          "chords": [
+            "prog_005",
+            "prog_005"
+          ]
+        },
+        {
+          "part_type": "chorus",
+          "part_tags": [
+            "driving"
+          ],
+          "chords": [
+            "prog_007",
+            "prog_005",
+            "prog_007",
+            "prog_008",
+            "prog_003"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "label": "Jazz minor (seed 5)",
+    "seed": 5,
+    "fixed_values": {
+      "tags": [
+        "jazz"
+      ],
+      "mode": "dorian"
+    },
+    "song": {
+      "tags": [
+        "jazz"
+      ],
+      "mode": "dorian",
+      "tempo": 125,
+      "key": "D",
+      "target_duration": 427,
+      "instruments": [
+        "preset_006"
+      ],
+      "structure": "intro-verse-bridge-chorus-outro",
+      "parts": [
+        {
+          "part_type": "intro",
+          "part_tags": [
+            "dark",
+            "upbeat",
+            "energetic"
+          ],
+          "chords": [
+            "prog_004",
+            "prog_001",
+            "prog_003",
+            "prog_002",
+            "prog_006",
+            "prog_008",
+            "prog_004",
+            "prog_007"
+          ]
+        },
+        {
+          "part_type": "verse",
+          "part_tags": [],
+          "chords": [
+            "prog_004",
+            "prog_001",
+            "prog_004",
+            "prog_007",
+            "prog_005",
+            "prog_003"
+          ]
+        },
+        {
+          "part_type": "bridge",
+          "part_tags": [
+            "dark",
+            "energetic",
+            "driving"
+          ],
+          "chords": [
+            "prog_002",
+            "prog_003",
+            "prog_008"
+          ]
+        },
+        {
+          "part_type": "chorus",
+          "part_tags": [
+            "energetic"
+          ],
+          "chords": [
+            "prog_001",
+            "prog_001",
+            "prog_004"
+          ]
+        },
+        {
+          "part_type": "outro",
+          "part_tags": [
+            "chill"
+          ],
+          "chords": [
+            "prog_003",
+            "prog_005",
+            "prog_006"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "label": "Dark electronic",
+    "seed": 6,
+    "fixed_values": {
+      "tags": [
+        "electronic",
+        "mood_dark",
+        "energy_high"
+      ]
+    },
+    "song": {
+      "tags": [
+        "electronic",
+        "mood_dark",
+        "energy_high"
+      ],
+      "tempo": 80,
+      "key": "A#",
+      "mode": "minor",
+      "target_duration": 556,
+      "instruments": [
+        "preset_005",
+        "preset_010",
+        "preset_007",
+        "preset_008",
+        "preset_003"
+      ],
+      "structure": "intro-verse-bridge-chorus-outro",
+      "parts": [
+        {
+          "part_type": "intro",
+          "part_tags": [],
+          "chords": [
+            "prog_003",
+            "prog_008"
+          ]
+        },
+        {
+          "part_type": "verse",
+          "part_tags": [
+            "dark",
+            "mellow"
+          ],
+          "chords": [
+            "prog_001",
+            "prog_005",
+            "prog_008",
+            "prog_004"
+          ]
+        },
+        {
+          "part_type": "bridge",
+          "part_tags": [
+            "driving",
+            "energetic",
+            "dark"
+          ],
+          "chords": [
+            "prog_002",
+            "prog_004",
+            "prog_005",
+            "prog_002",
+            "prog_007",
+            "prog_006"
+          ]
+        },
+        {
+          "part_type": "chorus",
+          "part_tags": [],
+          "chords": [
+            "prog_007",
+            "prog_005",
+            "prog_008",
+            "prog_002"
+          ]
+        },
+        {
+          "part_type": "outro",
+          "part_tags": [
+            "chill"
+          ],
+          "chords": [
+            "prog_005",
+            "prog_002",
+            "prog_001",
+            "prog_004",
+            "prog_006",
+            "prog_008",
+            "prog_004"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "label": "Fast upbeat rap",
+    "seed": 7,
+    "fixed_values": {
+      "tags": [
+        "rap",
+        "tempo_fast",
+        "energy_high"
+      ]
+    },
+    "song": {
+      "tags": [
+        "rap",
+        "tempo_fast",
+        "energy_high"
+      ],
+      "tempo": 130,
+      "key": "C",
+      "mode": "mixolydian",
+      "target_duration": 214,
+      "instruments": [
+        "preset_009",
+        "preset_006",
+        "preset_011",
+        "preset_003",
+        "preset_007",
+        "preset_001",
+        "preset_002"
+      ],
+      "structure": "verse-chorus-verse-chorus-bridge-chorus",
+      "parts": [
+        {
+          "part_type": "verse",
+          "part_tags": [],
+          "chords": [
+            "prog_002",
+            "prog_006"
+          ]
+        },
+        {
+          "part_type": "chorus",
+          "part_tags": [],
+          "chords": [
+            "prog_004",
+            "prog_001",
+            "prog_002",
+            "prog_007",
+            "prog_007",
+            "prog_002"
+          ]
+        },
+        {
+          "part_type": "verse",
+          "part_tags": [
+            "upbeat"
+          ],
+          "chords": [
+            "prog_007",
+            "prog_001"
+          ]
+        },
+        {
+          "part_type": "chorus",
+          "part_tags": [],
+          "chords": [
+            "prog_001",
+            "prog_007",
+            "prog_001"
+          ]
+        },
+        {
+          "part_type": "bridge",
+          "part_tags": [
+            "chill"
+          ],
+          "chords": [
+            "prog_003",
+            "prog_005"
+          ]
+        },
+        {
+          "part_type": "chorus",
+          "part_tags": [
+            "driving",
+            "mellow",
+            "dark"
+          ],
+          "chords": [
+            "prog_002",
+            "prog_005",
+            "prog_003"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "label": "Mellow r&b",
+    "seed": 8,
+    "fixed_values": {
+      "tags": [
+        "r&b",
+        "mood_neutral",
+        "energy_low"
+      ]
+    },
+    "song": {
+      "tags": [
+        "r&b",
+        "mood_neutral",
+        "energy_low"
+      ],
+      "tempo": 118,
+      "key": "A#",
+      "mode": "phrygian",
+      "target_duration": 439,
+      "instruments": [
+        "preset_007",
+        "preset_010",
+        "preset_003",
+        "preset_002",
+        "preset_005",
+        "preset_012",
+        "preset_008"
+      ],
+      "structure": "intro-verse-chorus-verse-chorus-outro",
+      "parts": [
+        {
+          "part_type": "intro",
+          "part_tags": [
+            "upbeat"
+          ],
+          "chords": [
+            "prog_001",
+            "prog_002",
+            "prog_003"
+          ]
+        },
+        {
+          "part_type": "verse",
+          "part_tags": [
+            "upbeat"
+          ],
+          "chords": [
+            "prog_004",
+            "prog_007",
+            "prog_001",
+            "prog_008",
+            "prog_008",
+            "prog_008",
+            "prog_007",
+            "prog_008"
+          ]
+        },
+        {
+          "part_type": "chorus",
+          "part_tags": [
+            "dark"
+          ],
+          "chords": [
+            "prog_007",
+            "prog_002",
+            "prog_008",
+            "prog_004",
+            "prog_001",
+            "prog_005",
+            "prog_007",
+            "prog_008"
+          ]
+        },
+        {
+          "part_type": "verse",
+          "part_tags": [
+            "dark",
+            "upbeat",
+            "mellow"
+          ],
+          "chords": [
+            "prog_002",
+            "prog_005",
+            "prog_002",
+            "prog_002",
+            "prog_007",
+            "prog_007",
+            "prog_002"
+          ]
+        },
+        {
+          "part_type": "chorus",
+          "part_tags": [],
+          "chords": [
+            "prog_004",
+            "prog_002",
+            "prog_008",
+            "prog_004"
+          ]
+        },
+        {
+          "part_type": "outro",
+          "part_tags": [
+            "driving"
+          ],
+          "chords": [
+            "prog_002",
+            "prog_001",
+            "prog_008",
+            "prog_004",
+            "prog_003",
+            "prog_008"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "label": "Long epic (tempo=128)",
+    "seed": 9,
+    "fixed_values": {
+      "tempo": 128,
+      "tags": [
+        "long"
+      ]
+    },
+    "song": {
+      "tempo": 128,
+      "tags": [
+        "long"
+      ],
+      "key": "C",
+      "mode": "dorian",
+      "target_duration": 537,
+      "instruments": [
+        "preset_006",
+        "preset_008",
+        "preset_011",
+        "preset_003",
+        "preset_001",
+        "preset_004"
+      ],
+      "structure": "verse-verse-chorus-verse-chorus",
+      "parts": [
+        {
+          "part_type": "verse",
+          "part_tags": [
+            "mellow",
+            "driving"
+          ],
+          "chords": [
+            "prog_003",
+            "prog_001",
+            "prog_006"
+          ]
+        },
+        {
+          "part_type": "verse",
+          "part_tags": [
+            "mellow",
+            "dark",
+            "chill"
+          ],
+          "chords": [
+            "prog_002",
+            "prog_006",
+            "prog_001",
+            "prog_007",
+            "prog_003",
+            "prog_008"
+          ]
+        },
+        {
+          "part_type": "chorus",
+          "part_tags": [
+            "dark",
+            "energetic",
+            "chill"
+          ],
+          "chords": [
+            "prog_003",
+            "prog_004",
+            "prog_001"
+          ]
+        },
+        {
+          "part_type": "verse",
+          "part_tags": [],
+          "chords": [
+            "prog_002",
+            "prog_007",
+            "prog_002"
+          ]
+        },
+        {
+          "part_type": "chorus",
+          "part_tags": [
+            "upbeat",
+            "chill"
+          ],
+          "chords": [
+            "prog_004",
+            "prog_007",
+            "prog_002"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "label": "Short energetic (seed 10)",
+    "seed": 10,
+    "fixed_values": {
+      "tags": [
+        "tempo_very_fast",
+        "energy_high",
+        "short"
+      ]
+    },
+    "song": {
+      "tags": [
+        "tempo_very_fast",
+        "energy_high",
+        "short"
+      ],
+      "tempo": 186,
+      "key": "A",
+      "mode": "major",
+      "target_duration": 62,
+      "instruments": [
+        "preset_004",
+        "preset_008",
+        "preset_005",
+        "preset_007",
+        "preset_009",
+        "preset_003",
+        "preset_011"
+      ],
+      "structure": "verse-chorus-verse-chorus-bridge-chorus",
+      "parts": [
+        {
+          "part_type": "verse",
+          "part_tags": [
+            "dark",
+            "chill",
+            "energetic"
+          ],
+          "chords": [
+            "prog_001",
+            "prog_004",
+            "prog_008",
+            "prog_008",
+            "prog_005",
+            "prog_003"
+          ]
+        },
+        {
+          "part_type": "chorus",
+          "part_tags": [],
+          "chords": [
+            "prog_008",
+            "prog_006",
+            "prog_002",
+            "prog_004",
+            "prog_006",
+            "prog_001"
+          ]
+        },
+        {
+          "part_type": "verse",
+          "part_tags": [
+            "upbeat",
+            "dark",
+            "mellow"
+          ],
+          "chords": [
+            "prog_003",
+            "prog_006",
+            "prog_007",
+            "prog_007",
+            "prog_005",
+            "prog_005",
+            "prog_008",
+            "prog_003"
+          ]
+        },
+        {
+          "part_type": "chorus",
+          "part_tags": [
+            "driving",
+            "chill"
+          ],
+          "chords": [
+            "prog_006",
+            "prog_003",
+            "prog_008",
+            "prog_004",
+            "prog_008",
+            "prog_007",
+            "prog_001"
+          ]
+        },
+        {
+          "part_type": "bridge",
+          "part_tags": [],
+          "chords": [
+            "prog_003",
+            "prog_004",
+            "prog_005"
+          ]
+        },
+        {
+          "part_type": "chorus",
+          "part_tags": [
+            "dark",
+            "upbeat"
+          ],
+          "chords": [
+            "prog_004",
+            "prog_006",
+            "prog_008",
+            "prog_007",
+            "prog_008",
+            "prog_002",
+            "prog_006",
+            "prog_003"
+          ]
+        }
+      ]
+    }
+  }
+]

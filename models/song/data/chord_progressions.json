@@ -1,0 +1,78 @@
+{
+  "description": "Common chord progressions with key/mode associations",
+  "progressions": [
+    {
+      "id": "prog_001",
+      "name": "I-V-vi-IV (Pop)",
+      "chords_numeric": ["I", "V", "vi", "IV"],
+      "example_in_C": ["C", "G", "Am", "F"],
+      "modes": ["major"],
+      "tags": ["pop", "upbeat", "simple", "happy"],
+      "note": "Classic pop progression"
+    },
+    {
+      "id": "prog_002",
+      "name": "ii-V-I (Jazz)",
+      "chords_numeric": ["ii", "V", "I"],
+      "example_in_C": ["Dm7", "G7", "Cmaj7"],
+      "modes": ["major", "dorian"],
+      "tags": ["jazz", "smooth", "complex"],
+      "note": "Standard jazz turnaround"
+    },
+    {
+      "id": "prog_003",
+      "name": "i-VI-III-VII (Minor)",
+      "chords_numeric": ["i", "VI", "III", "VII"],
+      "example_in_Am": ["Am", "F", "C", "G"],
+      "modes": ["minor"],
+      "tags": ["melancholic", "emotional", "simple"],
+      "note": "Common minor progression"
+    },
+    {
+      "id": "prog_004",
+      "name": "I-IV-I-IV (Blues)",
+      "chords_numeric": ["I7", "IV7", "I7", "IV7"],
+      "example_in_A": ["A7", "D7", "A7", "D7"],
+      "modes": ["mixolydian"],
+      "tags": ["blues", "soulful", "simple"],
+      "note": "12-bar blues variant"
+    },
+    {
+      "id": "prog_005",
+      "name": "i-VII-VI-VII (Dark)",
+      "chords_numeric": ["i", "VII", "VI", "VII"],
+      "example_in_Am": ["Am", "G", "F", "G"],
+      "modes": ["minor", "phrygian"],
+      "tags": ["dark", "atmospheric", "ambient"],
+      "note": "Creates dark, atmospheric feel"
+    },
+    {
+      "id": "prog_006",
+      "name": "I-iii-IV-V (Classical)",
+      "chords_numeric": ["I", "iii", "IV", "V"],
+      "example_in_C": ["C", "Em", "F", "G"],
+      "modes": ["major"],
+      "tags": ["classical", "elegant", "traditional"],
+      "note": "Classical-style progression"
+    },
+    {
+      "id": "prog_007",
+      "name": "i-iv-VII-III (Phrygian)",
+      "chords_numeric": ["i", "iv", "VII", "III"],
+      "example_in_Em": ["Em", "Am", "D", "G"],
+      "modes": ["phrygian"],
+      "tags": ["exotic", "atmospheric", "complex"],
+      "note": "Phrygian mode characteristic sound"
+    },
+    {
+      "id": "prog_008",
+      "name": "I-vi-ii-V (Doo-wop)",
+      "chords_numeric": ["I", "vi", "ii", "V"],
+      "example_in_C": ["C", "Am", "Dm", "G"],
+      "modes": ["major"],
+      "tags": ["nostalgic", "simple", "warm"],
+      "note": "Vintage doo-wop progression"
+    }
+  ],
+  "note": "Chord progressions are selected based on key, mode, and tags. In production, this library would be much larger."
+}
