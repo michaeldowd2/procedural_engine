@@ -661,7 +661,7 @@ function loadModel(modelName) {
   document.getElementById('gen-list').innerHTML =
     '<div style="padding:13px 20px;font-size:0.76rem;color:var(--muted)">Loading…</div>';
 
-  const base = `../output/${modelName}`;
+  const base = `output/${modelName}`;
 
   d3.json(`${base}/generations.json`).catch(() => null).then(generations => {
     document.getElementById('loading').classList.add('hidden');
