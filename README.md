@@ -138,7 +138,6 @@ procedural_engine/
 │       ├── schema.json    # Output structure definition
 │       ├── dataset.json   # Data sources, preprocessing, libraries
 │       ├── data/          # Source datasets (CSV/TSV)
-│       └── model_data/    # Generated: learned_rules.json, generations.json
 ├── scripts/               # CLI tools (see table above)
 ├── test_generation.py     # Quick CLI generation test
 └── index.html             # Explorer UI
