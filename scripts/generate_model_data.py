@@ -238,7 +238,15 @@ def mine_rules(config, model_dir):
     for source in config.get("data_sources", []):
         stype = source.get("type", "csv")
         name  = source["name"]
+        
+        # Source-specific overrides or global defaults
+        s_support   = source.get("min_support", min_support)
+        s_conf      = source.get("min_confidence", min_confidence)
+        s_item_freq = source.get("min_item_freq", min_item_freq)
+        s_max_ant   = source.get("max_antecedent_size", max_antecedent_size)
+
         print(f"\n[{name}] ({stype})")
+        print(f"  Params: min_support={s_support}, min_conf={s_conf}, min_item_freq={s_item_freq}, max_ant={s_max_ant}")
 
         if stype == "csv":
             txns = _extract_csv(source, config, model_dir)
@@ -256,12 +264,11 @@ def mine_rules(config, model_dir):
             txns = random.sample(txns, samples_per_source)
             print(f"  Sampled down to {samples_per_source} transactions")
 
-        txns, removed_vocab = _prune_vocabulary(txns, min_item_freq)
+        txns, removed_vocab = _prune_vocabulary(txns, s_item_freq)
         if removed_vocab:
-            print(f"  Pruned {len(removed_vocab)} rare items (< {min_item_freq * 100:.0f}% freq)")
+            print(f"  Pruned {len(removed_vocab)} rare items (< {s_item_freq * 100:.2f}% freq)")
 
-        per_source_max_ant = source.get("max_antecedent_size", max_antecedent_size)
-        source_rules = _mine_source(name, txns, min_support, min_confidence, max_len=per_source_max_ant + 1)
+        source_rules = _mine_source(name, txns, s_support, s_conf, max_len=s_max_ant + 1)
         all_rules.extend(source_rules)
         print(f"  Cumulative total: {len(all_rules)} rules")
 
