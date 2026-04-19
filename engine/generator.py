@@ -26,19 +26,19 @@ class Generator:
         """
         Given a numeric property name and its value, find the matching preprocessing
         bin and return the corresponding label tag string, or None if no mapping exists.
+        Returns (target_property, label).
         """
         d_conf = self.preprocessing.get(prop_name)
         if not d_conf or d_conf.get("type") != "bins":
             return None
         bins = d_conf["bins"]
         labels = d_conf["labels"]
+        target = d_conf.get("target", "tags")
         for i in range(len(bins) - 1):
             if bins[i] <= value < bins[i + 1]:
-                target = d_conf.get("target", "tags")
                 return (target, labels[i])
         # Edge: value == last bin boundary
         if value == bins[-1]:
-            target = d_conf.get("target", "tags")
             return (target, labels[-1])
         return None
 
@@ -60,16 +60,14 @@ class Generator:
                 return (bins[i], bins[i + 1])
         return None
 
-    def _build_dimension_groups(self):
+    def _build_dimension_groups(self, target_prop):
         """
         Return a dict mapping each discretization label to the set of all sibling
-        labels in the same dimension.  Used to enforce mutual exclusion when sampling
-        the tags list — you cannot be tempo_slow AND tempo_fast simultaneously.
-        Only includes dimensions where inject_on_sample is not False.
+        labels in the same dimension for a specific target property.
         """
         groups = {}  # label -> frozenset of all siblings (including self)
         for prop_name, d_conf in self.preprocessing.items():
-            if d_conf.get("type") == "bins" and d_conf.get("target") == "tags":
+            if d_conf.get("type") == "bins" and d_conf.get("target", "tags") == target_prop:
                 if d_conf.get("inject_on_sample", True) is False:
                     continue
                 siblings = frozenset(d_conf["labels"])
@@ -77,20 +75,18 @@ class Generator:
                     groups[label] = siblings
         return groups
 
-    def _build_tag_vocabulary(self):
-        """Build all known tag values from learned rules consequents."""
+    def _build_tag_vocabulary(self, prop_name):
+        """Build all known tag values for a specific property from learned rules consequents."""
         vocab = set()
+        prefix = f"{prop_name}="
         for rule in self.rule_engine.rules:
-            for cons in rule["consequents"]:
-                if cons.startswith("tags="):
-                    vocab.add(cons.split("=", 1)[1])
-        # Always include a minimum fallback set
-        vocab.update(["pop", "rock", "upbeat", "mellow", "energetic", "chill", "dark",
-                       "ambient", "jazz", "electronic", "r&b", "rap"])
-        # Add discretization labels — but skip dimensions that opt out of auto-injection
-        # (they are still valid as explicit user inputs via fixed_values)
+            for item in rule["antecedents"].union(rule["consequents"]):
+                if item.startswith(prefix):
+                    vocab.add(item.split("=", 1)[1])
+        
+        # Add discretization labels for this specific target property
         for d_conf in self.preprocessing.values():
-            if d_conf.get("target") == "tags" and d_conf.get("inject_on_sample", True) is not False:
+            if d_conf.get("target", "tags") == prop_name and d_conf.get("inject_on_sample", True) is not False:
                 vocab.update(d_conf["labels"])
         return list(vocab)
 
@@ -132,13 +128,13 @@ class Generator:
                 if result:
                     target_prop, label = result
                     context_tags.add(f"{target_prop}={label}")
-                    if target_prop == "tags":
-                        if "tags" not in output:
-                            output["tags"] = []
-                        if label not in output["tags"]:
-                            output["tags"].append(label)
-
-        tag_vocab = self._build_tag_vocabulary()
+                    # Only inject into output if the target property exists in schema
+                    # and we want it to be visible in the final JSON.
+                    if self.schema_parser.get_property(target_prop):
+                        if target_prop not in output:
+                            output[target_prop] = []
+                        if isinstance(output[target_prop], list) and label not in output[target_prop]:
+                            output[target_prop].append(label)
 
         # ── Resolve global properties in schema order ─────────────────────────
         for prop in self.schema_parser.get_all_properties():
@@ -171,6 +167,10 @@ class Generator:
                     if result:
                         target_prop, label = result
                         context_tags.add(f"{target_prop}={label}")
+                        # Auto-inject into the target list if it was already generated or is pre-filled
+                        if target_prop in output and isinstance(output[target_prop], list):
+                            if label not in output[target_prop]:
+                                output[target_prop].append(label)
 
             elif prop["type"] == "categorical":
                 rule_probs = self.rule_engine.query_context(context_tags)
@@ -188,13 +188,13 @@ class Generator:
                 min_count = prop.get("min_items", 1)
                 max_count = prop.get("max_items", 5)
 
-                dim_groups = self._build_dimension_groups()
+                dim_groups = self._build_dimension_groups(name)
+                tag_vocab = self._build_tag_vocabulary(name)
 
                 # Build initial pool; pre-exclude siblings of context-pinned labels
-                # (e.g. tempo_moderate already in context → remove tempo_slow/fast)
                 remaining = {t: True for t in tag_vocab}
                 for ctx_tag in context_tags:
-                    if ctx_tag.startswith("tags="):
+                    if ctx_tag.startswith(f"{name}="):
                         val = ctx_tag.split("=", 1)[1]
                         if val in dim_groups:
                             for sibling in dim_groups[val]:
@@ -205,8 +205,6 @@ class Generator:
                 chosen = []
 
                 # ── Truly sequential: re-query rules after each pick ─────────
-                # context_tags grows with each chosen tag, so later picks are
-                # informed by earlier ones (chained associations).
                 for i in range(max_count):
                     if not remaining:
                         break
@@ -217,7 +215,7 @@ class Generator:
                     scores = {}
                     for tag in remaining:
                         score = 0.1
-                        if f"tags={tag}" in context_tags:
+                        if f"{name}={tag}" in context_tags:
                             score += 1.0
                         score += rule_probs.get(f"{name}={tag}", 0.0)
                         scores[tag] = score

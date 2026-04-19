@@ -1,0 +1,23 @@
+# Generated Model Data
+**/learned_rules.json
+**/graph_data.json
+**/generations.json
+*.npy
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.venv/
+env/
+venv/
+bin/
+lib/
+include/
+
+# IDE / System
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

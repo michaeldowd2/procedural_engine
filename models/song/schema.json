@@ -43,11 +43,19 @@
       "description": "Musical mode/scale type"
     },
     {
+      "name": "genre",
+      "type": "tag_list",
+      "min_items": 1,
+      "max_items": 1,
+      "description": "Genre tags",
+      "note": "Each tag is treated as an independent item in association rules"
+    },
+    {
       "name": "tags",
       "type": "tag_list",
       "min_items": 1,
-      "max_items": 12,
-      "description": "Genre and mood tags",
+      "max_items": 3,
+      "description": "Mood and emotion tags",
       "note": "Each tag is treated as an independent item in association rules"
     },
     {
@@ -61,11 +69,10 @@
     },
     {
       "name": "instruments",
-      "type": "item_list",
+      "type": "tag_list",
       "min_items": 1,
       "max_items": 8,
-      "item_library": "instrument_presets",
-      "description": "List of instrument preset IDs to use in the composition"
+      "description": "List of instruments to use in the composition"
     },
     {
       "name": "structure",

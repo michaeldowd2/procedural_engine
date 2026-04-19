@@ -21,7 +21,11 @@ class RuleEngine:
             })
 
     def _load_learned_rules(self):
-        learned_rules_path = os.path.join(self.base_dir, "data", "learned_rules.json")
+        # Prefer model_data/ over data/
+        learned_rules_path = os.path.join(self.base_dir, "model_data", "learned_rules.json")
+        if not os.path.exists(learned_rules_path):
+            learned_rules_path = os.path.join(self.base_dir, "data", "learned_rules.json")
+            
         if os.path.exists(learned_rules_path):
             with open(learned_rules_path, 'r') as f:
                 learned = json.load(f)

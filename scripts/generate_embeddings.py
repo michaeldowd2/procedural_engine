@@ -5,7 +5,8 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.decomposition import PCA
 
 def generate_instrument_embeddings():
-    filepath = "../models/song/data/instrument_presets.json"
+    base_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+    filepath = os.path.join(base_dir, "models", "song", "data", "instrument_presets.json")
     with open(filepath, 'r') as f:
         data = json.load(f)
     
@@ -33,7 +34,8 @@ def generate_instrument_embeddings():
     # Since we're building the engine, we won't strictly enforce dim=100 dynamically.
     
     # Save the embeddings file
-    out_file = "../models/song/data/instrument_embeddings.npy"
+    out_file = os.path.join(base_dir, "models", "song", "data", "instrument_embeddings.npy")
+    os.makedirs(os.path.dirname(out_file), exist_ok=True)
     # To keep it useful, we can save a dictionary rather than just raw numpy array, 
     # but dataset.json implies an `.npy` file. We will save the matrix, and expect 
     # the order to match the presets array, or we save an npz with 'vectors' and 'ids'.
@@ -42,5 +44,4 @@ def generate_instrument_embeddings():
     print(f"Saved to {out_file}")
 
 if __name__ == "__main__":
-    os.makedirs(os.path.dirname("../models/song/data/instrument_embeddings.npy"), exist_ok=True)
     generate_instrument_embeddings()

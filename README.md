@@ -64,19 +64,16 @@ Ensure you have Python 3.8+ installed.
 pip install -r requirements.txt
 ```
 
-### 2. Prepare Data (Optional)
-If you want to rebuild the association rules for the song model:
+### 2. Refresh and Update Model
+Whenever you change the schema, data sources, or preprocessing rules, run the automated refresh script:
 ```bash
-python scripts/generate_model_data.py --model song
+python scripts/refresh_model.py --model song
 ```
+This script updates association rules, instrument embeddings, and visualizer samples in one step.
 
-### 3. Generate Samples
-Generate a batch of samples for the Explorer UI:
-```bash
-python scripts/generate_samples.py --model song --count 10
-```
+For more detailed information on maintenance and tuning, see the [Development Guide](DEVELOPMENT.md).
 
-### 4. Run CLI Test
+### 3. Run CLI Test
 Run the simple test script to see the generator in action:
 ```bash
 python test_generation.py

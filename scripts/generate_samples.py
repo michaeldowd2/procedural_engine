@@ -26,13 +26,13 @@ OUT_FILE = os.path.join(OUT_DIR, "generations.json")
 
 PROMPTS = [
     {"label": "Unconstrained (seed 1)",  "seed": 1,  "fixed_values": {}},
-    {"label": "High-energy rock",        "seed": 2,  "fixed_values": {"tags": ["rock", "energy_high"]}},
-    {"label": "Slow ambient chill",      "seed": 3,  "fixed_values": {"tags": ["ambient", "chill", "tempo_slow"]}},
-    {"label": "Happy pop",               "seed": 4,  "fixed_values": {"tags": ["pop", "mood_happy"]}},
-    {"label": "Jazz minor (seed 5)",     "seed": 5,  "fixed_values": {"tags": ["jazz"], "mode": "dorian"}},
-    {"label": "Dark electronic",         "seed": 6,  "fixed_values": {"tags": ["electronic", "mood_dark", "energy_high"]}},
-    {"label": "Fast upbeat rap",         "seed": 7,  "fixed_values": {"tags": ["rap", "tempo_fast", "energy_high"]}},
-    {"label": "Mellow r&b",              "seed": 8,  "fixed_values": {"tags": ["r&b", "mood_neutral", "energy_low"]}},
+    {"label": "High-energy rock",        "seed": 2,  "fixed_values": {"genre":["rock"],"tags": [    "energy_high"]}},
+    {"label": "Slow ambient chill",      "seed": 3,  "fixed_values": {"genre":["ambient"],"tags": ["chill", "tempo_slow"]}},
+    {"label": "Happy pop",               "seed": 4,  "fixed_values": {"genre":["pop"],"tags": ["mood_happy"]}},
+    {"label": "Jazz minor (seed 5)",     "seed": 5,  "fixed_values": {"genre":["jazz"], "mode": "dorian"}},
+    {"label": "Dark electronic",         "seed": 6,  "fixed_values": {"genre":["electronic"],"tags": ["mood_dark", "energy_high"]}},
+    {"label": "Fast upbeat rap",         "seed": 7,  "fixed_values": {"genre":["rap"],"tags": ["tempo_fast", "energy_high"]}},
+    {"label": "Mellow r&b",              "seed": 8,  "fixed_values": {"genre":["r&b"],"tags": ["mood_neutral", "energy_low"]}},
     {"label": "Long epic (tempo=128)",   "seed": 9,  "fixed_values": {"tempo": 128, "tags": ["long"]}},
     {"label": "Short energetic (seed 10)","seed": 10, "fixed_values": {"tags": ["tempo_very_fast", "energy_high", "short"]}},
 ]

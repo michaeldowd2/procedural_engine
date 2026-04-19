@@ -10,7 +10,7 @@
       "mappings": [
         {
           "column": "playlist_genre",
-          "target": "tags"
+          "target": "genre"
         },
         {
           "column": "key",
@@ -26,7 +26,7 @@
       "group_by": "TRACK_ID",
       "extract": {
         "prefixes": {
-          "genre---": "tags",
+          "genre---": "genre",
           "mood/theme---": "tags",
           "instrument---": "instruments"
         }
@@ -38,6 +38,8 @@
       "type": "time_series_dir",
       "aggregate": "max",
       "max_antecedent_size": 3,
+      "min_support": 0.05,
+      "min_item_freq": 0.005,
       "extract": {
         "prefixes": {
           "Emotion-": "tags",
@@ -57,7 +59,7 @@
       "mappings": [
         {
           "column": "genre",
-          "target": "tags"
+          "target": "genre"
         },
         {
           "column": "mood",
@@ -199,12 +201,11 @@
     }
   },
   "rule_mining_params": {
-    "min_support": 0.05,
+    "min_support": 0.01,
     "min_confidence": 0.3,
-    "algorithm": "fp-growth",
     "max_antecedent_size": 5,
     "samples_per_source": 10000,
-    "min_item_freq": 0.005
+    "min_item_freq": 0.001
   },
   "generation_params": {
     "tag_confidence_threshold": 0.2

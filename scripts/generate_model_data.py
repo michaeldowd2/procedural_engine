@@ -299,9 +299,9 @@ def _score(rule):
 def export_graph(
     rules,
     out_path,
-    min_lift        = 1.2,
-    max_rules_total = 1500,
-    max_per_source  = 500,
+    min_lift        = 1.1,
+    max_rules_total = 5000,
+    max_per_source  = 2000,
     synonym_groups  = None,
 ):
     total_loaded = len(rules)
@@ -425,7 +425,7 @@ def export_graph(
 # Per-model runner
 # ═══════════════════════════════════════════════════════════════════
 
-def run_model(model_dir):
+def run_model(model_dir, max_rules=5000, max_per_source=2000):
     dataset_path = os.path.join(model_dir, "dataset.json")
     if not os.path.exists(dataset_path):
         print(f"[SKIP] No dataset.json in {model_dir}")
@@ -444,7 +444,13 @@ def run_model(model_dir):
         json.dump(rules, f, indent=2)
 
     graph_path = os.path.join(model_data_dir, "graph_data.json")
-    export_graph(rules, graph_path, synonym_groups=config.get("tag_synonyms", []))
+    export_graph(
+        rules, 
+        graph_path, 
+        max_rules_total=max_rules,
+        max_per_source=max_per_source,
+        synonym_groups=config.get("tag_synonyms", [])
+    )
 
 
 # ═══════════════════════════════════════════════════════════════════
@@ -454,6 +460,8 @@ def run_model(model_dir):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Mine rules and export graph for model(s).")
     parser.add_argument("--model", help="Model name to process (default: all models in models/)")
+    parser.add_argument("--max-rules", type=int, default=5000)
+    parser.add_argument("--max-per-source", type=int, default=2000)
     args = parser.parse_args()
 
     base_dir    = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
@@ -475,7 +483,7 @@ if __name__ == "__main__":
             print(f"\n{'='*60}")
             print(f"Model: {model_name}")
             print(f"{'='*60}")
-            run_model(model_dir)
+            run_model(model_dir, max_rules=args.max_rules, max_per_source=args.max_per_source)
 
     # Regenerate manifest
     all_models = sorted(
