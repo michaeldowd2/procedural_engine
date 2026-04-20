@@ -1,136 +1,156 @@
 {
   "name": "song_composer",
-  "description": "Schema for procedural music composition",
+  "description": "Schema for procedural music composition with nested pattern structures",
   "properties": [
     {
       "name": "tempo",
       "type": "numeric",
-      "range": [
-        60,
-        200
-      ],
+      "range": [60, 200],
       "description": "Beats per minute"
     },
     {
       "name": "key",
       "type": "categorical",
-      "values": [
-        "C",
-        "C#",
-        "D",
-        "D#",
-        "E",
-        "F",
-        "F#",
-        "G",
-        "G#",
-        "A",
-        "A#",
-        "B"
-      ],
+      "values": ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"],
       "description": "Musical key"
     },
     {
       "name": "mode",
       "type": "categorical",
-      "values": [
-        "major",
-        "minor",
-        "dorian",
-        "mixolydian",
-        "phrygian"
-      ],
+      "values": ["major", "minor", "dorian", "mixolydian", "phrygian"],
       "description": "Musical mode/scale type"
     },
     {
-      "name": "genre",
-      "type": "tag_list",
-      "min_items": 1,
-      "max_items": 1,
-      "description": "Genre tags",
-      "note": "Each tag is treated as an independent item in association rules"
+      "name": "target_duration",
+      "type": "numeric",
+      "range": [60, 600],
+      "description": "Target song duration in seconds"
     },
     {
       "name": "tags",
       "type": "tag_list",
       "min_items": 1,
-      "max_items": 3,
-      "description": "Mood and emotion tags",
-      "note": "Each tag is treated as an independent item in association rules"
+      "max_items": 5,
+      "description": "Song-level mood, energy, and style tags",
+      "note": "Global tags that influence all parts"
     },
     {
-      "name": "target_duration",
-      "type": "numeric",
-      "range": [
-        60,
-        600
-      ],
-      "description": "Target song duration in seconds"
-    },
-    {
-      "name": "instruments",
+      "name": "instrument_list",
       "type": "tag_list",
-      "min_items": 1,
+      "min_items": 3,
       "max_items": 8,
-      "description": "List of instruments to use in the composition"
+      "description": "List of instruments used throughout the song",
+      "note": "Common instruments: kick, snare, closed_hat, open_hat, bass, piano, synth, pad, lead, etc."
     },
     {
-      "name": "structure",
+      "name": "part_structure",
       "type": "categorical",
       "values": [
         "verse-chorus-verse-chorus-bridge-chorus",
         "verse-verse-chorus-verse-chorus",
         "intro-verse-chorus-verse-chorus-outro",
         "verse-chorus-verse-chorus-verse-chorus",
-        "intro-verse-bridge-chorus-outro"
+        "intro-verse-bridge-chorus-outro",
+        "intro-verse-verse-chorus-bridge-chorus-outro"
       ],
-      "description": "High-level song structure"
+      "description": "High-level song structure defining part sequence"
     },
     {
       "name": "parts",
-      "type": "part_list",
-      "description": "Individual song parts (verse, chorus, etc.) with properties",
+      "type": "part_dict",
+      "description": "Dictionary of song parts keyed by name (e.g., 'verse_0', 'chorus_0')",
       "part_schema": {
         "properties": [
           {
             "name": "part_type",
             "type": "categorical",
-            "values": [
-              "intro",
-              "verse",
-              "chorus",
-              "bridge",
-              "outro"
-            ],
-            "context": [
-              "global.tags",
-              "global.structure"
-            ]
+            "values": ["intro", "verse", "chorus", "bridge", "outro"],
+            "context": {
+              "global.tags": 1.0,
+              "global.part_structure": 1.0
+            },
+            "description": "Type of musical section"
           },
           {
             "name": "part_tags",
-            "type": "tag_list",
-            "min_items": 0,
+            "type": "part_tag_list",
+            "min_items": 1,
             "max_items": 3,
-            "context": [
-              "global.tags",
-              "part_type"
-            ],
-            "description": "Mood/energy tags specific to this part"
+            "context": {
+              "global.tags": 1.0,
+              "part_type": 1.0,
+              "parts[-1].part_tags": -0.5,
+              "parts[-2].part_tags": -0.3
+            },
+            "description": "Part-specific energy/density tags (e.g., dense, sparse, energetic, mellow, upbeat, chill)",
+            "note": "Negative context weights create anti-correlation with previous parts for dynamic contrast"
+          },
+          {
+            "name": "duration_bars",
+            "type": "numeric",
+            "range": [4, 32],
+            "context": {
+              "part_type": 1.0,
+              "global.tags": 0.5
+            },
+            "description": "Duration of this part in bars (measures)",
+            "note": "Must be satisfied by total length of chord and instrument patterns"
           },
           {
             "name": "chords",
-            "type": "item_list",
-            "min_items": 2,
-            "max_items": 8,
-            "item_library": "chord_progressions",
-            "context": [
-              "global.key",
-              "global.mode",
-              "part_type",
-              "part_tags"
-            ],
-            "description": "Chord progression for this part"
+            "type": "pattern_structure",
+            "description": "Chord progression for this part using pattern/repetition structure",
+            "context": {
+              "global.key": 1.0,
+              "global.mode": 1.0,
+              "part_type": 1.0,
+              "part_tags": 1.0,
+              "duration_bars": 1.0
+            },
+            "fields": {
+              "pattern_structure": {
+                "type": "list",
+                "description": "Sequence of pattern identifiers (e.g., ['A', 'B'])"
+              },
+              "repetitions": {
+                "type": "numeric",
+                "range": [1, 4],
+                "description": "Number of times the pattern_structure repeats"
+              },
+              "patterns": {
+                "type": "pattern_dict",
+                "description": "Mapping of pattern IDs to chord sequences (e.g., {A: ['I', 'vi', 'IV', 'V'], B: ['I', 'V']})",
+                "note": "Each pattern represents bars worth of chords. Total: sum(len(patterns[p]) for p in pattern_structure) × repetitions = duration_bars"
+              }
+            }
+          },
+          {
+            "name": "instruments",
+            "type": "instrument_dict",
+            "description": "Per-instrument patterns for this part",
+            "context": {
+              "global.instrument_list": 1.0,
+              "part_type": 1.0,
+              "part_tags": 1.0,
+              "duration_bars": 1.0
+            },
+            "instrument_schema": {
+              "pattern_structure": {
+                "type": "list",
+                "description": "Sequence of pattern identifiers (e.g., ['A', 'B', 'A'])"
+              },
+              "repetitions": {
+                "type": "numeric",
+                "range": [1, 8],
+                "description": "Number of times the pattern_structure repeats"
+              },
+              "patterns": {
+                "type": "pattern_dict",
+                "description": "Mapping of pattern IDs to rhythm patterns",
+                "note": "Pattern encoding: '1' = event on beat 1 (whole note), '11' = events on beats 1&3 (half notes), '1010' = quarter notes, '10101010' = eighth notes, '1-10' = half note, quarter rest, quarter note. Each pattern = 1 bar. Total: len(pattern_structure) × repetitions = duration_bars"
+              }
+            },
+            "note": "Dictionary keyed by instrument name. Each instrument must have patterns totaling duration_bars."
           }
         ]
       }
@@ -138,9 +158,11 @@
   ],
   "notes": [
     "Properties are generated in the order listed",
-    "Context references allow later properties to depend on earlier ones",
+    "Context references support correlation multipliers: positive values = positive correlation, negative = anti-correlation",
     "global.* refers to top-level properties",
-    "Item libraries (instruments, patterns, chords) can contain 100s-1000s of items",
-    "Embeddings are used for items not seen in training datasets"
+    "parts[-1].* refers to the previous part, parts[-2].* refers to two parts ago",
+    "Pattern structures enforce duration constraints: pattern length × repetitions must equal duration_bars",
+    "Pattern encoding uses string notation where '1' = note, '0' = rest, '-' = hold/sustain",
+    "Part tags use anti-correlation to create dynamic contrast (sparse → dense, mellow → energetic)"
   ]
 }
