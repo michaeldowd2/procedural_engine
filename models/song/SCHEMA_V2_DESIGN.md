@@ -250,6 +250,66 @@ def generate_pattern_structure(duration_bars, context):
 ✅ **Readable:** Pattern encoding is human-friendly
 ✅ **Scalable:** Pattern system works for simple or complex music
 
+## Calculated Fields
+
+### The Problem
+To ensure patterns match `duration_bars`, repetitions must be calculated rather than sampled.
+
+### Formula (Instruments)
+```
+repetitions = duration_bars / len(pattern_structure)
+```
+
+**Example:**
+- `duration_bars = 16`
+- `pattern_structure = ["A", "B"]` (length = 2)
+- `repetitions = 16 / 2 = 8` ✓
+
+### Formula (Chords)
+Chords are more complex because each pattern can contain multiple bars:
+```
+repetitions = duration_bars / sum(len(patterns[p]) for p in pattern_structure)
+```
+
+**Example:**
+- `duration_bars = 16`
+- `pattern_structure = ["A", "B"]`
+- `patterns.A = ["I", "vi", "IV", "V"]` (4 chords = 4 bars)
+- `patterns.B = ["I", "V", "IV", "V"]` (4 chords = 4 bars)
+- `repetitions = 16 / (4 + 4) = 2` ✓
+
+### Implementation
+Schema specifies:
+```json
+{
+  "type": "calculated",
+  "formula": "duration_bars / len(pattern_structure)"
+}
+```
+
+Engine behavior:
+1. Generate `duration_bars` first
+2. Sample `pattern_structure` (context-aware)
+3. Calculate `repetitions` using formula
+4. If result is not integer, either:
+   - Round and accept partial bar at end
+   - Resample pattern_structure until divisible
+   - Add constraint to pattern_structure sampling
+
+### Edge Cases
+
+**Non-divisible duration:**
+- `duration_bars = 16`, `pattern_structure = ["A", "B", "C"]` (length 3)
+- `repetitions = 16 / 3 = 5.33...`
+
+**Options:**
+1. **Round down:** `repetitions = 5`, total = 15 bars (1 bar short)
+2. **Round up:** `repetitions = 6`, total = 18 bars (2 bars over)
+3. **Resample:** Try different pattern_structure lengths that divide evenly
+4. **Constraint:** Only allow pattern_structure lengths that divide `duration_bars`
+
+**Recommendation:** Option 3 (resample) during generation with fallback to Option 1 (round down) if no divisible structure found after N attempts.
+
 ## Open Questions
 
 1. **Pattern normalization:** Should `"1"` and `"1---"` be treated as equivalent?
@@ -257,6 +317,7 @@ def generate_pattern_structure(duration_bars, context):
 3. **Pattern resolution:** Should patterns resolve to MIDI notes, or stay abstract?
 4. **Swing/groove:** How to encode non-quantized rhythms?
 5. **Velocity/dynamics:** Include in pattern encoding (e.g., `1v127-0v64`)?
+6. **Non-divisible durations:** How strict should the constraint be? Allow partial bars?
 
 ## Next Steps
 

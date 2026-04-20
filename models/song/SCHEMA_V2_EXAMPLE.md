@@ -54,29 +54,33 @@ String-based rhythm notation where each pattern = 1 bar:
           "A": ["i", "VI", "III", "VII"]
         }
       },
+      "_chord_calc": "4 chords in A = 4 bars, repetitions = 8/4 = 2 ✓",
 
       "instruments": {
         "kick": {
           "pattern_structure": ["A", "B"],
-          "repetitions": 2,
+          "repetitions": 4,
           "patterns": {
             "A": "1000",
             "B": "1010"
-          }
+          },
+          "_calc": "2 patterns, repetitions = 8/2 = 4 ✓"
         },
         "closed_hat": {
           "pattern_structure": ["A"],
-          "repetitions": 4,
+          "repetitions": 8,
           "patterns": {
             "A": "10101010"
-          }
+          },
+          "_calc": "1 pattern, repetitions = 8/1 = 8 ✓"
         },
         "pad": {
           "pattern_structure": ["A"],
-          "repetitions": 2,
+          "repetitions": 8,
           "patterns": {
             "A": "1---"
-          }
+          },
+          "_calc": "1 pattern, repetitions = 8/1 = 8 ✓"
         }
       }
     },
@@ -94,53 +98,60 @@ String-based rhythm notation where each pattern = 1 bar:
           "B": ["i", "iv", "VI", "VII"]
         }
       },
+      "_chord_calc": "A=4 bars, B=4 bars, repetitions = 16/(4+4) = 2 ✓",
 
       "instruments": {
         "kick": {
           "pattern_structure": ["A"],
-          "repetitions": 8,
+          "repetitions": 16,
           "patterns": {
             "A": "1010"
-          }
+          },
+          "_calc": "1 pattern, repetitions = 16/1 = 16 ✓"
         },
         "snare": {
           "pattern_structure": ["A"],
-          "repetitions": 8,
+          "repetitions": 16,
           "patterns": {
             "A": "0010"
-          }
+          },
+          "_calc": "1 pattern, repetitions = 16/1 = 16 ✓"
         },
         "closed_hat": {
           "pattern_structure": ["A", "B"],
-          "repetitions": 4,
+          "repetitions": 8,
           "patterns": {
             "A": "10101010",
             "B": "1010101-"
-          }
+          },
+          "_calc": "2 patterns, repetitions = 16/2 = 8 ✓"
         },
         "bass": {
           "pattern_structure": ["A", "B"],
-          "repetitions": 2,
+          "repetitions": 8,
           "patterns": {
             "A": "1-1-1010",
             "B": "10101-10"
-          }
+          },
+          "_calc": "2 patterns, repetitions = 16/2 = 8 ✓"
         },
         "synth_lead": {
           "pattern_structure": ["A", "B", "C"],
-          "repetitions": 2,
+          "repetitions": 5,
           "patterns": {
             "A": "0-101010",
             "B": "10-10-10",
             "C": "1-1-10-1"
-          }
+          },
+          "_calc": "3 patterns, repetitions = 16/3 = 5.33 (rounds to 5, leaves 1 bar partial) ⚠️"
         },
         "pad": {
           "pattern_structure": ["A"],
-          "repetitions": 4,
+          "repetitions": 16,
           "patterns": {
             "A": "1---"
-          }
+          },
+          "_calc": "1 pattern, repetitions = 16/1 = 16 ✓"
         }
       }
     },

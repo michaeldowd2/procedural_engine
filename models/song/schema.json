@@ -113,14 +113,15 @@
                 "description": "Sequence of pattern identifiers (e.g., ['A', 'B'])"
               },
               "repetitions": {
-                "type": "numeric",
-                "range": [1, 4],
-                "description": "Number of times the pattern_structure repeats"
+                "type": "calculated",
+                "formula": "duration_bars / sum(len(patterns[p]) for p in pattern_structure)",
+                "description": "Auto-calculated: ensures total chord bars match duration_bars",
+                "note": "For chords, patterns can have multiple bars (multiple chords). Formula accounts for this."
               },
               "patterns": {
                 "type": "pattern_dict",
                 "description": "Mapping of pattern IDs to chord sequences (e.g., {A: ['I', 'vi', 'IV', 'V'], B: ['I', 'V']})",
-                "note": "Each pattern represents bars worth of chords. Total: sum(len(patterns[p]) for p in pattern_structure) × repetitions = duration_bars"
+                "note": "Each chord in the list = 1 bar. Pattern A with 4 chords = 4 bars."
               }
             }
           },
@@ -140,14 +141,15 @@
                 "description": "Sequence of pattern identifiers (e.g., ['A', 'B', 'A'])"
               },
               "repetitions": {
-                "type": "numeric",
-                "range": [1, 8],
-                "description": "Number of times the pattern_structure repeats"
+                "type": "calculated",
+                "formula": "duration_bars / len(pattern_structure)",
+                "description": "Auto-calculated: duration_bars divided by length of pattern_structure",
+                "note": "This ensures len(pattern_structure) × repetitions = duration_bars"
               },
               "patterns": {
                 "type": "pattern_dict",
                 "description": "Mapping of pattern IDs to rhythm patterns",
-                "note": "Pattern encoding: '1' = event on beat 1 (whole note), '11' = events on beats 1&3 (half notes), '1010' = quarter notes, '10101010' = eighth notes, '1-10' = half note, quarter rest, quarter note. Each pattern = 1 bar. Total: len(pattern_structure) × repetitions = duration_bars"
+                "note": "Pattern encoding: '1' = event on beat 1 (whole note), '11' = events on beats 1&3 (half notes), '1010' = quarter notes, '10101010' = eighth notes, '1-10' = half note, quarter rest, quarter note. Each pattern = 1 bar."
               }
             },
             "note": "Dictionary keyed by instrument name. Each instrument must have patterns totaling duration_bars."
