@@ -44,7 +44,7 @@ class Generator:
             return None
         bins = d_conf["bins"]
         labels = d_conf["labels"]
-        target = d_conf.get("target", "tags")
+        target = d_conf.get("target")
         for i in range(len(bins) - 1):
             if bins[i] <= value < bins[i + 1]:
                 return (target, labels[i])
@@ -64,7 +64,9 @@ class Generator:
             return None
         bins = d_conf["bins"]
         labels = d_conf["labels"]
-        target = d_conf.get("target", "tags")
+        target = d_conf.get("target")
+        if not target:
+            return None  # Skip if no target property specified
         for i, label in enumerate(labels):
             tag_str = f"{target}={label}"
             if tag_str in context_tags:
@@ -78,7 +80,7 @@ class Generator:
         """
         groups = {}  # label -> frozenset of all siblings (including self)
         for prop_name, d_conf in self.preprocessing.items():
-            if d_conf.get("type") == "bins" and d_conf.get("target", "tags") == target_prop:
+            if d_conf.get("type") == "bins" and d_conf.get("target") == target_prop:
                 if d_conf.get("inject_on_sample", True) is False:
                     continue
                 siblings = frozenset(d_conf["labels"])
@@ -86,19 +88,19 @@ class Generator:
                     groups[label] = siblings
         return groups
 
-    def _build_tag_vocabulary(self, prop_name):
-        """Build all known tag values for a specific property from learned rules consequents."""
+    def _build_item_vocabulary(self, prop_name):
+        """Build all known item values for a specific property from learned rules consequents."""
         vocab = set()
         prefix = f"{prop_name}="
         for rule in self.rule_engine.rules:
             for item in rule["antecedents"].union(rule["consequents"]):
                 if item.startswith(prefix):
                     vocab.add(item.split("=", 1)[1])
-        
+
         # Add discretization labels for this specific target property
         for d_conf in self.preprocessing.values():
             if (d_conf.get("type") == "bins"
-                    and d_conf.get("target", "tags") == prop_name
+                    and d_conf.get("target") == prop_name
                     and d_conf.get("inject_on_sample", True) is not False):
                 vocab.update(d_conf["labels"])
         return sorted(vocab)
@@ -211,15 +213,15 @@ class Generator:
                 output[name] = chosen
                 context_tags.add(f"{name}={chosen}")
 
-            elif prop["type"] == "tag_list":
+            elif prop["type"] == "item_list":
                 min_count = prop.get("min_items", 1)
                 max_count = prop.get("max_items", 5)
 
                 dim_groups = self._build_dimension_groups(name)
-                tag_vocab = self._build_tag_vocabulary(name)
+                item_vocab = self._build_item_vocabulary(name)
 
                 # Build initial pool; pre-exclude siblings of context-pinned labels
-                remaining = {t: True for t in tag_vocab}
+                remaining = {t: True for t in item_vocab}
                 for ctx_tag in context_tags:
                     if ctx_tag.startswith(f"{name}="):
                         val = ctx_tag.split("=", 1)[1]
@@ -298,7 +300,7 @@ class Generator:
                         if s_name == "part_type":
                             continue
 
-                        if sub_prop["type"] == "tag_list":
+                        if sub_prop["type"] == "item_list":
                             rule_probs = self.rule_engine.query_context(local_context)
                             sub_opts = {t: 0.1 for t in ["energetic", "driving", "mellow", "upbeat", "dark", "chill"]}
                             for r_cons, conf in rule_probs.items():

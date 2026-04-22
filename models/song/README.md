@@ -47,11 +47,11 @@ This mines rules inline and writes `model_data/generations.json` for the Explore
 
 ```
 {
-  tempo          numeric  60–200 BPM
+  tempo          numeric      60–200 BPM
   key            categorical  C, C#, D, ... B
   mode           categorical  major, minor, dorian, ...
-  genre          tag_list
-  tags           tag_list     mood, energy, tempo, style tags
+  genre          item_list    genre classification
+  tags           item_list    mood, energy, style descriptors
   target_duration numeric     seconds
   instruments    item_list    from instrument_presets library
   structure      categorical  verse-chorus-... patterns

@@ -102,13 +102,14 @@ assert total_bars == duration_bars
 
 ## Schema Type Extensions
 
-To support v2, the following new types are introduced:
+To support v2, the following types are used:
 
-### `part_tag_list`
-Like `tag_list` but:
-- Treated as distinct namespace from global tags
-- Supports anti-correlation in context
-- Used for part-level energy/density descriptors
+### `item_list`
+Multi-valued categorical property where each value is an independent item:
+- Each item treated independently in association rules
+- Can be used for tags, instruments, genres, moods, etc.
+- Supports anti-correlation in context (via negative weights)
+- Property name provides semantic meaning, not the type
 
 ### `part_dict`
 Dictionary of parts keyed by name (`verse_0`, `chorus_0`, etc.)

@@ -28,19 +28,19 @@
     },
     {
       "name": "tags",
-      "type": "tag_list",
+      "type": "item_list",
       "min_items": 1,
       "max_items": 5,
       "description": "Song-level mood, energy, and style tags",
-      "note": "Global tags that influence all parts"
+      "note": "Each item is treated independently in association rules"
     },
     {
       "name": "instrument_list",
-      "type": "tag_list",
+      "type": "item_list",
       "min_items": 3,
       "max_items": 8,
       "description": "List of instruments used throughout the song",
-      "note": "Common instruments: kick, snare, closed_hat, open_hat, bass, piano, synth, pad, lead, etc."
+      "note": "Each instrument is an independent item in association rules"
     },
     {
       "name": "part_structure",
@@ -73,7 +73,7 @@
           },
           {
             "name": "part_tags",
-            "type": "part_tag_list",
+            "type": "item_list",
             "min_items": 1,
             "max_items": 3,
             "context": {
