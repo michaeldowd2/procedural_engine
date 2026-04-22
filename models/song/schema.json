@@ -28,38 +28,36 @@
     },
     {
       "name": "tags",
-      "type": "item_list",
+      "type": "string_list",
       "min_items": 1,
       "max_items": 5,
       "description": "Song-level mood, energy, and style tags",
-      "note": "Each item is treated independently in association rules"
+      "note": "Each string is treated as an independent item in association rules"
     },
     {
       "name": "instrument_list",
-      "type": "item_list",
+      "type": "string_list",
       "min_items": 3,
       "max_items": 8,
       "description": "List of instruments used throughout the song",
-      "note": "Each instrument is an independent item in association rules"
+      "note": "Each instrument name is an independent item in association rules"
     },
     {
       "name": "part_structure",
-      "type": "categorical",
-      "values": [
-        "verse-chorus-verse-chorus-bridge-chorus",
-        "verse-verse-chorus-verse-chorus",
-        "intro-verse-chorus-verse-chorus-outro",
-        "verse-chorus-verse-chorus-verse-chorus",
-        "intro-verse-bridge-chorus-outro",
-        "intro-verse-verse-chorus-bridge-chorus-outro"
-      ],
-      "description": "High-level song structure defining part sequence"
+      "type": "string_list",
+      "min_items": 3,
+      "max_items": 20,
+      "values": ["intro", "verse", "chorus", "bridge", "outro"],
+      "description": "Sequence of part types defining song structure",
+      "note": "Example: ['intro', 'verse', 'chorus', 'verse', 'chorus', 'bridge', 'chorus']"
     },
     {
       "name": "parts",
-      "type": "part_dict",
-      "description": "Dictionary of song parts keyed by name (e.g., 'verse_0', 'chorus_0')",
-      "part_schema": {
+      "type": "object_dict",
+      "keys_from": "part_structure",
+      "key_naming": "{value}_{index}",
+      "description": "Dictionary of song parts keyed by part_structure items (e.g., 'verse_0', 'chorus_0')",
+      "schema": {
         "properties": [
           {
             "name": "part_type",
@@ -73,7 +71,7 @@
           },
           {
             "name": "part_tags",
-            "type": "item_list",
+            "type": "string_list",
             "min_items": 1,
             "max_items": 3,
             "context": {
@@ -82,7 +80,7 @@
               "parts[-1].part_tags": -0.5,
               "parts[-2].part_tags": -0.3
             },
-            "description": "Part-specific energy/density tags (e.g., dense, sparse, energetic, mellow, upbeat, chill)",
+            "description": "Part-specific energy/density descriptors (e.g., dense, sparse, energetic, mellow, upbeat, chill)",
             "note": "Negative context weights create anti-correlation with previous parts for dynamic contrast"
           },
           {
@@ -160,11 +158,13 @@
   ],
   "notes": [
     "Properties are generated in the order listed",
-    "Context references support correlation multipliers: positive values = positive correlation, negative = anti-correlation",
-    "global.* refers to top-level properties",
-    "parts[-1].* refers to the previous part, parts[-2].* refers to two parts ago",
-    "Pattern structures enforce duration constraints: pattern length × repetitions must equal duration_bars",
-    "Pattern encoding uses string notation where '1' = note, '0' = rest, '-' = hold/sustain",
-    "Part tags use anti-correlation to create dynamic contrast (sparse → dense, mellow → energetic)"
+    "Type system is domain-agnostic: string_list, object_dict, etc. describe structure, not semantics",
+    "part_structure is a string_list that generates: ['intro', 'verse', 'chorus', 'verse', 'chorus']",
+    "parts is an object_dict with keys_from='part_structure', creating keys like 'verse_0', 'chorus_0', 'verse_1'",
+    "Context references support correlation multipliers: positive = correlation, negative = anti-correlation",
+    "global.* refers to top-level properties, parts[-1].* refers to previous part",
+    "Pattern structures enforce duration constraints: pattern length × repetitions = duration_bars",
+    "Pattern encoding uses string notation: '1' = note, '0' = rest, '-' = hold/sustain",
+    "Calculated fields auto-compute values (e.g., repetitions = duration_bars / len(pattern_structure))"
   ]
 }

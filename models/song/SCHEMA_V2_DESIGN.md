@@ -104,17 +104,22 @@ assert total_bars == duration_bars
 
 To support v2, the following types are used:
 
-### `item_list`
-Multi-valued categorical property where each value is an independent item:
-- Each item treated independently in association rules
-- Can be used for tags, instruments, genres, moods, etc.
+### `string_list`
+List of strings where each value is treated independently:
+- Each string is an independent item in association rules
+- Used for multi-valued categorical properties (tags, instruments, part sequences, etc.)
 - Supports anti-correlation in context (via negative weights)
+- Can have min/max item constraints
 - Property name provides semantic meaning, not the type
 
-### `part_dict`
-Dictionary of parts keyed by name (`verse_0`, `chorus_0`, etc.)
-- Engine iterates through `part_structure` to determine part names
-- Each part generated using nested `part_schema`
+### `object_dict`
+Dictionary of objects generated from a related list property:
+- `keys_from`: specifies which property provides the keys
+- `key_naming`: template for generating key names (e.g., `"{value}_{index}"`)
+- `schema`: defines structure of each object in the dictionary
+- Example: `parts` dict generated from `part_structure` list
+  - `part_structure`: `["verse", "chorus", "verse"]`
+  - `parts` keys: `["verse_0", "chorus_0", "verse_1"]`
 
 ### `pattern_structure` (composite type)
 Contains three sub-fields:

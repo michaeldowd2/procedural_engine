@@ -213,7 +213,7 @@ class Generator:
                 output[name] = chosen
                 context_tags.add(f"{name}={chosen}")
 
-            elif prop["type"] == "item_list":
+            elif prop["type"] == "string_list":
                 min_count = prop.get("min_items", 1)
                 max_count = prop.get("max_items", 5)
 
@@ -271,7 +271,7 @@ class Generator:
                 output[name] = chosen
                 # context_tags updated inside loop; no further update needed
 
-            elif prop["type"] == "item_list":
+            elif prop["type"] == "string_list":
                 count = random.randint(prop.get("min_items", 1), prop.get("max_items", 4))
                 lib = prop.get("item_library")
                 lib_items = self.embeddings_manager.get_library_items(lib)
@@ -300,7 +300,7 @@ class Generator:
                         if s_name == "part_type":
                             continue
 
-                        if sub_prop["type"] == "item_list":
+                        if sub_prop["type"] == "string_list":
                             rule_probs = self.rule_engine.query_context(local_context)
                             sub_opts = {t: 0.1 for t in ["energetic", "driving", "mellow", "upbeat", "dark", "chill"]}
                             for r_cons, conf in rule_probs.items():
@@ -318,7 +318,7 @@ class Generator:
                             for t in picked:
                                 local_context.add(f"{s_name}={t}")
 
-                        elif sub_prop["type"] == "item_list":
+                        elif sub_prop["type"] == "string_list":
                             lib = sub_prop.get("item_library")
                             items = self.embeddings_manager.get_library_items(lib)
                             if items:
