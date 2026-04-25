@@ -88,10 +88,16 @@ class Generator:
                     groups[label] = siblings
         return groups
 
-    def _build_item_vocabulary(self, prop_name):
-        """Build all known item values for a specific property from learned rules consequents."""
+    def _build_item_vocabulary(self, prop_name, prop_def=None):
+        """Build all known item values for a specific property from learned rules consequents and schema."""
         vocab = set()
         prefix = f"{prop_name}="
+
+        # Add schema-defined values first if available
+        if prop_def and "values" in prop_def:
+            vocab.update(prop_def["values"])
+
+        # Add items from learned rules
         for rule in self.rule_engine.rules:
             for item in rule["antecedents"].union(rule["consequents"]):
                 if item.startswith(prefix):
@@ -218,7 +224,7 @@ class Generator:
                 max_count = prop.get("max_items", 5)
 
                 dim_groups = self._build_dimension_groups(name)
-                item_vocab = self._build_item_vocabulary(name)
+                item_vocab = self._build_item_vocabulary(name, prop)
 
                 # Build initial pool; pre-exclude siblings of context-pinned labels
                 remaining = {t: True for t in item_vocab}

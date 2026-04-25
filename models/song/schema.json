@@ -39,6 +39,7 @@
       "type": "string_list",
       "min_items": 3,
       "max_items": 8,
+      "values": ["kick", "snare", "closed_hat", "open_hat", "bass", "piano", "synth", "pad", "lead", "guitar", "strings", "brass", "vocals"],
       "description": "List of instruments used throughout the song",
       "note": "Each instrument name is an independent item in association rules"
     },
