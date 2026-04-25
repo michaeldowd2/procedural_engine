@@ -290,50 +290,90 @@ class Generator:
                 for c in chosen:
                     context_tags.add(f"{name}={c}")
 
-            elif prop["type"] == "part_list":
-                struct = output.get("structure", "")
-                parts = [p for p in struct.split("-") if p]
-                output[name] = []
+            elif prop["type"] == "object_dict":
+                # Generic dictionary of objects, keys generated from another property
+                keys_from = prop.get("keys_from")
+                key_naming = prop.get("key_naming", "{value}_{index}")
+                sub_schema_def = prop.get("schema", {})
+                sub_properties = sub_schema_def.get("properties", [])
 
-                for p in parts:
-                    part_dict = {"part_type": p}
-                    sub_schema = prop.get("part_schema", {}).get("properties", [])
+                if not keys_from or keys_from not in output:
+                    output[name] = {}
+                    continue
+
+                source_list = output[keys_from]
+                if not isinstance(source_list, list):
+                    output[name] = {}
+                    continue
+
+                # Track value counts for index naming
+                value_counts = {}
+                result_dict = {}
+
+                for item_value in source_list:
+                    # Generate key name using template
+                    index = value_counts.get(item_value, 0)
+                    value_counts[item_value] = index + 1
+                    key = key_naming.format(value=item_value, index=index)
+
+                    # Generate object for this key
+                    obj = {}
                     local_context = set(context_tags)
-                    local_context.add(f"part_type={p}")
+                    local_context.add(f"{name}.{key}={item_value}")
 
-                    for sub_prop in sub_schema:
+                    # Recursively generate properties (simplified - full recursion would call generate())
+                    for sub_prop in sub_properties:
                         s_name = sub_prop["name"]
-                        if s_name == "part_type":
-                            continue
+                        s_type = sub_prop.get("type")
 
-                        if sub_prop["type"] == "string_list":
-                            rule_probs = self.rule_engine.query_context(local_context)
-                            sub_opts = {t: 0.1 for t in ["energetic", "driving", "mellow", "upbeat", "dark", "chill"]}
-                            for r_cons, conf in rule_probs.items():
-                                if r_cons.startswith(f"{s_name}="):
-                                    val = r_cons.split("=", 1)[1]
-                                    sub_opts[val] = sub_opts.get(val, 0.1) + conf
-                            sub_count = random.randint(
-                                sub_prop.get("min_items", 1),
-                                min(sub_prop.get("max_items", 2), len(sub_opts))
-                            )
-                            sub_scores = np.array(list(sub_opts.values()), dtype=float)
-                            sub_scores /= sub_scores.sum()
-                            picked = np.random.choice(list(sub_opts.keys()), size=sub_count, replace=False, p=sub_scores).tolist()
-                            part_dict[s_name] = picked
-                            for t in picked:
-                                local_context.add(f"{s_name}={t}")
+                        if s_type == "categorical":
+                            # Simple categorical sampling
+                            values = sub_prop.get("values", [])
+                            if values:
+                                rule_probs = self.rule_engine.query_context(local_context)
+                                scores = {v: 0.1 for v in values}
+                                for v in values:
+                                    scores[v] += rule_probs.get(f"{s_name}={v}", 0.0)
+                                vals = list(scores.keys())
+                                s = np.array(list(scores.values()), dtype=float)
+                                if s.sum() > 0:
+                                    s = s / s.sum()
+                                    obj[s_name] = np.random.choice(vals, p=s)
+                                else:
+                                    obj[s_name] = random.choice(vals)
+                                local_context.add(f"{s_name}={obj[s_name]}")
 
-                        elif sub_prop["type"] == "string_list":
-                            lib = sub_prop.get("item_library")
-                            items = self.embeddings_manager.get_library_items(lib)
-                            if items:
-                                n = random.randint(sub_prop.get("min_items", 2), min(sub_prop.get("max_items", 4), len(items)))
-                                part_dict[s_name] = [random.choice(items) for _ in range(n)]
+                        elif s_type == "string_list":
+                            # Reuse existing string_list logic (simplified)
+                            min_count = sub_prop.get("min_items", 1)
+                            max_count = sub_prop.get("max_items", 3)
+                            item_vocab = self._build_item_vocabulary(s_name, sub_prop)
+                            if item_vocab:
+                                rule_probs = self.rule_engine.query_context(local_context)
+                                scores = {v: 0.1 for v in item_vocab}
+                                for v in item_vocab:
+                                    scores[v] += rule_probs.get(f"{s_name}={v}", 0.0)
+                                count = random.randint(min_count, min(max_count, len(scores)))
+                                vals = list(scores.keys())
+                                s = np.array(list(scores.values()), dtype=float)
+                                s = s / s.sum() if s.sum() > 0 else np.ones(len(s)) / len(s)
+                                picked = np.random.choice(vals, size=count, replace=False, p=s).tolist()
+                                obj[s_name] = picked
+                                for v in picked:
+                                    local_context.add(f"{s_name}={v}")
                             else:
-                                part_dict[s_name] = []
+                                obj[s_name] = []
 
-                    output[name].append(part_dict)
+                        elif s_type == "numeric":
+                            # Simple numeric sampling
+                            r = sub_prop.get("range", [0, 100])
+                            obj[s_name] = random.randint(r[0], r[1])
+
+                        # TODO: Add more type handlers as needed
+
+                    result_dict[key] = obj
+
+                output[name] = result_dict
 
         if return_edges:
             return output, self._compute_sample_edges(context_tags)
