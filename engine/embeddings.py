@@ -11,6 +11,7 @@ class EmbeddingsManager:
             
         self.embeddings = {}
         self.item_ids = {}
+        self.item_metadata = {}
         self._load_libraries()
 
     def _load_libraries(self):
@@ -29,6 +30,9 @@ class EmbeddingsManager:
             
             ids = [item["id"] for item in items]
             self.item_ids[lib_name] = ids
+            
+            # Store full item metadata for context-aware selection
+            self.item_metadata[lib_name] = {item["id"]: item for item in items}
             
             emb_file = lib_info.get("embedding_file")
             if emb_file:
@@ -58,3 +62,6 @@ class EmbeddingsManager:
 
     def get_library_items(self, lib_name):
         return self.item_ids.get(lib_name, [])
+
+    def get_item_metadata(self, lib_name, item_id):
+        return self.item_metadata.get(lib_name, {}).get(item_id, {})

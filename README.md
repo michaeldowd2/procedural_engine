@@ -2,16 +2,18 @@
 
 A Python-based procedural generation system that produces coherent, constraint-aware outputs from schema definitions and learned association rules.
 
-## Core Concept
+## Core Concept & Philosophy
 
-The engine generates structured JSON outputs where property values maintain meaningful relationships learned from real datasets. It separates *structure* (schema) from *semantics* (association rules mined via FP-Growth).
+The engine is built on a strictly **domain-agnostic** philosophy. It is a general, schema-driven procedural sampler. No domain-specific concepts (like "tags", "parts", or "songs") leak into the engine logic. 
+Instead, it reasons entirely about abstract **"items"** (for rule association) and **"entities"** (for structural grouping), allowing it to generate anything from music to levels to narrative structures, defined entirely by your JSON schema.
 
 **Key Features:**
-- **Schema-Driven**: Generate arbitrary JSON structures defined in `schema.json`.
+- **Fully Schema-Driven**: Handlers dynamically adapt to your configuration. Structural parsing is data-driven via properties like `source_property` and `delimiter`, rather than hardcoded logic.
 - **Inline Rule Mining**: Rules are mined from source data on first use — no pre-generation step required.
+- **Contextual Library Selection**: Library items are probabilistically scored and selected based on **Rule Association** (mined from datasets) and **Metadata Overlap** (matching JSON metadata properties against the active generation context).
 - **Deterministic**: Seed-based generation for repeatable results.
 - **Controllable Adherence**: `adherence` parameter (0 to 1+) controls how closely outputs follow learned patterns.
-- **Bidirectional Inference**: Fixed numeric values automatically inject their discretized tags into context, and vice versa.
+- **Bidirectional Inference**: Fixed numeric values automatically inject their discretized items into context, and vice versa.
 - **Explorer UI**: A browser-based tool to browse generated samples and their learned rule connections.
 
 ## Architecture
@@ -42,7 +44,17 @@ And at the project root:
 
 ### Preprocessing
 
-Preprocessing (numeric→tag binning) is defined **per data source** inside `dataset.json` under each source's `"preprocessing"` key. The generator collects all preprocessing across sources at startup.
+Preprocessing (numeric→item binning) is defined **per data source** inside `dataset.json` under each source's `"preprocessing"` key. The generator collects all preprocessing across sources at startup.
+
+## Contextual Library Selection
+
+A major feature of the engine is how it selects predefined items from libraries (e.g., pulling a specific preset from hundreds of options in `instrument_presets.json`). 
+
+Instead of blind random selection, the engine computes a weighted probability for every library item based on two contextual signals:
+1. **Rule Inferences**: Direct probability boosts from explicit association rules mined from the dataset.
+2. **Metadata Overlap**: Flexible intersection between the item's metadata and the current context. If the generator has produced `genre=rock`, and a library item contains the string `"rock"` inside any of its metadata arrays or properties, it automatically receives a massive probability boost.
+
+This allows library items to dynamically align to the generated context without requiring strict 1:1 schema mapping!
 
 ## Quick Start
 
@@ -107,7 +119,7 @@ song, edges = gen.generate(seed=42, return_edges=True)
 | `scripts/generate_model_data.py` | Pre-generate `learned_rules.json` for offline/production use |
 | `scripts/refresh_model.py` | Runs all three above in sequence |
 | `scripts/inspect_rules.py` | Print mined rule stats for a model |
-| `scripts/check_tags.py` | Verify tag dimension constraints across sample seeds |
+| `scripts/check_items.py` | Verify item dimension constraints across sample seeds |
 
 ## Pre-generating Rules (Optional)
 

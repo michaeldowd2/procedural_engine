@@ -20,6 +20,14 @@ class RuleEngine:
             self._load_learned_rules()
         print(f"[rule_engine] Total rules loaded: {len(self.rules)}")
 
+        self.synonyms = {}
+        # Load item synonyms for generic abstract matching
+        synonym_list = self.config.get("item_synonyms", [])
+        for group in synonym_list:
+            group_set = set(group)
+            for item in group_set:
+                self.synonyms.setdefault(item, set()).update(group_set)
+
     def _load_manual_rules(self):
         manual_config = self.config.get("manual_rules", [])
         if isinstance(manual_config, dict):
@@ -50,11 +58,16 @@ class RuleEngine:
                         'confidence': r['confidence']
                     })
 
-    def query_context(self, current_context_tags):
-        # current_context_tags is a set of strings, e.g., {"style=pop", "emotion=happy"}
+    def query_context(self, current_context_items):
+        # Expand current context items with any defined synonyms
+        expanded_context = set(current_context_items)
+        for item in current_context_items:
+            if item in self.synonyms:
+                expanded_context.update(self.synonyms[item])
+
         matched_consequents = {}
         for rule in self.rules:
-            if rule['antecedents'].issubset(current_context_tags):
+            if rule['antecedents'].issubset(expanded_context):
                 for cons in rule['consequents']:
                     if cons not in matched_consequents:
                         matched_consequents[cons] = []

@@ -115,24 +115,24 @@ def _extract_wide_tsv(source, model_dir):
             group_idx = raw_header.index(group_col)
         except ValueError:
             group_idx = 0
-        tag_start = len(raw_header) - 1
+        item_start = len(raw_header) - 1
 
         for line in f:
             fields = line.rstrip("\n").split(delimiter)
-            if len(fields) <= tag_start:
+            if len(fields) <= item_start:
                 continue
             group_key = fields[group_idx].strip()
             if not group_key:
                 continue
-            raw_tags = [t.strip() for t in fields[tag_start:] if t.strip()]
+            raw_items = [t.strip() for t in fields[item_start:] if t.strip()]
             if group_key not in transactions:
                 transactions[group_key] = set()
-            for tag in raw_tags:
-                if any(tag.endswith(s) for s in ex_suffixes):
+            for item in raw_items:
+                if any(item.endswith(s) for s in ex_suffixes):
                     continue
                 for pre, target in prefixes.items():
-                    if tag.startswith(pre):
-                        transactions[group_key].add(f"{target}={tag[len(pre):]}")
+                    if item.startswith(pre):
+                        transactions[group_key].add(f"{target}={item[len(pre):]}")
                         break
 
     return [list(items) for items in transactions.values() if len(items) > 1]

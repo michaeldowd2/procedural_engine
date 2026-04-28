@@ -44,7 +44,7 @@
     },
     {
       "name": "genre",
-      "type": "tag_list",
+      "type": "rule_item_list",
       "min_items": 1,
       "max_items": 1,
       "description": "Genre tags",
@@ -52,7 +52,7 @@
     },
     {
       "name": "tags",
-      "type": "tag_list",
+      "type": "rule_item_list",
       "min_items": 1,
       "max_items": 3,
       "description": "Mood and emotion tags",
@@ -69,10 +69,49 @@
     },
     {
       "name": "instruments",
-      "type": "tag_list",
+      "type": "rule_item_list",
       "min_items": 1,
       "max_items": 8,
       "description": "List of instruments to use in the composition"
+    },
+    {
+      "name": "drum_kit",
+      "type": "categorical",
+      "values": [
+        "Acoustic",
+        "808",
+        "Vintage",
+        "Lofi",
+        "Synth_Pop",
+        "Metal_Kit"
+      ],
+      "description": "Primary drum kit sounds"
+    },
+    {
+      "name": "vocal_style",
+      "type": "categorical",
+      "values": [
+        "Clean",
+        "Whisper",
+        "Screamed",
+        "Vocoder",
+        "Harmonized",
+        "Rap",
+        "None"
+      ],
+      "description": "Vocal delivery style"
+    },
+    {
+      "name": "production_style",
+      "type": "categorical",
+      "values": [
+        "Raw",
+        "Polished",
+        "Lo-Fi",
+        "Vintage",
+        "Wall_of_Sound"
+      ],
+      "description": "Overall mixing and production aesthetic"
     },
     {
       "name": "structure",
@@ -87,13 +126,22 @@
       "description": "High-level song structure"
     },
     {
+      "name": "kick_pattern",
+      "type": "wfc_grid",
+      "dimensions": [16],
+      "domain": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+      "description": "16-step kick drum pattern (0=rest, 1-9=velocity)"
+    },
+    {
       "name": "parts",
-      "type": "part_list",
+      "type": "entity_list",
+      "source_property": "structure",
+      "delimiter": "-",
       "description": "Individual song parts (verse, chorus, etc.) with properties",
-      "part_schema": {
+      "entity_schema": {
         "properties": [
           {
-            "name": "part_type",
+            "name": "entity_type",
             "type": "categorical",
             "values": [
               "intro",
@@ -109,28 +157,28 @@
           },
           {
             "name": "part_tags",
-            "type": "tag_list",
+            "type": "rule_item_list",
             "min_items": 0,
             "max_items": 3,
             "context": [
               "global.tags",
-              "part_type"
+              "entity_type"
             ],
             "description": "Mood/energy tags specific to this part"
           },
           {
-            "name": "chords",
-            "type": "item_list",
-            "min_items": 2,
-            "max_items": 8,
-            "item_library": "chord_progressions",
+            "name": "chord_progression",
+            "type": "wfc_grid",
+            "dimensions": [16],
+            "domain": [0, 1, 2, 3, 4, 5, 6, 7, -1],
+            "dictionary_map": "chord_mode_map",
             "context": [
               "global.key",
               "global.mode",
-              "part_type",
+              "entity_type",
               "part_tags"
             ],
-            "description": "Chord progression for this part"
+            "description": "Chord progression generated via WFC"
           }
         ]
       }

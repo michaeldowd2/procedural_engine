@@ -1,0 +1,286 @@
+{
+  "rules": [
+    {
+      "context_trigger": [],
+      "target_property": "kick_pattern",
+      "type": "state_weights",
+      "condition": "index[0] % 8 == 0",
+      "action": {
+        "weights": {
+          "9": 10.0,
+          "8": 5.0,
+          "0": 0.1,
+          "default": 1.0
+        }
+      }
+    },
+    {
+      "context_trigger": [],
+      "target_property": "kick_pattern",
+      "type": "state_weights",
+      "condition": "index[0] % 2 != 0",
+      "action": {
+        "weights": {
+          "0": 10.0,
+          "1": 2.0,
+          "2": 1.0,
+          "default": 0.1
+        }
+      }
+    },
+    {
+      "context_trigger": ["genre=Dance"],
+      "target_property": "kick_pattern",
+      "type": "state_weights",
+      "condition": "index[0] % 2 == 0",
+      "action": {
+        "weights": {
+          "9": 50.0,
+          "8": 10.0,
+          "default": 0.0
+        }
+      }
+    },
+    {
+      "context_trigger": ["genre=Dance"],
+      "target_property": "kick_pattern",
+      "type": "state_weights",
+      "condition": "index[0] % 2 != 0",
+      "action": {
+        "weights": {
+          "0": 50.0,
+          "default": 0.0
+        }
+      }
+    },
+    {
+      "context_trigger": ["genre=Hip-Hop"],
+      "target_property": "kick_pattern",
+      "type": "state_weights",
+      "condition": "index[0] in [0, 5, 8, 11]",
+      "action": {
+        "weights": {
+          "9": 20.0,
+          "8": 10.0,
+          "default": 1.0
+        }
+      }
+    },
+    {
+      "context_trigger": ["genre=Hip-Hop"],
+      "target_property": "kick_pattern",
+      "type": "state_weights",
+      "condition": "index[0] in [4, 12]",
+      "action": {
+        "weights": {
+          "0": 20.0,
+          "default": 0.1
+        }
+      }
+    },
+    {
+      "context_trigger": ["genre=Rock"],
+      "target_property": "kick_pattern",
+      "type": "state_weights",
+      "condition": "index[0] in [0, 8, 10]",
+      "action": {
+        "weights": {
+          "9": 10.0,
+          "8": 5.0,
+          "default": 0.5
+        }
+      }
+    },
+    {
+      "context_trigger": ["genre=Metal"],
+      "target_property": "kick_pattern",
+      "type": "state_weights",
+      "condition": "True",
+      "action": {
+        "weights": {
+          "9": 10.0,
+          "8": 10.0,
+          "0": 1.0,
+          "default": 0.1
+        }
+      }
+    },
+    {
+      "context_trigger": ["tempo_slow"],
+      "target_property": "kick_pattern",
+      "type": "state_weights",
+      "condition": "index[0] % 4 != 0",
+      "action": {
+        "weights": {
+          "0": 10.0,
+          "default": 0.1
+        }
+      }
+    },
+    {
+      "context_trigger": ["energy_low"],
+      "target_property": "kick_pattern",
+      "type": "state_weights",
+      "condition": "True",
+      "action": {
+        "weights": {
+          "3": 5.0,
+          "4": 5.0,
+          "5": 5.0,
+          "9": 0.1,
+          "8": 0.1,
+          "default": 1.0
+        }
+      }
+    },
+    {
+      "context_trigger": [],
+      "target_property": "chord_progression",
+      "type": "adjacency",
+      "action": {
+        "state_1": 5,
+        "state_2": 4,
+        "offset": [1]
+      }
+    },
+    {
+      "context_trigger": [],
+      "target_property": "chord_progression",
+      "type": "state_weights",
+      "condition": "index[0] == 0",
+      "action": {
+        "weights": {
+          "-1": 0.0,
+          "1": 5.0,
+          "4": 2.0,
+          "5": 2.0,
+          "6": 2.0,
+          "default": 1.0
+        }
+      }
+    },
+    {
+      "context_trigger": [],
+      "target_property": "chord_progression",
+      "type": "state_weights",
+      "condition": "index[0] % 2 != 0",
+      "action": {
+        "weights": {
+          "-1": 50.0,
+          "default": 0.0
+        }
+      }
+    },
+    {
+      "context_trigger": [],
+      "target_property": "chord_progression",
+      "type": "state_weights",
+      "condition": "index[0] % 4 != 0 and index[0] % 2 == 0",
+      "action": {
+        "weights": {
+          "-1": 10.0,
+          "default": 1.0
+        }
+      }
+    },
+    {
+      "context_trigger": ["genre=Jazz"],
+      "target_property": "chord_progression",
+      "type": "state_weights",
+      "condition": "index[0] % 4 != 0 and index[0] % 2 == 0",
+      "action": {
+        "weights": {
+          "-1": 0.5,
+          "2": 5.0,
+          "5": 5.0,
+          "1": 5.0,
+          "default": 1.0
+        }
+      }
+    },
+    {
+      "context_trigger": ["tags=Sad"],
+      "target_property": "chord_progression",
+      "type": "state_weights",
+      "condition": "True",
+      "action": {
+        "weights": {
+          "6": 5.0,
+          "2": 3.0,
+          "3": 3.0,
+          "4": 2.0,
+          "1": 0.5,
+          "default": 1.0
+        }
+      }
+    },
+    {
+      "context_trigger": ["tags=Happy"],
+      "target_property": "chord_progression",
+      "type": "state_weights",
+      "condition": "True",
+      "action": {
+        "weights": {
+          "1": 5.0,
+          "4": 5.0,
+          "5": 5.0,
+          "6": 0.5,
+          "2": 0.5,
+          "3": 0.5,
+          "default": 1.0
+        }
+      }
+    },
+    {
+      "context_trigger": ["genre=Pop"],
+      "target_property": "chord_progression",
+      "type": "state_weights",
+      "condition": "True",
+      "action": {
+        "weights": {
+          "1": 5.0,
+          "4": 5.0,
+          "5": 5.0,
+          "6": 5.0,
+          "2": 0.1,
+          "3": 0.1,
+          "7": 0.0,
+          "-1": 1.0,
+          "default": 1.0
+        }
+      }
+    }
+  ],
+  "dictionaries": {
+    "chord_mode_map": [
+      {
+        "context_trigger": ["mode=major"],
+        "mapping": {
+          "0": "rest",
+          "1": "I",
+          "2": "ii",
+          "3": "iii",
+          "4": "IV",
+          "5": "V",
+          "6": "vi",
+          "7": "vii\u00b0",
+          "-1": "hold"
+        }
+      },
+      {
+        "context_trigger": ["mode=minor"],
+        "mapping": {
+          "0": "rest",
+          "1": "i",
+          "2": "ii\u00b0",
+          "3": "III",
+          "4": "iv",
+          "5": "v",
+          "6": "VI",
+          "7": "VII",
+          "-1": "hold"
+        }
+      }
+    ]
+  }
+}

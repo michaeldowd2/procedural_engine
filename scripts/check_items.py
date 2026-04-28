@@ -13,16 +13,16 @@ DIMS = {
 ok = True
 for seed in [1, 2, 3, 4, 5, 42, 99]:
     song = g.generate(seed=seed, adherence=0.8)
-    tags = song['tags']
+    items = song.get('tags', song.get('items', [])) # Fallback if schema was updated
     violations = []
     for dim, labels in DIMS.items():
-        found = [l for l in labels if l in tags]
+        found = [l for l in labels if l in items]
         if len(found) > 1:
             violations.append(f'{dim}: {found}')
     status = 'FAIL ' + str(violations) if violations else 'OK'
     if violations:
         ok = False
-    print(f'seed={seed:3d}  tempo={song["tempo"]:3d}  tags={tags}')
+    print(f'seed={seed:3d}  tempo={song["tempo"]:3d}  items={items}')
     print(f'         [{status}]')
 
 print()

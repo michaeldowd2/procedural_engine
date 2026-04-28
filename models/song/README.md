@@ -58,3 +58,15 @@ This mines rules inline and writes `model_data/generations.json` for the Explore
   parts          part_list    per-section chords and tags
 }
 ```
+
+## Wave Function Collapse (WFC) Patterns
+
+The engine supports generic N-dimensional pattern generation via a Wave Function Collapse solver. Properties using the `wfc_grid` type in the schema (like `kick_pattern` and `chord_progression`) are generated as follows:
+
+1. **Schema Dimensions & Domain**: The schema defines the dimensions of the grid (e.g., `[16]` for a 16-step 1D array) and the base mathematical domain of possible states (e.g., `[0, 1, ..., 9]`).
+2. **Context-Triggered Rules**: `data/pattern_rules.json` contains generative rules (`state_weights`, `adjacency`) that trigger based on context items (e.g., `genre=Dance`).
+3. **Linear Adherence Scaling**: Rules define abstract probability weights (where a weight of `0.0` means complete exclusion). The global `adherence` parameter linearly interpolates these weights toward a uniform distribution (`1.0`) as adherence decreases. 
+   - `adherence = 1.0`: Strict adherence to defined weights.
+   - `adherence = 0.5`: Defined weights are heavily favored, but excluded items (`0.0`) become possible (`0.5`).
+   - `adherence = 0.0`: All states are completely uniform (pure chaos/creativity).
+4. **Dictionary Substitution**: After the numeric grid is solved, an optional `dictionary_map` can substitute states with human-readable values (e.g., mapping `1` to `I` based on a `mode=major` trigger).

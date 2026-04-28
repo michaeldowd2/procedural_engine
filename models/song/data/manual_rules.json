@@ -432,57 +432,117 @@
     "note": "Intense metal subgenres (prog, tech) are highly complex"
   },
   {
-    "antecedent": ["part_type=chorus", "tags=energetic"],
+    "antecedent": ["entity_type=chorus", "tags=energetic"],
     "consequent": ["part_tags=upbeat"],
     "confidence": 0.85,
     "note": "Energetic choruses call for upbeat energy"
   },
   {
-    "antecedent": ["part_type=chorus", "tags=energetic"],
+    "antecedent": ["entity_type=chorus", "tags=energetic"],
     "consequent": ["part_tags=driving"],
     "confidence": 0.85,
     "note": "Energetic choruses should have driving momentum"
   },
   {
-    "antecedent": ["part_type=chorus", "tags=happy_mood"],
+    "antecedent": ["entity_type=chorus", "tags=happy_mood"],
     "consequent": ["part_tags=upbeat"],
     "confidence": 0.85,
     "note": "Happy choruses are reliably upbeat"
   },
   {
-    "antecedent": ["part_type=chorus", "genre=pop"],
+    "antecedent": ["entity_type=chorus", "genre=pop"],
     "consequent": ["part_tags=upbeat"],
     "confidence": 0.80,
     "note": "Pop choruses are typically the most energetic section"
   },
   {
-    "antecedent": ["part_type=verse"],
+    "antecedent": ["entity_type=verse"],
     "consequent": ["part_tags=mellow"],
     "confidence": 0.65,
     "note": "Verses are typically lower energy than the chorus"
   },
   {
-    "antecedent": ["part_type=bridge"],
+    "antecedent": ["entity_type=bridge"],
     "consequent": ["part_tags=dark"],
     "confidence": 0.60,
     "note": "Bridges often introduce harmonic tension or emotional contrast"
   },
   {
-    "antecedent": ["part_type=intro"],
+    "antecedent": ["entity_type=intro"],
     "consequent": ["part_tags=chill"],
     "confidence": 0.60,
     "note": "Intros typically start low-key before the song builds"
   },
   {
-    "antecedent": ["part_type=outro"],
+    "antecedent": ["entity_type=outro"],
     "consequent": ["part_tags=mellow"],
     "confidence": 0.65,
     "note": "Outros wind the energy down"
   },
   {
-    "antecedent": ["part_type=chorus", "tags=dark_mood"],
+    "antecedent": ["entity_type=chorus", "tags=dark_mood"],
     "consequent": ["part_tags=dark"],
     "confidence": 0.75,
     "note": "Dark-mood songs carry that darkness into the chorus"
+  },
+  {
+    "antecedent": ["genre=electronic"],
+    "consequent": ["drum_kit=808"],
+    "confidence": 0.85,
+    "note": "Electronic music heavily features 808s"
+  },
+  {
+    "antecedent": ["genre=electronic"],
+    "consequent": ["production_style=Polished"],
+    "confidence": 0.75,
+    "note": "Electronic music generally features polished production"
+  },
+  {
+    "antecedent": ["genre=folk"],
+    "consequent": ["drum_kit=Acoustic"],
+    "confidence": 0.90,
+    "note": "Folk music primarily uses acoustic kits"
+  },
+  {
+    "antecedent": ["genre=folk"],
+    "consequent": ["vocal_style=Harmonized"],
+    "confidence": 0.70,
+    "note": "Folk often incorporates harmonized vocals"
+  },
+  {
+    "antecedent": ["genre=metal"],
+    "consequent": ["drum_kit=Metal_Kit"],
+    "confidence": 0.85,
+    "note": "Metal requires specific aggressive drum kits"
+  },
+  {
+    "antecedent": ["genre=metal"],
+    "consequent": ["vocal_style=Screamed"],
+    "confidence": 0.80,
+    "note": "Metal frequently uses screamed or harsh vocals"
+  },
+  {
+    "antecedent": ["genre=metal"],
+    "consequent": ["production_style=Wall_of_Sound"],
+    "confidence": 0.80,
+    "note": "Metal often employs a dense, wall-of-sound production style"
+  },
+  {
+    "antecedent": ["tags=dark_mood"],
+    "consequent": ["vocal_style=Whisper"],
+    "confidence": 0.65,
+    "note": "Dark moods can be enhanced by whispered vocals"
+  },
+  {
+    "antecedent": ["genre=ambient"],
+    "consequent": ["vocal_style=None"],
+    "confidence": 0.85,
+    "note": "Ambient music is typically instrumental"
+  },
+  {
+    "antecedent": ["genre=rap"],
+    "consequent": ["vocal_style=Rap"],
+    "confidence": 0.95,
+    "note": "Rap music necessitates a rap vocal style"
   }
 ]

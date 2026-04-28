@@ -152,8 +152,11 @@
   "manual_rules": {
     "file": "data/manual_rules.json"
   },
+  "pattern_rules": {
+    "file": "data/pattern_rules.json"
+  },
   "generation_params": {
-    "tag_confidence_threshold": 0.2
+    "item_confidence_threshold": 0.2
   },
   "embedding_params": {
     "dimension": 100,
@@ -161,7 +164,7 @@
     "context_window": 5,
     "note": "Learn item embeddings for large libraries (instruments, MIDI patterns)"
   },
-  "tag_synonyms": [
+  "item_synonyms": [
     [
       "tags=Happy",
       "tags=happy",
