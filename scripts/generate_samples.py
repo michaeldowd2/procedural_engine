@@ -24,6 +24,7 @@ SCHEMA   = os.path.join(_models_root, args.model, "schema.json")
 DATASET  = os.path.join(_models_root, args.model, "dataset.json")
 OUT_DIR  = os.path.join(_root, "output", args.model)
 OUT_FILE = os.path.join(OUT_DIR, "generations.json")
+EDGES_FILE = os.path.join(OUT_DIR, "edges.json")
 
 PROMPTS = [
     {"label": "Unconstrained (seed 1)",   "seed": 1,  "fixed_values": {}},
@@ -43,6 +44,7 @@ def main():
     gen = Generator(SCHEMA, DATASET)
 
     samples = []
+    edges_dict = {}
     for prompt in PROMPTS:
         print(f"  Generating: {prompt['label']}")
         song, edges = gen.generate(
@@ -57,13 +59,22 @@ def main():
             "seed":         prompt["seed"],
             "fixed_values": prompt.get("fixed_values", {}),
             "song":         song,
-            "edges":        edges,
         })
+        edges_dict[str(prompt["seed"])] = edges
 
     os.makedirs(OUT_DIR, exist_ok=True)
+    import re
+    json_str = json.dumps(samples, indent=2)
+    # Collapse arrays of primitives (strings, numbers) onto a single line
+    json_str = re.sub(r'\[\s*([^{}\[\]]*?)\s*\]', lambda m: '[' + ' '.join(m.group(1).split()) + ']', json_str)
+    
     with open(OUT_FILE, "w") as f:
-        json.dump(samples, f, indent=2)
-    print(f"\nSaved {len(samples)} samples to {OUT_FILE}")
+        f.write(json_str)
+        
+    with open(EDGES_FILE, "w") as f:
+        json.dump(edges_dict, f, indent=2)
+        
+    print(f"\nSaved {len(samples)} samples to {OUT_FILE} and edges to {EDGES_FILE}")
 
     # Keep manifest up to date so the Explorer knows which models exist
     import glob as _glob

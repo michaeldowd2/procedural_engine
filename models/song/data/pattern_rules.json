@@ -249,6 +249,128 @@
           "default": 1.0
         }
       }
+    },
+    {
+      "context_trigger": ["genre=Reggae"],
+      "target_property": "kick_pattern",
+      "type": "state_weights",
+      "condition": "index[0] in [4, 12]",
+      "action": {
+        "weights": {
+          "9": 50.0,
+          "8": 10.0,
+          "default": 0.0
+        }
+      }
+    },
+    {
+      "context_trigger": ["genre=Reggae"],
+      "target_property": "kick_pattern",
+      "type": "state_weights",
+      "condition": "index[0] not in [4, 12]",
+      "action": {
+        "weights": {
+          "0": 50.0,
+          "default": 0.0
+        }
+      }
+    },
+    {
+      "context_trigger": ["genre=Reggae"],
+      "target_property": "chord_progression",
+      "type": "state_weights",
+      "condition": "index[0] in [2, 6, 10, 14]",
+      "action": {
+        "weights": {
+          "1": 10.0,
+          "2": 10.0,
+          "3": 10.0,
+          "4": 10.0,
+          "5": 10.0,
+          "6": 10.0,
+          "-1": 0.0,
+          "default": 1.0
+        }
+      }
+    },
+    {
+      "context_trigger": ["genre=Reggae"],
+      "target_property": "chord_progression",
+      "type": "state_weights",
+      "condition": "index[0] in [0, 4, 8, 12]",
+      "action": {
+        "weights": {
+          "-1": 50.0,
+          "0": 10.0,
+          "default": 0.0
+        }
+      }
+    },
+    {
+      "context_trigger": ["genre=Punk"],
+      "target_property": "chord_progression",
+      "type": "state_weights",
+      "condition": "index[0] % 4 == 0",
+      "action": {
+        "weights": {
+          "1": 10.0,
+          "4": 10.0,
+          "5": 10.0,
+          "-1": 1.0,
+          "default": 0.1
+        }
+      }
+    },
+    {
+      "context_trigger": ["genre=Punk"],
+      "target_property": "kick_pattern",
+      "type": "state_weights",
+      "condition": "index[0] % 2 == 0",
+      "action": {
+        "weights": {
+          "9": 20.0,
+          "8": 10.0,
+          "default": 0.1
+        }
+      }
+    },
+    {
+      "context_trigger": ["genre=Punk"],
+      "target_property": "kick_pattern",
+      "type": "state_weights",
+      "condition": "index[0] % 2 != 0",
+      "action": {
+        "weights": {
+          "0": 5.0,
+          "4": 2.0,
+          "9": 0.5,
+          "default": 1.0
+        }
+      }
+    },
+    {
+      "context_trigger": ["tags=chill"],
+      "target_property": "kick_pattern",
+      "type": "state_weights",
+      "condition": "index[0] % 4 != 0",
+      "action": {
+        "weights": {
+          "0": 20.0,
+          "default": 0.1
+        }
+      }
+    },
+    {
+      "context_trigger": ["tags=epic", "genre=cinematic"],
+      "target_property": "chord_progression",
+      "type": "state_weights",
+      "condition": "index[0] % 8 != 0",
+      "action": {
+        "weights": {
+          "-1": 50.0,
+          "default": 0.1
+        }
+      }
     }
   ],
   "dictionaries": {
@@ -278,6 +400,48 @@
           "5": "v",
           "6": "VI",
           "7": "VII",
+          "-1": "hold"
+        }
+      },
+      {
+        "context_trigger": ["mode=dorian"],
+        "mapping": {
+          "0": "rest",
+          "1": "i",
+          "2": "ii",
+          "3": "III",
+          "4": "IV",
+          "5": "v",
+          "6": "vi\u00b0",
+          "7": "VII",
+          "-1": "hold"
+        }
+      },
+      {
+        "context_trigger": ["mode=mixolydian"],
+        "mapping": {
+          "0": "rest",
+          "1": "I",
+          "2": "ii",
+          "3": "iii\u00b0",
+          "4": "IV",
+          "5": "v",
+          "6": "vi",
+          "7": "VII",
+          "-1": "hold"
+        }
+      },
+      {
+        "context_trigger": ["mode=phrygian"],
+        "mapping": {
+          "0": "rest",
+          "1": "i",
+          "2": "II",
+          "3": "III",
+          "4": "iv",
+          "5": "v\u00b0",
+          "6": "VI",
+          "7": "vii",
           "-1": "hold"
         }
       }

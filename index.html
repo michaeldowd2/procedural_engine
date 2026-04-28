@@ -673,15 +673,21 @@ function loadModel(modelName) {
       return;
     }
 
-    currentGenerations = generations;
-    const hasEdges = generations.some(g => g.edges && g.edges.length > 0);
-    document.getElementById('header-sub').textContent =
-      hasEdges
-        ? `${generations.length} samples · rule connections included`
-        : `${generations.length} samples · re-run generate_samples.py for edges`;
+    d3.json(`${base}/edges.json`).catch(() => ({})).then(edgesData => {
+      generations.forEach(g => {
+        g.edges = edgesData[String(g.seed)] || [];
+      });
 
-    document.getElementById('empty-state').classList.remove('hidden');
-    buildSidebar(generations);
+      currentGenerations = generations;
+      const hasEdges = generations.some(g => g.edges && g.edges.length > 0);
+      document.getElementById('header-sub').textContent =
+        hasEdges
+          ? `${generations.length} samples · rule connections included`
+          : `${generations.length} samples · re-run generate_samples.py for edges`;
+
+      document.getElementById('empty-state').classList.remove('hidden');
+      buildSidebar(generations);
+    });
   });
 }
 

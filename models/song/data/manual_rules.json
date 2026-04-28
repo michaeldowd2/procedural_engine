@@ -544,5 +544,35 @@
     "consequent": ["vocal_style=Rap"],
     "confidence": 0.95,
     "note": "Rap music necessitates a rap vocal style"
+  },
+  {
+    "antecedent": ["genre=reggae"],
+    "consequent": ["drum_kit=Vintage"],
+    "confidence": 0.85,
+    "note": "Reggae frequently uses vintage, dry drum sounds"
+  },
+  {
+    "antecedent": ["genre=punk"],
+    "consequent": ["drum_kit=Acoustic", "production_style=Raw", "energy_high"],
+    "confidence": 0.90,
+    "note": "Punk favors raw acoustic drums and high energy"
+  },
+  {
+    "antecedent": ["genre=lo-fi"],
+    "consequent": ["drum_kit=Lofi", "production_style=Lo-Fi", "tempo_slow"],
+    "confidence": 0.95,
+    "note": "Lo-fi genre inherently dictates lo-fi production and slow tempos"
+  },
+  {
+    "antecedent": ["tags=epic", "genre=cinematic"],
+    "consequent": ["production_style=Wall_of_Sound", "mode=minor"],
+    "confidence": 0.80,
+    "note": "Epic cinematic music often uses dense production and minor scales"
+  },
+  {
+    "antecedent": ["genre=house"],
+    "consequent": ["drum_kit=808", "tempo_fast"],
+    "confidence": 0.80,
+    "note": "House music heavily relies on electronic 808/909 style kits"
   }
 ]

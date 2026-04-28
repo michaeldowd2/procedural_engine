@@ -7,2108 +7,517 @@
       "tempo": 94,
       "key": "F",
       "mode": "mixolydian",
-      "genre": [
-        "alternative"
-      ],
-      "tags": [
-        "children",
-        "Loving / Romantic",
-        "Cheerful / Festive"
-      ],
+      "genre": ["alternative"],
+      "tags": ["children", "Loving / Romantic", "Cheerful / Festive"],
       "target_duration": 124,
-      "instruments": [
-        "Electric Guitar (clean)",
-        "String Ensemble",
-        "bass",
-        "drums",
-        "brass",
-        "keyboard",
-        "Female Lead Vocals",
-        "synthesizer"
-      ],
-      "structure": "verse-chorus-verse-chorus-bridge-chorus",
+      "instruments": ["Electric Guitar (distorted)", "Synthesizer", "bass", "electricguitar", "cello", "orchestra", "Female Lead Vocals", "trombone"],
+      "drum_kit": "Acoustic",
+      "vocal_style": "Harmonized",
+      "production_style": "Lo-Fi",
+      "structure": "intro-verse-chorus-verse-chorus-outro",
+      "kick_pattern": [1, 0, 0, 2, 6, 0, 3, 0, 8, 0, 0, 2, 1, 0, 2, 5],
       "parts": [
         {
-          "part_type": "verse",
-          "part_tags": [
-            "mellow",
-            "upbeat"
-          ],
-          "chords": [
-            "prog_008",
-            "prog_008"
-          ]
+          "entity_type": "intro",
+          "part_tags": ["chill"],
+          "chord_progression": ["iii\u00b0", "hold", "v", "hold", "ii", "hold", "rest", "hold", "v", "hold", "hold", "hold", "v", "hold", "hold", "hold"]
         },
         {
-          "part_type": "chorus",
-          "part_tags": [
-            "energetic",
-            "driving",
-            "dark"
-          ],
-          "chords": [
-            "prog_007",
-            "prog_004",
-            "prog_002",
-            "prog_008",
-            "prog_001",
-            "prog_007",
-            "prog_007"
-          ]
+          "entity_type": "verse",
+          "part_tags": ["dark", "upbeat", "mellow"],
+          "chord_progression": ["I", "hold", "hold", "hold", "rest", "hold", "IV", "hold", "IV", "hold", "hold", "hold", "v", "hold", "I", "hold"]
         },
         {
-          "part_type": "verse",
+          "entity_type": "chorus",
           "part_tags": [],
-          "chords": [
-            "prog_008",
-            "prog_005",
-            "prog_004",
-            "prog_002",
-            "prog_006",
-            "prog_001",
-            "prog_001"
-          ]
+          "chord_progression": ["ii", "hold", "hold", "hold", "ii", "hold", "hold", "hold", "hold", "hold", "hold", "hold", "ii", "hold", "vi", "hold"]
         },
         {
-          "part_type": "chorus",
+          "entity_type": "verse",
+          "part_tags": ["dark", "mellow"],
+          "chord_progression": ["rest", "hold", "hold", "hold", "ii", "hold", "hold", "VII", "vi", "hold", "hold", "hold", "v", "hold", "hold", "hold"]
+        },
+        {
+          "entity_type": "chorus",
           "part_tags": [],
-          "chords": [
-            "prog_001",
-            "prog_007",
-            "prog_004",
-            "prog_007",
-            "prog_001",
-            "prog_004",
-            "prog_008"
-          ]
+          "chord_progression": ["IV", "hold", "hold", "hold", "iii\u00b0", "hold", "hold", "iii\u00b0", "VII", "hold", "hold", "hold", "I", "hold", "hold", "hold"]
         },
         {
-          "part_type": "bridge",
-          "part_tags": [
-            "chill",
-            "upbeat",
-            "dark"
-          ],
-          "chords": [
-            "prog_004",
-            "prog_006",
-            "prog_004",
-            "prog_004",
-            "prog_008",
-            "prog_005"
-          ]
-        },
-        {
-          "part_type": "chorus",
-          "part_tags": [],
-          "chords": [
-            "prog_002",
-            "prog_003",
-            "prog_005",
-            "prog_002",
-            "prog_006"
-          ]
+          "entity_type": "outro",
+          "part_tags": ["upbeat", "mellow"],
+          "chord_progression": ["v", "hold", "vi", "hold", "iii\u00b0", "hold", "iii\u00b0", "hold", "I", "hold", "IV", "hold", "I", "hold", "hold", "hold"]
         }
       ]
-    },
-    "edges": [
-      {
-        "source": "instruments=synthesizer",
-        "target": "instruments=drums",
-        "confidence": 0.9464882943143812
-      },
-      {
-        "source": "instruments=drums",
-        "target": "instruments=synthesizer",
-        "confidence": 0.6674528301886792
-      },
-      {
-        "source": "instruments=drums",
-        "target": "instruments=bass",
-        "confidence": 0.909967845659164
-      },
-      {
-        "source": "instruments=bass",
-        "target": "instruments=drums",
-        "confidence": 0.9464882943143812
-      },
-      {
-        "source": "instruments=synthesizer",
-        "target": "instruments=bass",
-        "confidence": 0.909967845659164
-      },
-      {
-        "source": "instruments=bass",
-        "target": "instruments=synthesizer",
-        "confidence": 0.6674528301886792
-      },
-      {
-        "source": "genre=alternative",
-        "target": "instruments=bass",
-        "confidence": 0.835820895522388
-      },
-      {
-        "source": "instruments=bass",
-        "target": "genre=alternative",
-        "confidence": 0.12962962962962962
-      },
-      {
-        "source": "genre=alternative",
-        "target": "instruments=drums",
-        "confidence": 0.7697594501718212
-      },
-      {
-        "source": "instruments=drums",
-        "target": "genre=alternative",
-        "confidence": 0.12962962962962962
-      },
-      {
-        "source": "genre=alternative",
-        "target": "instruments=synthesizer",
-        "confidence": 0.10078534031413613
-      },
-      {
-        "source": "instruments=brass",
-        "target": "instruments=drums",
-        "confidence": 0.8730158730158729
-      },
-      {
-        "source": "instruments=brass",
-        "target": "instruments=bass",
-        "confidence": 0.7971014492753623
-      },
-      {
-        "source": "instruments=keyboard",
-        "target": "instruments=synthesizer",
-        "confidence": 0.6674528301886792
-      },
-      {
-        "source": "instruments=synthesizer",
-        "target": "instruments=keyboard",
-        "confidence": 0.43471582181259594
-      },
-      {
-        "source": "instruments=keyboard",
-        "target": "instruments=drums",
-        "confidence": 0.9464882943143812
-      },
-      {
-        "source": "instruments=drums",
-        "target": "instruments=keyboard",
-        "confidence": 0.43471582181259594
-      },
-      {
-        "source": "instruments=keyboard",
-        "target": "instruments=bass",
-        "confidence": 0.909967845659164
-      },
-      {
-        "source": "instruments=bass",
-        "target": "instruments=keyboard",
-        "confidence": 0.43471582181259594
-      },
-      {
-        "source": "tags=Loving / Romantic",
-        "target": "instruments=Electric Guitar (clean)",
-        "confidence": 0.6147540983606558
-      },
-      {
-        "source": "instruments=Female Lead Vocals",
-        "target": "instruments=Electric Guitar (clean)",
-        "confidence": 0.5660377358490566
-      },
-      {
-        "source": "tags=Cheerful / Festive",
-        "target": "instruments=Electric Guitar (clean)",
-        "confidence": 0.6666666666666666
-      }
-    ]
+    }
   },
   {
     "label": "High-energy rock",
     "seed": 2,
     "fixed_values": {
-      "genre": [
-        "rock"
-      ],
-      "tags": [
-        "high_energy",
-        "tempo_slow"
-      ]
+      "genre": ["rock"],
+      "tags": ["high_energy", "tempo_slow"]
     },
     "song": {
-      "genre": [
-        "rock"
-      ],
-      "tags": [
-        "high_energy",
-        "tempo_slow"
-      ],
+      "genre": ["rock"],
+      "tags": ["high_energy", "tempo_slow"],
       "tempo": 74,
       "key": "E",
       "mode": "major",
       "target_duration": 153,
-      "instruments": [
-        "electricguitar",
-        "classicalguitar",
-        "cello",
-        "bass",
-        "Samples",
-        "horn",
-        "Synthesizer",
-        "Male Lead Vocals"
-      ],
+      "instruments": ["drummachine", "beat", "bass", "String Ensemble", "Electric Guitar (distorted)", "guitar", "Samples", "Male Lead Vocals"],
+      "drum_kit": "Lofi",
+      "vocal_style": "Vocoder",
+      "production_style": "Raw",
       "structure": "intro-verse-chorus-verse-chorus-outro",
+      "kick_pattern": [5, 0, 0, 0, 0, 0, 2, 1, 8, 1, 1, 0, 8, 0, 6, 0],
       "parts": [
         {
-          "part_type": "intro",
-          "part_tags": [],
-          "chords": [
-            "prog_003",
-            "prog_005",
-            "prog_005",
-            "prog_004"
-          ]
+          "entity_type": "intro",
+          "part_tags": ["chill"],
+          "chord_progression": ["V", "hold", "hold", "hold", "vi", "hold", "hold", "hold", "IV", "hold", "hold", "hold", "I", "hold", "vii\u00b0", "vii\u00b0"]
         },
         {
-          "part_type": "verse",
-          "part_tags": [],
-          "chords": [
-            "prog_003",
-            "prog_007",
-            "prog_007",
-            "prog_006",
-            "prog_008",
-            "prog_005"
-          ]
+          "entity_type": "verse",
+          "part_tags": ["mellow"],
+          "chord_progression": ["iii", "hold", "hold", "hold", "ii", "hold", "hold", "hold", "vii\u00b0", "hold", "hold", "hold", "vi", "hold", "ii", "hold"]
         },
         {
-          "part_type": "chorus",
-          "part_tags": [],
-          "chords": [
-            "prog_001",
-            "prog_006",
-            "prog_008",
-            "prog_006",
-            "prog_007",
-            "prog_007",
-            "prog_003",
-            "prog_003"
-          ]
+          "entity_type": "chorus",
+          "part_tags": ["upbeat", "driving"],
+          "chord_progression": ["I", "hold", "hold", "hold", "V", "hold", "I", "hold", "iii", "hold", "ii", "hold", "vi", "hold", "iii", "hold"]
         },
         {
-          "part_type": "verse",
-          "part_tags": [
-            "mellow"
-          ],
-          "chords": [
-            "prog_001",
-            "prog_003",
-            "prog_006"
-          ]
+          "entity_type": "verse",
+          "part_tags": ["upbeat", "chill", "driving"],
+          "chord_progression": ["V", "hold", "hold", "hold", "IV", "hold", "hold", "hold", "IV", "hold", "vi", "hold", "rest", "hold", "iii", "hold"]
         },
         {
-          "part_type": "chorus",
-          "part_tags": [
-            "energetic"
-          ],
-          "chords": [
-            "prog_006",
-            "prog_003",
-            "prog_008"
-          ]
+          "entity_type": "chorus",
+          "part_tags": ["chill", "driving", "dark"],
+          "chord_progression": ["I", "hold", "hold", "hold", "vii\u00b0", "hold", "hold", "hold", "vii\u00b0", "hold", "hold", "hold", "iii", "hold", "IV", "hold"]
         },
         {
-          "part_type": "outro",
-          "part_tags": [
-            "mellow",
-            "upbeat",
-            "chill"
-          ],
-          "chords": [
-            "prog_006",
-            "prog_006",
-            "prog_006",
-            "prog_008",
-            "prog_003",
-            "prog_007",
-            "prog_008"
-          ]
+          "entity_type": "outro",
+          "part_tags": ["chill", "mellow"],
+          "chord_progression": ["vi", "hold", "I", "hold", "hold", "hold", "hold", "hold", "V", "rest", "rest", "hold", "vii\u00b0", "hold", "iii", "hold"]
         }
       ]
-    },
-    "edges": [
-      {
-        "source": "genre=rock",
-        "target": "key=E",
-        "confidence": 0.7
-      },
-      {
-        "source": "genre=rock",
-        "target": "structure=intro-verse-chorus-verse-chorus-outro",
-        "confidence": 0.75
-      },
-      {
-        "source": "tags=tempo_slow",
-        "target": "tags=high_energy",
-        "confidence": 0.3987863025574339
-      },
-      {
-        "source": "tags=tempo_slow",
-        "target": "genre=rock",
-        "confidence": 0.13090593844820114
-      },
-      {
-        "source": "tags=high_energy",
-        "target": "genre=rock",
-        "confidence": 0.16491005626436325
-      },
-      {
-        "source": "genre=rock",
-        "target": "tags=high_energy",
-        "confidence": 0.6874793524942187
-      },
-      {
-        "source": "genre=rock",
-        "target": "instruments=bass",
-        "confidence": 0.7428571428571429
-      },
-      {
-        "source": "instruments=bass",
-        "target": "genre=rock",
-        "confidence": 0.4361602982292637
-      },
-      {
-        "source": "instruments=electricguitar",
-        "target": "instruments=bass",
-        "confidence": 0.8851351351351351
-      },
-      {
-        "source": "instruments=bass",
-        "target": "instruments=electricguitar",
-        "confidence": 0.861842105263158
-      },
-      {
-        "source": "genre=rock",
-        "target": "instruments=electricguitar",
-        "confidence": 0.6666666666666667
-      },
-      {
-        "source": "instruments=electricguitar",
-        "target": "genre=rock",
-        "confidence": 0.4361602982292637
-      },
-      {
-        "source": "instruments=classicalguitar",
-        "target": "instruments=electricguitar",
-        "confidence": 0.44406779661016954
-      },
-      {
-        "source": "instruments=classicalguitar",
-        "target": "instruments=bass",
-        "confidence": 0.4372881355932204
-      },
-      {
-        "source": "instruments=cello",
-        "target": "instruments=bass",
-        "confidence": 0.8851351351351351
-      },
-      {
-        "source": "instruments=cello",
-        "target": "instruments=electricguitar",
-        "confidence": 0.861842105263158
-      },
-      {
-        "source": "instruments=electricguitar",
-        "target": "instruments=cello",
-        "confidence": 0.12208760484622554
-      },
-      {
-        "source": "instruments=bass",
-        "target": "instruments=cello",
-        "confidence": 0.12208760484622554
-      },
-      {
-        "source": "instruments=cello",
-        "target": "instruments=horn",
-        "confidence": 0.23667377398720685
-      },
-      {
-        "source": "instruments=horn",
-        "target": "instruments=cello",
-        "confidence": 0.6416184971098267
-      },
-      {
-        "source": "instruments=Synthesizer",
-        "target": "instruments=Male Lead Vocals",
-        "confidence": 0.6910569105691058
-      },
-      {
-        "source": "instruments=Male Lead Vocals",
-        "target": "instruments=Synthesizer",
-        "confidence": 0.4748603351955308
-      },
-      {
-        "source": "instruments=Samples",
-        "target": "instruments=Synthesizer",
-        "confidence": 0.9538461538461538
-      },
-      {
-        "source": "structure=intro-verse-chorus-verse-chorus-outro",
-        "target": "genre=rock",
-        "confidence": 0.3333333333333333
-      }
-    ]
+    }
   },
   {
     "label": "Slow ambient chill",
     "seed": 3,
     "fixed_values": {
-      "genre": [
-        "ambient"
-      ],
-      "tags": [
-        "chill",
-        "tempo_slow"
-      ]
+      "genre": ["ambient"],
+      "tags": ["chill", "tempo_slow"]
     },
     "song": {
-      "genre": [
-        "ambient"
-      ],
-      "tags": [
-        "chill",
-        "tempo_slow"
-      ],
+      "genre": ["ambient"],
+      "tags": ["chill", "tempo_slow"],
       "tempo": 67,
       "key": "F#",
       "mode": "mixolydian",
       "target_duration": 193,
-      "instruments": [
-        "String Ensemble",
-        "drums",
-        "trombone",
-        "trumpet",
-        "Electric Guitar (clean)",
-        "Male Lead Vocals",
-        "Backing vocals",
-        "classicalguitar"
-      ],
-      "structure": "verse-chorus-verse-chorus-bridge-chorus",
+      "instruments": ["String Ensemble", "drums", "trombone", "trumpet", "Electric Guitar (clean)", "Male Lead Vocals", "Backing vocals", "classicalguitar"],
+      "drum_kit": "Acoustic",
+      "vocal_style": "Vocoder",
+      "production_style": "Vintage",
+      "structure": "verse-verse-chorus-verse-chorus",
+      "kick_pattern": [1, 0, 3, 0, 5, 0, 0, 0, 8, 0, 0, 0, 3, 0, 0, 0],
       "parts": [
         {
-          "part_type": "verse",
-          "part_tags": [
-            "mellow",
-            "driving"
-          ],
-          "chords": [
-            "prog_008",
-            "prog_002",
-            "prog_001",
-            "prog_008",
-            "prog_005",
-            "prog_004"
-          ]
+          "entity_type": "verse",
+          "part_tags": ["mellow"],
+          "chord_progression": ["rest", "hold", "hold", "hold", "iii\u00b0", "hold", "I", "hold", "IV", "hold", "hold", "hold", "IV", "hold", "hold", "hold"]
         },
         {
-          "part_type": "chorus",
-          "part_tags": [
-            "dark"
-          ],
-          "chords": [
-            "prog_008",
-            "prog_008",
-            "prog_007",
-            "prog_003",
-            "prog_004",
-            "prog_003",
-            "prog_007"
-          ]
+          "entity_type": "verse",
+          "part_tags": ["mellow"],
+          "chord_progression": ["VII", "hold", "hold", "hold", "vi", "hold", "rest", "hold", "I", "hold", "hold", "hold", "IV", "hold", "hold", "hold"]
         },
         {
-          "part_type": "verse",
+          "entity_type": "chorus",
           "part_tags": [],
-          "chords": [
-            "prog_002",
-            "prog_003",
-            "prog_001",
-            "prog_005",
-            "prog_001",
-            "prog_005",
-            "prog_008"
-          ]
+          "chord_progression": ["ii", "hold", "hold", "hold", "I", "hold", "hold", "hold", "I", "hold", "rest", "hold", "iii\u00b0", "hold", "hold", "hold"]
         },
         {
-          "part_type": "chorus",
-          "part_tags": [
-            "upbeat",
-            "energetic",
-            "mellow"
-          ],
-          "chords": [
-            "prog_007",
-            "prog_007",
-            "prog_008",
-            "prog_003",
-            "prog_006",
-            "prog_002",
-            "prog_001"
-          ]
+          "entity_type": "verse",
+          "part_tags": ["chill", "mellow"],
+          "chord_progression": ["vi", "hold", "v", "hold", "VII", "hold", "iii\u00b0", "hold", "vi", "hold", "hold", "hold", "iii\u00b0", "hold", "hold", "hold"]
         },
         {
-          "part_type": "bridge",
-          "part_tags": [
-            "dark"
-          ],
-          "chords": [
-            "prog_004",
-            "prog_005",
-            "prog_007",
-            "prog_005",
-            "prog_007"
-          ]
-        },
-        {
-          "part_type": "chorus",
-          "part_tags": [
-            "driving",
-            "dark",
-            "mellow"
-          ],
-          "chords": [
-            "prog_006",
-            "prog_007",
-            "prog_004",
-            "prog_006",
-            "prog_001",
-            "prog_005"
-          ]
+          "entity_type": "chorus",
+          "part_tags": [],
+          "chord_progression": ["VII", "hold", "hold", "hold", "VII", "hold", "hold", "hold", "hold", "hold", "VII", "hold", "vi", "hold", "IV", "hold"]
         }
       ]
-    },
-    "edges": [
-      {
-        "source": "genre=ambient",
-        "target": "tags=chill",
-        "confidence": 0.8
-      },
-      {
-        "source": "instruments=trombone",
-        "target": "instruments=drums",
-        "confidence": 0.7
-      },
-      {
-        "source": "instruments=trumpet",
-        "target": "instruments=trombone",
-        "confidence": 0.5384615384615384
-      },
-      {
-        "source": "instruments=trombone",
-        "target": "instruments=trumpet",
-        "confidence": 0.8959999999999999
-      },
-      {
-        "source": "instruments=drums",
-        "target": "instruments=trombone",
-        "confidence": 0.5384615384615384
-      },
-      {
-        "source": "instruments=trumpet",
-        "target": "instruments=drums",
-        "confidence": 0.7
-      },
-      {
-        "source": "instruments=drums",
-        "target": "instruments=trumpet",
-        "confidence": 0.8959999999999999
-      },
-      {
-        "source": "instruments=classicalguitar",
-        "target": "instruments=drums",
-        "confidence": 0.45084745762711864
-      },
-      {
-        "source": "instruments=Male Lead Vocals",
-        "target": "instruments=Electric Guitar (clean)",
-        "confidence": 0.7418032786885246
-      },
-      {
-        "source": "instruments=Electric Guitar (clean)",
-        "target": "instruments=Male Lead Vocals",
-        "confidence": 0.8497652582159624
-      },
-      {
-        "source": "instruments=Male Lead Vocals",
-        "target": "instruments=Backing vocals",
-        "confidence": 0.70703125
-      },
-      {
-        "source": "instruments=Backing vocals",
-        "target": "instruments=Male Lead Vocals",
-        "confidence": 0.8497652582159624
-      },
-      {
-        "source": "instruments=Backing vocals",
-        "target": "instruments=Electric Guitar (clean)",
-        "confidence": 0.7418032786885246
-      },
-      {
-        "source": "instruments=Electric Guitar (clean)",
-        "target": "instruments=Backing vocals",
-        "confidence": 0.70703125
-      },
-      {
-        "source": "tags=chill",
-        "target": "genre=ambient",
-        "confidence": 1.0
-      }
-    ]
+    }
   },
   {
     "label": "Happy pop",
     "seed": 4,
     "fixed_values": {
-      "genre": [
-        "pop"
-      ],
-      "tags": [
-        "happy_mood",
-        "tempo_fast"
-      ]
+      "genre": ["pop"],
+      "tags": ["happy_mood", "tempo_fast"]
     },
     "song": {
-      "genre": [
-        "pop"
-      ],
-      "tags": [
-        "happy_mood",
-        "tempo_fast"
-      ],
+      "genre": ["pop"],
+      "tags": ["happy_mood", "tempo_fast"],
       "tempo": 120,
       "key": "B",
       "mode": "dorian",
       "target_duration": 370,
-      "instruments": [
-        "violin",
-        "orchestra",
-        "horn",
-        "Piano",
-        "viola",
-        "Acoustic Guitar",
-        "Male Lead Vocals",
-        "brass"
-      ],
-      "structure": "verse-chorus-verse-chorus-verse-chorus",
+      "instruments": ["violin", "horn", "harp", "Female Lead Vocals", "viola", "Acoustic Guitar", "Piano", "brass"],
+      "drum_kit": "Synth_Pop",
+      "vocal_style": "Whisper",
+      "production_style": "Wall_of_Sound",
+      "structure": "intro-verse-bridge-chorus-outro",
+      "kick_pattern": [9, 0, 3, 2, 2, 2, 9, 0, 9, 4, 8, 2, 6, 2, 6, 0],
       "parts": [
         {
-          "part_type": "verse",
-          "part_tags": [],
-          "chords": [
-            "prog_007",
-            "prog_008",
-            "prog_003",
-            "prog_002",
-            "prog_002",
-            "prog_001",
-            "prog_007"
-          ]
+          "entity_type": "intro",
+          "part_tags": ["chill"],
+          "chord_progression": ["VII", "hold", "hold", "hold", "rest", "hold", "rest", "hold", "hold", "hold", "IV", "hold", "vi\u00b0", "hold", "hold", "hold"]
         },
         {
-          "part_type": "chorus",
-          "part_tags": [
-            "mellow",
-            "dark"
-          ],
-          "chords": [
-            "prog_001",
-            "prog_004",
-            "prog_006",
-            "prog_005",
-            "prog_003",
-            "prog_002",
-            "prog_005",
-            "prog_004"
-          ]
+          "entity_type": "verse",
+          "part_tags": ["mellow"],
+          "chord_progression": ["III", "hold", "hold", "hold", "IV", "hold", "rest", "hold", "v", "hold", "hold", "hold", "i", "hold", "hold", "hold"]
         },
         {
-          "part_type": "verse",
-          "part_tags": [],
-          "chords": [
-            "prog_005",
-            "prog_005",
-            "prog_004",
-            "prog_003",
-            "prog_005",
-            "prog_005",
-            "prog_006",
-            "prog_002"
-          ]
+          "entity_type": "bridge",
+          "part_tags": ["chill", "driving", "dark"],
+          "chord_progression": ["ii", "hold", "IV", "hold", "ii", "hold", "hold", "hold", "vi\u00b0", "hold", "ii", "IV", "rest", "hold", "ii", "hold"]
         },
         {
-          "part_type": "chorus",
-          "part_tags": [
-            "chill",
-            "mellow"
-          ],
-          "chords": [
-            "prog_007",
-            "prog_004",
-            "prog_003",
-            "prog_004",
-            "prog_008",
-            "prog_005",
-            "prog_002"
-          ]
+          "entity_type": "chorus",
+          "part_tags": ["upbeat"],
+          "chord_progression": ["rest", "hold", "IV", "hold", "VII", "hold", "IV", "hold", "III", "hold", "hold", "hold", "rest", "hold", "hold", "rest"]
         },
         {
-          "part_type": "verse",
-          "part_tags": [
-            "mellow",
-            "energetic"
-          ],
-          "chords": [
-            "prog_005",
-            "prog_005"
-          ]
-        },
-        {
-          "part_type": "chorus",
-          "part_tags": [
-            "upbeat"
-          ],
-          "chords": [
-            "prog_007",
-            "prog_005",
-            "prog_007",
-            "prog_008",
-            "prog_003"
-          ]
+          "entity_type": "outro",
+          "part_tags": ["driving", "upbeat", "mellow"],
+          "chord_progression": ["rest", "hold", "VII", "hold", "III", "hold", "hold", "hold", "v", "hold", "hold", "hold", "v", "ii", "i", "hold"]
         }
       ]
-    },
-    "edges": [
-      {
-        "source": "tags=tempo_fast",
-        "target": "genre=pop",
-        "confidence": 0.18348144276006273
-      },
-      {
-        "source": "genre=pop",
-        "target": "tags=tempo_fast",
-        "confidence": 0.4006849315068493
-      },
-      {
-        "source": "genre=pop",
-        "target": "tags=happy_mood",
-        "confidence": 0.2733644859813084
-      },
-      {
-        "source": "tags=happy_mood",
-        "target": "genre=pop",
-        "confidence": 0.18348144276006273
-      },
-      {
-        "source": "tags=tempo_fast",
-        "target": "tags=happy_mood",
-        "confidence": 0.2733644859813084
-      },
-      {
-        "source": "tags=happy_mood",
-        "target": "tags=tempo_fast",
-        "confidence": 0.4006849315068493
-      },
-      {
-        "source": "instruments=violin",
-        "target": "instruments=horn",
-        "confidence": 0.14267352185089976
-      },
-      {
-        "source": "instruments=horn",
-        "target": "instruments=violin",
-        "confidence": 0.6416184971098267
-      },
-      {
-        "source": "instruments=violin",
-        "target": "instruments=viola",
-        "confidence": 0.17480719794344474
-      },
-      {
-        "source": "instruments=viola",
-        "target": "instruments=violin",
-        "confidence": 0.7861271676300577
-      },
-      {
-        "source": "instruments=Piano",
-        "target": "instruments=Male Lead Vocals",
-        "confidence": 0.681159420289855
-      },
-      {
-        "source": "instruments=Acoustic Guitar",
-        "target": "instruments=Male Lead Vocals",
-        "confidence": 0.8130081300813009
-      }
-    ]
+    }
   },
   {
     "label": "Jazz minor (seed 5)",
     "seed": 5,
     "fixed_values": {
-      "genre": [
-        "jazz"
-      ],
+      "genre": ["jazz"],
       "mode": "dorian"
     },
     "song": {
-      "genre": [
-        "jazz"
-      ],
+      "genre": ["jazz"],
       "mode": "dorian",
       "tempo": 125,
       "key": "D#",
-      "tags": [
-        "smooth",
-        "Tender / Soft",
-        "space"
-      ],
+      "tags": ["smooth", "Touching / Loving", "space"],
       "target_duration": 427,
-      "instruments": [
-        "classicalguitar",
-        "electricpiano",
-        "piano",
-        "computer",
-        "Samples",
-        "Electric Guitar (clean)",
-        "Bass",
-        "percussion"
-      ],
-      "structure": "intro-verse-chorus-verse-chorus-outro",
+      "instruments": ["classicalguitar", "electricpiano", "piano", "computer", "Samples", "Electric Guitar (clean)", "Bass", "orchestra"],
+      "drum_kit": "Vintage",
+      "vocal_style": "Whisper",
+      "production_style": "Wall_of_Sound",
+      "structure": "verse-verse-chorus-verse-chorus",
+      "kick_pattern": [2, 0, 5, 8, 3, 0, 3, 0, 1, 1, 1, 1, 9, 2, 2, 1],
       "parts": [
         {
-          "part_type": "intro",
+          "entity_type": "verse",
+          "part_tags": ["driving", "dark", "mellow"],
+          "chord_progression": ["VII", "hold", "IV", "hold", "hold", "hold", "hold", "hold", "ii", "hold", "hold", "hold", "v", "hold", "IV", "hold"]
+        },
+        {
+          "entity_type": "verse",
+          "part_tags": ["mellow"],
+          "chord_progression": ["i", "rest", "i", "hold", "i", "hold", "hold", "hold", "i", "hold", "IV", "hold", "vi\u00b0", "hold", "rest", "hold"]
+        },
+        {
+          "entity_type": "chorus",
           "part_tags": [],
-          "chords": [
-            "prog_008",
-            "prog_004",
-            "prog_001",
-            "prog_003",
-            "prog_002",
-            "prog_006",
-            "prog_008",
-            "prog_004"
-          ]
+          "chord_progression": ["VII", "hold", "hold", "hold", "vi\u00b0", "hold", "i", "III", "i", "hold", "hold", "hold", "v", "hold", "i", "hold"]
         },
         {
-          "part_type": "verse",
-          "part_tags": [
-            "driving",
-            "dark",
-            "mellow"
-          ],
-          "chords": [
-            "prog_002",
-            "prog_004",
-            "prog_001",
-            "prog_004",
-            "prog_007",
-            "prog_005"
-          ]
+          "entity_type": "verse",
+          "part_tags": ["mellow"],
+          "chord_progression": ["III", "hold", "hold", "hold", "III", "hold", "vi\u00b0", "hold", "ii", "hold", "hold", "hold", "vi\u00b0", "hold", "hold", "hold"]
         },
         {
-          "part_type": "chorus",
-          "part_tags": [
-            "mellow"
-          ],
-          "chords": [
-            "prog_007",
-            "prog_003",
-            "prog_002",
-            "prog_003",
-            "prog_008",
-            "prog_003",
-            "prog_003",
-            "prog_001"
-          ]
-        },
-        {
-          "part_type": "verse",
+          "entity_type": "chorus",
           "part_tags": [],
-          "chords": [
-            "prog_004",
-            "prog_003",
-            "prog_003"
-          ]
-        },
-        {
-          "part_type": "chorus",
-          "part_tags": [
-            "driving",
-            "upbeat"
-          ],
-          "chords": [
-            "prog_004",
-            "prog_004",
-            "prog_003",
-            "prog_004"
-          ]
-        },
-        {
-          "part_type": "outro",
-          "part_tags": [
-            "mellow",
-            "driving",
-            "upbeat"
-          ],
-          "chords": [
-            "prog_001",
-            "prog_006",
-            "prog_007",
-            "prog_003"
-          ]
+          "chord_progression": ["rest", "hold", "IV", "hold", "hold", "hold", "hold", "hold", "i", "hold", "hold", "hold", "III", "hold", "hold", "hold"]
         }
       ]
-    },
-    "edges": [
-      {
-        "source": "genre=jazz",
-        "target": "mode=dorian",
-        "confidence": 0.65
-      },
-      {
-        "source": "genre=jazz",
-        "target": "tags=smooth",
-        "confidence": 0.65
-      },
-      {
-        "source": "mode=dorian",
-        "target": "tags=smooth",
-        "confidence": 0.65
-      },
-      {
-        "source": "genre=jazz",
-        "target": "instruments=piano",
-        "confidence": 0.35529157667386607
-      },
-      {
-        "source": "instruments=piano",
-        "target": "genre=jazz",
-        "confidence": 0.10401517546632942
-      },
-      {
-        "source": "instruments=electricpiano",
-        "target": "genre=jazz",
-        "confidence": 0.21647509578544058
-      },
-      {
-        "source": "genre=jazz",
-        "target": "instruments=electricpiano",
-        "confidence": 0.12203023758099352
-      },
-      {
-        "source": "instruments=electricpiano",
-        "target": "instruments=piano",
-        "confidence": 0.7045454545454545
-      },
-      {
-        "source": "instruments=electricpiano",
-        "target": "instruments=computer",
-        "confidence": 0.5511111111111111
-      },
-      {
-        "source": "instruments=computer",
-        "target": "instruments=electricpiano",
-        "confidence": 0.5849056603773585
-      },
-      {
-        "source": "instruments=piano",
-        "target": "instruments=computer",
-        "confidence": 0.5511111111111111
-      },
-      {
-        "source": "instruments=computer",
-        "target": "instruments=piano",
-        "confidence": 0.7045454545454545
-      },
-      {
-        "source": "instruments=piano",
-        "target": "instruments=electricpiano",
-        "confidence": 0.5849056603773585
-      },
-      {
-        "source": "instruments=electricpiano",
-        "target": "instruments=classicalguitar",
-        "confidence": 0.22988505747126436
-      },
-      {
-        "source": "instruments=classicalguitar",
-        "target": "instruments=electricpiano",
-        "confidence": 0.4067796610169492
-      },
-      {
-        "source": "instruments=classicalguitar",
-        "target": "instruments=piano",
-        "confidence": 0.35593220338983056
-      },
-      {
-        "source": "instruments=Bass",
-        "target": "instruments=Electric Guitar (clean)",
-        "confidence": 0.7084282460136674
-      },
-      {
-        "source": "instruments=Electric Guitar (clean)",
-        "target": "instruments=Bass",
-        "confidence": 0.9873015873015872
-      },
-      {
-        "source": "tags=Tender / Soft",
-        "target": "instruments=Bass",
-        "confidence": 0.9830508474576273
-      },
-      {
-        "source": "tags=Tender / Soft",
-        "target": "instruments=Electric Guitar (clean)",
-        "confidence": 0.6987951807228916
-      },
-      {
-        "source": "tags=smooth",
-        "target": "genre=jazz",
-        "confidence": 1.0
-      }
-    ]
+    }
   },
   {
     "label": "Dark electronic",
     "seed": 6,
     "fixed_values": {
-      "genre": [
-        "electronic"
-      ],
-      "tags": [
-        "dark_mood",
-        "high_energy",
-        "tempo_slow"
-      ]
+      "genre": ["electronic"],
+      "tags": ["dark_mood", "high_energy", "tempo_slow"]
     },
     "song": {
-      "genre": [
-        "electronic"
-      ],
-      "tags": [
-        "dark_mood",
-        "high_energy",
-        "tempo_slow"
-      ],
+      "genre": ["electronic"],
+      "tags": ["dark_mood", "high_energy", "tempo_slow"],
       "tempo": 80,
       "key": "A#",
       "mode": "minor",
       "target_duration": 556,
-      "instruments": [
-        "saxophone",
-        "Backing vocals",
-        "Drum Set",
-        "electricpiano",
-        "drummachine",
-        "cello",
-        "bass",
-        "horn"
-      ],
+      "instruments": ["sampler", "Backing vocals", "Drum Set", "electricguitar", "drummachine", "brass", "Synthesizer", "guitar"],
+      "drum_kit": "Vintage",
+      "vocal_style": "Harmonized",
+      "production_style": "Lo-Fi",
       "structure": "intro-verse-chorus-verse-chorus-outro",
+      "kick_pattern": [9, 0, 7, 0, 9, 0, 2, 1, 9, 0, 3, 2, 4, 1, 8, 0],
       "parts": [
         {
-          "part_type": "intro",
-          "part_tags": [
-            "chill",
-            "mellow"
-          ],
-          "chords": [
-            "prog_001",
-            "prog_003"
-          ]
+          "entity_type": "intro",
+          "part_tags": ["mellow", "upbeat", "driving"],
+          "chord_progression": ["rest", "hold", "ii\u00b0", "hold", "III", "hold", "hold", "hold", "v", "hold", "VII", "hold", "hold", "hold", "hold", "VI"]
         },
         {
-          "part_type": "verse",
-          "part_tags": [
-            "mellow",
-            "chill",
-            "upbeat"
-          ],
-          "chords": [
-            "prog_006",
-            "prog_006",
-            "prog_001",
-            "prog_005",
-            "prog_008",
-            "prog_004",
-            "prog_007",
-            "prog_002"
-          ]
+          "entity_type": "verse",
+          "part_tags": ["driving", "upbeat", "mellow"],
+          "chord_progression": ["VI", "hold", "VII", "hold", "hold", "hold", "hold", "hold", "ii\u00b0", "hold", "iv", "hold", "iv", "hold", "hold", "hold"]
         },
         {
-          "part_type": "chorus",
-          "part_tags": [
-            "dark"
-          ],
-          "chords": [
-            "prog_005",
-            "prog_002",
-            "prog_007",
-            "prog_006",
-            "prog_002",
-            "prog_006"
-          ]
+          "entity_type": "chorus",
+          "part_tags": ["chill", "upbeat", "mellow"],
+          "chord_progression": ["VI", "hold", "v", "hold", "VII", "hold", "hold", "hold", "i", "hold", "III", "ii\u00b0", "rest", "hold", "hold", "hold"]
         },
         {
-          "part_type": "verse",
-          "part_tags": [
-            "dark",
-            "upbeat",
-            "energetic"
-          ],
-          "chords": [
-            "prog_005",
-            "prog_008",
-            "prog_002",
-            "prog_004",
-            "prog_005",
-            "prog_002",
-            "prog_001",
-            "prog_004"
-          ]
+          "entity_type": "verse",
+          "part_tags": ["mellow"],
+          "chord_progression": ["iv", "hold", "hold", "hold", "III", "hold", "hold", "hold", "iv", "hold", "hold", "hold", "hold", "hold", "III", "hold"]
         },
         {
-          "part_type": "chorus",
-          "part_tags": [
-            "dark",
-            "upbeat"
-          ],
-          "chords": [
-            "prog_004",
-            "prog_001",
-            "prog_006",
-            "prog_004",
-            "prog_007"
-          ]
+          "entity_type": "chorus",
+          "part_tags": ["mellow", "driving", "chill"],
+          "chord_progression": ["rest", "hold", "hold", "hold", "VI", "hold", "rest", "hold", "rest", "hold", "hold", "hold", "VI", "hold", "hold", "hold"]
         },
         {
-          "part_type": "outro",
-          "part_tags": [
-            "mellow",
-            "energetic"
-          ],
-          "chords": [
-            "prog_002",
-            "prog_002",
-            "prog_004",
-            "prog_002"
-          ]
+          "entity_type": "outro",
+          "part_tags": ["upbeat", "dark", "chill"],
+          "chord_progression": ["ii\u00b0", "hold", "hold", "hold", "hold", "hold", "ii\u00b0", "hold", "rest", "hold", "hold", "hold", "III", "hold", "i", "hold"]
         }
       ]
-    },
-    "edges": [
-      {
-        "source": "tags=dark_mood",
-        "target": "mode=minor",
-        "confidence": 0.85
-      },
-      {
-        "source": "genre=electronic",
-        "target": "mode=minor",
-        "confidence": 0.85
-      },
-      {
-        "source": "mode=minor",
-        "target": "tags=dark_mood",
-        "confidence": 0.7
-      },
-      {
-        "source": "tags=tempo_slow",
-        "target": "tags=high_energy",
-        "confidence": 0.3987863025574339
-      },
-      {
-        "source": "tags=tempo_slow",
-        "target": "tags=dark_mood",
-        "confidence": 0.2436064152579107
-      },
-      {
-        "source": "tags=dark_mood",
-        "target": "tags=tempo_slow",
-        "confidence": 0.11222044728434505
-      },
-      {
-        "source": "tags=high_energy",
-        "target": "tags=dark_mood",
-        "confidence": 0.2123781599175846
-      },
-      {
-        "source": "tags=dark_mood",
-        "target": "tags=high_energy",
-        "confidence": 0.5351437699680511
-      },
-      {
-        "source": "instruments=bass",
-        "target": "genre=electronic",
-        "confidence": 0.16659583510412238
-      },
-      {
-        "source": "instruments=electricpiano",
-        "target": "instruments=bass",
-        "confidence": 0.9579831932773109
-      },
-      {
-        "source": "instruments=bass",
-        "target": "instruments=electricpiano",
-        "confidence": 0.756578947368421
-      },
-      {
-        "source": "instruments=electricpiano",
-        "target": "instruments=drummachine",
-        "confidence": 0.47302904564315357
-      },
-      {
-        "source": "instruments=drummachine",
-        "target": "instruments=electricpiano",
-        "confidence": 0.44357976653696496
-      },
-      {
-        "source": "instruments=electricpiano",
-        "target": "genre=electronic",
-        "confidence": 0.3333333333333333
-      },
-      {
-        "source": "instruments=drummachine",
-        "target": "instruments=bass",
-        "confidence": 0.7862068965517242
-      },
-      {
-        "source": "instruments=bass",
-        "target": "instruments=drummachine",
-        "confidence": 0.47302904564315357
-      },
-      {
-        "source": "instruments=drummachine",
-        "target": "genre=electronic",
-        "confidence": 0.5078014184397164
-      },
-      {
-        "source": "instruments=cello",
-        "target": "instruments=bass",
-        "confidence": 0.9274193548387097
-      },
-      {
-        "source": "instruments=electricpiano",
-        "target": "instruments=cello",
-        "confidence": 0.4771784232365145
-      },
-      {
-        "source": "instruments=cello",
-        "target": "instruments=electricpiano",
-        "confidence": 0.756578947368421
-      },
-      {
-        "source": "instruments=cello",
-        "target": "instruments=drummachine",
-        "confidence": 0.2601279317697228
-      },
-      {
-        "source": "instruments=drummachine",
-        "target": "instruments=cello",
-        "confidence": 0.17304964539007095
-      },
-      {
-        "source": "instruments=bass",
-        "target": "instruments=cello",
-        "confidence": 0.4771784232365145
-      },
-      {
-        "source": "instruments=cello",
-        "target": "instruments=horn",
-        "confidence": 0.23667377398720685
-      },
-      {
-        "source": "instruments=horn",
-        "target": "instruments=cello",
-        "confidence": 0.6416184971098267
-      },
-      {
-        "source": "instruments=saxophone",
-        "target": "instruments=bass",
-        "confidence": 0.9579831932773109
-      },
-      {
-        "source": "instruments=electricpiano",
-        "target": "instruments=saxophone",
-        "confidence": 0.47302904564315357
-      },
-      {
-        "source": "instruments=saxophone",
-        "target": "instruments=electricpiano",
-        "confidence": 0.5205479452054795
-      },
-      {
-        "source": "instruments=bass",
-        "target": "instruments=saxophone",
-        "confidence": 0.47302904564315357
-      },
-      {
-        "source": "instruments=Backing vocals",
-        "target": "instruments=Drum Set",
-        "confidence": 0.9133333333333334
-      },
-      {
-        "source": "instruments=Drum Set",
-        "target": "instruments=Backing vocals",
-        "confidence": 0.65083135391924
-      },
-      {
-        "source": "structure=intro-verse-chorus-verse-chorus-outro",
-        "target": "genre=electronic",
-        "confidence": 0.3333333333333333
-      },
-      {
-        "source": "genre=electronic",
-        "target": "structure=intro-verse-chorus-verse-chorus-outro",
-        "confidence": 0.5
-      }
-    ]
+    }
   },
   {
     "label": "Fast upbeat rap",
     "seed": 7,
     "fixed_values": {
-      "genre": [
-        "rap"
-      ],
-      "tags": [
-        "tempo_fast",
-        "high_energy"
-      ]
+      "genre": ["rap"],
+      "tags": ["tempo_fast", "high_energy"]
     },
     "song": {
-      "genre": [
-        "rap"
-      ],
-      "tags": [
-        "tempo_fast",
-        "high_energy"
-      ],
+      "genre": ["rap"],
+      "tags": ["tempo_fast", "high_energy"],
       "tempo": 130,
       "key": "C",
       "mode": "mixolydian",
       "target_duration": 214,
-      "instruments": [
-        "classicalguitar",
-        "orchestra",
-        "voice",
-        "drums",
-        "doublebass",
-        "Drum Machine",
-        "Samples",
-        "computer"
-      ],
-      "structure": "verse-chorus-verse-chorus-verse-chorus",
+      "instruments": ["beat", "keyboard", "violin", "drummachine", "computer", "Bass", "Samples", "doublebass"],
+      "drum_kit": "Synth_Pop",
+      "vocal_style": "Rap",
+      "production_style": "Polished",
+      "structure": "verse-chorus-verse-chorus-bridge-chorus",
+      "kick_pattern": [4, 0, 5, 0, 9, 7, 2, 0, 9, 1, 4, 7, 4, 8, 7, 9],
       "parts": [
         {
-          "part_type": "verse",
-          "part_tags": [
-            "upbeat",
-            "mellow",
-            "energetic"
-          ],
-          "chords": [
-            "prog_001",
-            "prog_002",
-            "prog_002",
-            "prog_006",
-            "prog_001",
-            "prog_004",
-            "prog_001"
-          ]
+          "entity_type": "verse",
+          "part_tags": ["dark", "upbeat", "chill"],
+          "chord_progression": ["IV", "hold", "ii", "hold", "iii\u00b0", "hold", "hold", "hold", "ii", "hold", "I", "hold", "IV", "hold", "hold", "hold"]
         },
         {
-          "part_type": "chorus",
-          "part_tags": [],
-          "chords": [
-            "prog_007",
-            "prog_002",
-            "prog_004",
-            "prog_002",
-            "prog_007"
-          ]
+          "entity_type": "chorus",
+          "part_tags": ["driving", "upbeat"],
+          "chord_progression": ["I", "hold", "hold", "hold", "vi", "hold", "ii", "hold", "vi", "hold", "IV", "hold", "vi", "hold", "hold", "hold"]
         },
         {
-          "part_type": "verse",
-          "part_tags": [],
-          "chords": [
-            "prog_002",
-            "prog_004",
-            "prog_001",
-            "prog_007",
-            "prog_001",
-            "prog_004",
-            "prog_001",
-            "prog_003"
-          ]
+          "entity_type": "verse",
+          "part_tags": ["chill", "mellow"],
+          "chord_progression": ["VII", "hold", "rest", "hold", "vi", "hold", "VII", "hold", "iii\u00b0", "hold", "I", "hold", "ii", "hold", "IV", "hold"]
         },
         {
-          "part_type": "chorus",
-          "part_tags": [
-            "driving",
-            "chill"
-          ],
-          "chords": [
-            "prog_003",
-            "prog_002",
-            "prog_005",
-            "prog_003",
-            "prog_002"
-          ]
+          "entity_type": "chorus",
+          "part_tags": ["upbeat", "dark", "driving"],
+          "chord_progression": ["v", "hold", "vi", "hold", "ii", "hold", "VII", "hold", "v", "hold", "hold", "hold", "rest", "hold", "hold", "hold"]
         },
         {
-          "part_type": "verse",
-          "part_tags": [
-            "mellow"
-          ],
-          "chords": [
-            "prog_002",
-            "prog_002",
-            "prog_001",
-            "prog_004"
-          ]
+          "entity_type": "bridge",
+          "part_tags": ["upbeat", "chill", "driving"],
+          "chord_progression": ["rest", "hold", "VII", "hold", "iii\u00b0", "I", "hold", "hold", "hold", "hold", "vi", "hold", "v", "hold", "hold", "vi"]
         },
         {
-          "part_type": "chorus",
-          "part_tags": [
-            "mellow",
-            "chill",
-            "energetic"
-          ],
-          "chords": [
-            "prog_007",
-            "prog_006",
-            "prog_008",
-            "prog_008",
-            "prog_006",
-            "prog_005",
-            "prog_004"
-          ]
+          "entity_type": "chorus",
+          "part_tags": ["upbeat", "driving"],
+          "chord_progression": ["v", "hold", "hold", "hold", "v", "hold", "VII", "hold", "VII", "hold", "hold", "hold", "rest", "hold", "hold", "hold"]
         }
       ]
-    },
-    "edges": [
-      {
-        "source": "tags=high_energy",
-        "target": "tags=tempo_fast",
-        "confidence": 0.7
-      },
-      {
-        "source": "tags=tempo_fast",
-        "target": "tags=high_energy",
-        "confidence": 0.7085881753312946
-      },
-      {
-        "source": "tags=tempo_fast",
-        "target": "genre=rap",
-        "confidence": 0.13162589194699287
-      },
-      {
-        "source": "genre=rap",
-        "target": "tags=tempo_fast",
-        "confidence": 0.2931328036322361
-      },
-      {
-        "source": "genre=rap",
-        "target": "tags=high_energy",
-        "confidence": 0.5266742338251986
-      },
-      {
-        "source": "tags=high_energy",
-        "target": "genre=rap",
-        "confidence": 0.1470798003011332
-      },
-      {
-        "source": "instruments=voice",
-        "target": "instruments=drums",
-        "confidence": 0.5801526717557252
-      },
-      {
-        "source": "instruments=drums",
-        "target": "instruments=voice",
-        "confidence": 0.1521216973578863
-      },
-      {
-        "source": "instruments=computer",
-        "target": "instruments=voice",
-        "confidence": 0.12056737588652484
-      },
-      {
-        "source": "instruments=voice",
-        "target": "instruments=computer",
-        "confidence": 0.15572519083969466
-      },
-      {
-        "source": "instruments=classicalguitar",
-        "target": "instruments=drums",
-        "confidence": 0.45084745762711864
-      },
-      {
-        "source": "instruments=computer",
-        "target": "instruments=drums",
-        "confidence": 0.22340425531914895
-      },
-      {
-        "source": "instruments=Samples",
-        "target": "instruments=Drum Machine",
-        "confidence": 0.8461538461538461
-      },
-      {
-        "source": "instruments=Drum Machine",
-        "target": "instruments=Samples",
-        "confidence": 0.5339805825242718
-      }
-    ]
+    }
   },
   {
     "label": "Mellow r&b",
     "seed": 8,
     "fixed_values": {
-      "genre": [
-        "r&b"
-      ],
-      "tags": [
-        "neutral_mood",
-        "low_energy",
-        "tempo_moderate"
-      ]
+      "genre": ["r&b"],
+      "tags": ["neutral_mood", "low_energy", "tempo_moderate"]
     },
     "song": {
-      "genre": [
-        "r&b"
-      ],
-      "tags": [
-        "neutral_mood",
-        "low_energy",
-        "tempo_moderate"
-      ],
+      "genre": ["r&b"],
+      "tags": ["neutral_mood", "low_energy", "tempo_moderate"],
       "tempo": 118,
       "key": "A#",
       "mode": "phrygian",
       "target_duration": 439,
-      "instruments": [
-        "synthesizer",
-        "drums",
-        "Samples",
-        "Acoustic Guitar",
-        "beat",
-        "bass",
-        "doublebass",
-        "classicalguitar"
-      ],
-      "structure": "intro-verse-chorus-verse-chorus-outro",
+      "instruments": ["synthesizer", "drums", "Sequencer", "Acoustic Guitar", "beat", "bass", "drummachine", "computer"],
+      "drum_kit": "Lofi",
+      "vocal_style": "Vocoder",
+      "production_style": "Vintage",
+      "structure": "verse-chorus-verse-chorus-verse-chorus",
+      "kick_pattern": [8, 0, 9, 0, 9, 0, 5, 9, 8, 1, 4, 0, 2, 1, 8, 0],
       "parts": [
         {
-          "part_type": "intro",
-          "part_tags": [
-            "chill",
-            "upbeat",
-            "mellow"
-          ],
-          "chords": [
-            "prog_004",
-            "prog_001",
-            "prog_002"
-          ]
+          "entity_type": "verse",
+          "part_tags": ["mellow"],
+          "chord_progression": ["v\u00b0", "hold", "II", "hold", "v\u00b0", "hold", "hold", "hold", "iv", "hold", "v\u00b0", "hold", "hold", "hold", "hold", "hold"]
         },
         {
-          "part_type": "verse",
-          "part_tags": [
-            "mellow"
-          ],
-          "chords": [
-            "prog_004",
-            "prog_007",
-            "prog_001"
-          ]
-        },
-        {
-          "part_type": "chorus",
-          "part_tags": [
-            "chill",
-            "mellow",
-            "driving"
-          ],
-          "chords": [
-            "prog_008",
-            "prog_007",
-            "prog_008",
-            "prog_004",
-            "prog_007"
-          ]
-        },
-        {
-          "part_type": "verse",
+          "entity_type": "chorus",
           "part_tags": [],
-          "chords": [
-            "prog_004",
-            "prog_001",
-            "prog_005",
-            "prog_007",
-            "prog_008"
-          ]
+          "chord_progression": ["VI", "hold", "rest", "hold", "iv", "hold", "III", "hold", "rest", "hold", "hold", "VI", "iv", "hold", "hold", "v\u00b0"]
         },
         {
-          "part_type": "chorus",
-          "part_tags": [
-            "energetic",
-            "chill",
-            "mellow"
-          ],
-          "chords": [
-            "prog_002",
-            "prog_005",
-            "prog_002",
-            "prog_002",
-            "prog_007",
-            "prog_007",
-            "prog_002"
-          ]
+          "entity_type": "verse",
+          "part_tags": ["driving", "dark", "upbeat"],
+          "chord_progression": ["rest", "hold", "vii", "hold", "hold", "hold", "iv", "hold", "hold", "hold", "hold", "hold", "rest", "hold", "II", "hold"]
         },
         {
-          "part_type": "outro",
+          "entity_type": "chorus",
           "part_tags": [],
-          "chords": [
-            "prog_004",
-            "prog_002",
-            "prog_008",
-            "prog_004"
-          ]
+          "chord_progression": ["i", "hold", "v\u00b0", "hold", "v\u00b0", "hold", "rest", "hold", "vii", "hold", "iv", "hold", "VI", "hold", "iv", "hold"]
+        },
+        {
+          "entity_type": "verse",
+          "part_tags": ["dark", "driving", "chill"],
+          "chord_progression": ["v\u00b0", "hold", "rest", "hold", "i", "hold", "hold", "hold", "vii", "hold", "VI", "hold", "hold", "hold", "iv", "hold"]
+        },
+        {
+          "entity_type": "chorus",
+          "part_tags": [],
+          "chord_progression": ["iv", "hold", "hold", "hold", "III", "hold", "hold", "vii", "v\u00b0", "hold", "hold", "hold", "i", "hold", "hold", "hold"]
         }
       ]
-    },
-    "edges": [
-      {
-        "source": "genre=r&b",
-        "target": "tags=neutral_mood",
-        "confidence": 0.4675285628382441
-      },
-      {
-        "source": "tags=neutral_mood",
-        "target": "genre=r&b",
-        "confidence": 0.19914738124238732
-      },
-      {
-        "source": "tags=tempo_moderate",
-        "target": "genre=r&b",
-        "confidence": 0.20807061790668346
-      },
-      {
-        "source": "genre=r&b",
-        "target": "tags=tempo_moderate",
-        "confidence": 0.44648226097414306
-      },
-      {
-        "source": "tags=tempo_moderate",
-        "target": "tags=neutral_mood",
-        "confidence": 0.460137312596329
-      },
-      {
-        "source": "tags=neutral_mood",
-        "target": "tags=tempo_moderate",
-        "confidence": 0.42057877813504824
-      },
-      {
-        "source": "tags=low_energy",
-        "target": "tags=neutral_mood",
-        "confidence": 0.40326975476839233
-      },
-      {
-        "source": "tags=low_energy",
-        "target": "tags=tempo_moderate",
-        "confidence": 0.28610354223433243
-      },
-      {
-        "source": "tags=low_energy",
-        "target": "genre=r&b",
-        "confidence": 0.3514986376021798
-      },
-      {
-        "source": "instruments=synthesizer",
-        "target": "instruments=drums",
-        "confidence": 0.7448512585812357
-      },
-      {
-        "source": "instruments=drums",
-        "target": "instruments=synthesizer",
-        "confidence": 0.3767361111111111
-      },
-      {
-        "source": "instruments=drums",
-        "target": "instruments=bass",
-        "confidence": 0.7969924812030076
-      },
-      {
-        "source": "instruments=bass",
-        "target": "instruments=drums",
-        "confidence": 0.8217054263565892
-      },
-      {
-        "source": "instruments=synthesizer",
-        "target": "instruments=bass",
-        "confidence": 0.7508650519031143
-      },
-      {
-        "source": "instruments=bass",
-        "target": "instruments=synthesizer",
-        "confidence": 0.3767361111111111
-      },
-      {
-        "source": "instruments=classicalguitar",
-        "target": "instruments=drums",
-        "confidence": 0.8217054263565892
-      },
-      {
-        "source": "instruments=classicalguitar",
-        "target": "instruments=bass",
-        "confidence": 0.7969924812030076
-      }
-    ]
+    }
   },
   {
     "label": "Long epic (tempo=128)",
     "seed": 9,
     "fixed_values": {
       "tempo": 128,
-      "tags": [
-        "long"
-      ]
+      "tags": ["long"]
     },
     "song": {
       "tempo": 128,
-      "tags": [
-        "long"
-      ],
+      "tags": ["long"],
       "key": "C",
       "mode": "dorian",
-      "genre": [
-        "industrial"
-      ],
+      "genre": ["instrumentalpop"],
       "target_duration": 537,
-      "instruments": [
-        "Electric Guitar (clean)",
-        "Drum Set",
-        "Male Lead Vocals",
-        "cello",
-        "String Ensemble",
-        "Bass",
-        "classicalguitar",
-        "Samples"
-      ],
-      "structure": "intro-verse-bridge-chorus-outro",
+      "instruments": ["Electric Guitar (clean)", "Drum Set", "Male Lead Vocals", "cello", "String Ensemble", "Bass", "classicalguitar", "Samples"],
+      "drum_kit": "Metal_Kit",
+      "vocal_style": "None",
+      "production_style": "Raw",
+      "structure": "verse-chorus-verse-chorus-verse-chorus",
+      "kick_pattern": [9, 1, 0, 0, 8, 0, 2, 0, 4, 7, 1, 0, 8, 2, 4, 0],
       "parts": [
         {
-          "part_type": "intro",
-          "part_tags": [
-            "chill",
-            "energetic"
-          ],
-          "chords": [
-            "prog_003",
-            "prog_003",
-            "prog_001",
-            "prog_006"
-          ]
+          "entity_type": "verse",
+          "part_tags": ["mellow"],
+          "chord_progression": ["rest", "hold", "III", "hold", "rest", "hold", "hold", "hold", "vi\u00b0", "hold", "i", "rest", "III", "hold", "III", "hold"]
         },
         {
-          "part_type": "verse",
-          "part_tags": [
-            "mellow",
-            "dark",
-            "upbeat"
-          ],
-          "chords": [
-            "prog_002",
-            "prog_006",
-            "prog_001",
-            "prog_007",
-            "prog_003",
-            "prog_008"
-          ]
-        },
-        {
-          "part_type": "bridge",
-          "part_tags": [
-            "dark",
-            "upbeat",
-            "chill"
-          ],
-          "chords": [
-            "prog_003",
-            "prog_004",
-            "prog_001"
-          ]
-        },
-        {
-          "part_type": "chorus",
+          "entity_type": "chorus",
           "part_tags": [],
-          "chords": [
-            "prog_002",
-            "prog_007",
-            "prog_002"
-          ]
+          "chord_progression": ["vi\u00b0", "hold", "hold", "hold", "III", "hold", "IV", "hold", "III", "hold", "hold", "hold", "vi\u00b0", "hold", "v", "hold"]
         },
         {
-          "part_type": "outro",
-          "part_tags": [
-            "mellow",
-            "chill"
-          ],
-          "chords": [
-            "prog_004",
-            "prog_007",
-            "prog_002"
-          ]
+          "entity_type": "verse",
+          "part_tags": ["upbeat", "mellow"],
+          "chord_progression": ["v", "hold", "v", "hold", "i", "hold", "vi\u00b0", "hold", "vi\u00b0", "hold", "hold", "hold", "i", "hold", "hold", "hold"]
+        },
+        {
+          "entity_type": "chorus",
+          "part_tags": [],
+          "chord_progression": ["i", "hold", "hold", "hold", "ii", "hold", "i", "hold", "v", "hold", "III", "hold", "ii", "hold", "hold", "hold"]
+        },
+        {
+          "entity_type": "verse",
+          "part_tags": ["mellow"],
+          "chord_progression": ["IV", "hold", "hold", "hold", "III", "hold", "hold", "hold", "ii", "hold", "VII", "hold", "ii", "hold", "hold", "hold"]
+        },
+        {
+          "entity_type": "chorus",
+          "part_tags": [],
+          "chord_progression": ["IV", "hold", "hold", "hold", "i", "hold", "VII", "v", "vi\u00b0", "hold", "vi\u00b0", "hold", "IV", "hold", "hold", "hold"]
         }
       ]
-    },
-    "edges": [
-      {
-        "source": "instruments=Bass",
-        "target": "instruments=Drum Set",
-        "confidence": 0.984313725490196
-      },
-      {
-        "source": "instruments=Drum Set",
-        "target": "instruments=Bass",
-        "confidence": 1.0
-      },
-      {
-        "source": "instruments=Male Lead Vocals",
-        "target": "instruments=Bass",
-        "confidence": 1.0
-      },
-      {
-        "source": "instruments=Bass",
-        "target": "instruments=Male Lead Vocals",
-        "confidence": 0.8283828382838284
-      },
-      {
-        "source": "instruments=Male Lead Vocals",
-        "target": "instruments=Drum Set",
-        "confidence": 0.984313725490196
-      },
-      {
-        "source": "instruments=Drum Set",
-        "target": "instruments=Male Lead Vocals",
-        "confidence": 0.8283828382838284
-      },
-      {
-        "source": "instruments=Bass",
-        "target": "instruments=Electric Guitar (clean)",
-        "confidence": 0.7819314641744548
-      },
-      {
-        "source": "instruments=Electric Guitar (clean)",
-        "target": "instruments=Bass",
-        "confidence": 1.0
-      },
-      {
-        "source": "instruments=Drum Set",
-        "target": "instruments=Electric Guitar (clean)",
-        "confidence": 0.7819314641744548
-      },
-      {
-        "source": "instruments=Electric Guitar (clean)",
-        "target": "instruments=Drum Set",
-        "confidence": 0.984313725490196
-      },
-      {
-        "source": "instruments=Male Lead Vocals",
-        "target": "instruments=Electric Guitar (clean)",
-        "confidence": 0.7819314641744548
-      },
-      {
-        "source": "instruments=Electric Guitar (clean)",
-        "target": "instruments=Male Lead Vocals",
-        "confidence": 0.8283828382838284
-      }
-    ]
+    }
   },
   {
     "label": "Short energetic (seed 10)",
     "seed": 10,
     "fixed_values": {
-      "tags": [
-        "tempo_very_fast",
-        "high_energy",
-        "short"
-      ]
+      "tags": ["tempo_very_fast", "high_energy", "short"]
     },
     "song": {
-      "tags": [
-        "tempo_very_fast",
-        "high_energy",
-        "short"
-      ],
+      "tags": ["tempo_very_fast", "high_energy", "short"],
       "tempo": 186,
       "key": "A",
       "mode": "major",
-      "genre": [
-        "newage"
-      ],
+      "genre": ["newage"],
       "target_duration": 62,
-      "instruments": [
-        "piano",
-        "doublebass",
-        "Piano",
-        "Electric Guitar (clean)",
-        "percussion",
-        "Drum Set",
-        "Bass",
-        "keyboard"
-      ],
-      "structure": "intro-verse-bridge-chorus-outro",
+      "instruments": ["orchestra", "classicalguitar", "Female Lead Vocals", "Electric Guitar (distorted)", "percussion", "Drum Set", "Bass", "horn"],
+      "drum_kit": "Metal_Kit",
+      "vocal_style": "Clean",
+      "production_style": "Lo-Fi",
+      "structure": "verse-chorus-verse-chorus-verse-chorus",
+      "kick_pattern": [8, 0, 5, 9, 4, 9, 2, 0, 9, 3, 8, 6, 2, 1, 1, 1],
       "parts": [
         {
-          "part_type": "intro",
-          "part_tags": [
-            "energetic",
-            "chill",
-            "upbeat"
-          ],
-          "chords": [
-            "prog_001",
-            "prog_004",
-            "prog_008",
-            "prog_008",
-            "prog_005"
-          ]
+          "entity_type": "verse",
+          "part_tags": ["mellow"],
+          "chord_progression": ["I", "hold", "rest", "hold", "rest", "hold", "ii", "hold", "ii", "hold", "hold", "hold", "hold", "hold", "V", "hold"]
         },
         {
-          "part_type": "verse",
-          "part_tags": [
-            "mellow"
-          ],
-          "chords": [
-            "prog_008",
-            "prog_006"
-          ]
+          "entity_type": "chorus",
+          "part_tags": ["upbeat", "dark", "mellow"],
+          "chord_progression": ["vi", "hold", "ii", "hold", "I", "hold", "V", "hold", "vi", "hold", "hold", "hold", "ii", "hold", "hold", "hold"]
         },
         {
-          "part_type": "bridge",
-          "part_tags": [],
-          "chords": [
-            "prog_006",
-            "prog_001",
-            "prog_007"
-          ]
+          "entity_type": "verse",
+          "part_tags": ["mellow"],
+          "chord_progression": ["V", "hold", "ii", "hold", "ii", "hold", "hold", "hold", "I", "hold", "hold", "hold", "V", "hold", "vii\u00b0", "hold"]
         },
         {
-          "part_type": "chorus",
-          "part_tags": [
-            "driving"
-          ],
-          "chords": [
-            "prog_006",
-            "prog_007",
-            "prog_007",
-            "prog_005",
-            "prog_005",
-            "prog_008"
-          ]
+          "entity_type": "chorus",
+          "part_tags": ["driving", "chill", "mellow"],
+          "chord_progression": ["vi", "hold", "hold", "hold", "IV", "hold", "hold", "hold", "IV", "hold", "hold", "hold", "V", "hold", "hold", "hold"]
         },
         {
-          "part_type": "outro",
-          "part_tags": [
-            "dark"
-          ],
-          "chords": [
-            "prog_005",
-            "prog_006",
-            "prog_003",
-            "prog_008",
-            "prog_004",
-            "prog_008",
-            "prog_007"
-          ]
+          "entity_type": "verse",
+          "part_tags": ["mellow"],
+          "chord_progression": ["IV", "hold", "rest", "vi", "I", "hold", "hold", "hold", "V", "hold", "hold", "hold", "I", "hold", "V", "hold"]
+        },
+        {
+          "entity_type": "chorus",
+          "part_tags": ["driving", "mellow", "upbeat"],
+          "chord_progression": ["I", "hold", "hold", "hold", "ii", "hold", "hold", "hold", "iii", "IV", "hold", "hold", "vi", "hold", "iii", "hold"]
         }
       ]
-    },
-    "edges": [
-      {
-        "source": "tags=tempo_very_fast",
-        "target": "tags=high_energy",
-        "confidence": 0.6506646971935007
-      },
-      {
-        "source": "tags=high_energy",
-        "target": "tags=tempo_very_fast",
-        "confidence": 0.13963071558760598
-      },
-      {
-        "source": "genre=newage",
-        "target": "instruments=piano",
-        "confidence": 0.20960187353629975
-      },
-      {
-        "source": "instruments=keyboard",
-        "target": "instruments=piano",
-        "confidence": 0.23049645390070925
-      },
-      {
-        "source": "instruments=keyboard",
-        "target": "instruments=percussion",
-        "confidence": 0.24822695035460995
-      },
-      {
-        "source": "instruments=percussion",
-        "target": "instruments=keyboard",
-        "confidence": 0.5691056910569106
-      },
-      {
-        "source": "instruments=Bass",
-        "target": "instruments=Drum Set",
-        "confidence": 0.9864864864864865
-      },
-      {
-        "source": "instruments=Drum Set",
-        "target": "instruments=Bass",
-        "confidence": 1.0
-      },
-      {
-        "source": "instruments=Bass",
-        "target": "instruments=Electric Guitar (clean)",
-        "confidence": 0.7390243902439024
-      },
-      {
-        "source": "instruments=Electric Guitar (clean)",
-        "target": "instruments=Bass",
-        "confidence": 1.0
-      },
-      {
-        "source": "instruments=Drum Set",
-        "target": "instruments=Electric Guitar (clean)",
-        "confidence": 0.7390243902439024
-      },
-      {
-        "source": "instruments=Electric Guitar (clean)",
-        "target": "instruments=Drum Set",
-        "confidence": 0.9864864864864865
-      },
-      {
-        "source": "instruments=Piano",
-        "target": "instruments=Bass",
-        "confidence": 1.0
-      },
-      {
-        "source": "instruments=Piano",
-        "target": "instruments=Drum Set",
-        "confidence": 0.9864864864864865
-      },
-      {
-        "source": "instruments=Piano",
-        "target": "instruments=Electric Guitar (clean)",
-        "confidence": 0.5887096774193548
-      }
-    ]
+    }
   }
 ]
